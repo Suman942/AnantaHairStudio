@@ -9,18 +9,28 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="20dp"
         android:fillViewport="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
        <View
            android:layout_width="match_parent"
-           android:layout_height="0dp"
+           android:layout_height="150dp"
            android:background="@color/colorPrimary"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintHeight_percent="0.2"
            android:id="@+id/view1"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="view1"
+            android:orientation="horizontal"
+            app:barrierDirection="bottom"
+            android:id="@+id/b1"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
@@ -45,10 +55,11 @@
             app:layout_constraintBottom_toBottomOf="@id/view1"
             android:background="@drawable/search_drawable"
             android:focusableInTouchMode="false"
+            app:layout_constraintVertical_bias="0.4"
             />
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="@drawable/ic_search"
             app:layout_constraintTop_toTopOf="@id/searchView"
             app:layout_constraintBottom_toBottomOf="@id/searchView"
@@ -66,7 +77,7 @@
             app:layout_constraintLeft_toRightOf="@id/searchIcon"
             android:text="Search..."
             android:textColor="#C5C5C5"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintRight_toRightOf="@id/searchView"
             app:layout_constraintHorizontal_bias="0.05"/>
 
@@ -80,7 +91,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:cardBackgroundColor="#E9FFFE"
             android:id="@+id/haircut"
-            app:layout_constraintVertical_bias="0.19">
+            app:cardElevation="5dp"
+            app:layout_constraintVertical_bias="0.12">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -97,13 +109,14 @@
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@id/haircut"
             android:text="Haircut"
             app:layout_constraintRight_toRightOf="@id/haircut"
             app:layout_constraintTop_toBottomOf="@id/haircut"
             android:textColor="#777777"
+            android:id="@+id/haircutTxt"
             android:gravity="center"
             android:layout_marginTop="5dp"/>
 
@@ -112,9 +125,11 @@
             android:layout_height="70dp"
             app:layout_constraintRight_toLeftOf="@id/blech"
             app:layout_constraintLeft_toRightOf="@id/haircut"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/haircut"
+            app:layout_constraintTop_toTopOf="@id/haircut"
             app:cardBackgroundColor="#E9FFFE"
+            app:cardElevation="5dp"
+
             android:id="@+id/hairColor"
             app:layout_constraintVertical_bias="0.19">
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -140,6 +155,7 @@
             app:layout_constraintRight_toRightOf="@id/hairColor"
             app:layout_constraintTop_toBottomOf="@id/hairColor"
             android:textColor="#777777"
+            android:id="@+id/hairColorTxt"
             android:gravity="center"
             android:layout_marginTop="5dp"/>
 
@@ -147,11 +163,12 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             app:layout_constraintRight_toRightOf="@id/searchView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/haircut"
+            app:layout_constraintTop_toTopOf="@id/haircut"
             app:cardBackgroundColor="#E9FFFE"
+            app:cardElevation="5dp"
             android:id="@+id/blech"
-            app:layout_constraintVertical_bias="0.19">
+            >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -175,16 +192,416 @@
             app:layout_constraintRight_toRightOf="@id/blech"
             app:layout_constraintTop_toBottomOf="@id/blech"
             android:textColor="#777777"
+            android:id="@+id/blechTxt"
             android:gravity="center"
             android:layout_marginTop="5dp"/>
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintLeft_toLeftOf="@id/searchView"
+            app:layout_constraintTop_toBottomOf="@id/haircutTxt"
+            app:cardBackgroundColor="#E9FFFE"
+            android:id="@+id/shaving"
+            app:cardElevation="5dp"
+            android:layout_marginTop="50dp"
+           >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/shaving"
+            android:text="Shaving"
+            app:layout_constraintRight_toRightOf="@id/shaving"
+            app:layout_constraintTop_toBottomOf="@id/shaving"
+            android:textColor="#777777"
+            android:id="@+id/shavingTxt"
+            android:gravity="center"
+            android:layout_marginTop="5dp"/>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintRight_toLeftOf="@id/blech"
+            app:layout_constraintLeft_toRightOf="@id/haircut"
+            app:layout_constraintBottom_toBottomOf="@id/shaving"
+            app:layout_constraintTop_toTopOf="@id/shaving"
+            app:cardBackgroundColor="#E9FFFE"
+            app:cardElevation="5dp"
+            android:id="@+id/straightening"
+            app:layout_constraintVertical_bias="0.09">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/ic_s_hairstraight"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/hairColor"
+            android:text="Straightening"
+            app:layout_constraintRight_toRightOf="@id/hairColor"
+            app:layout_constraintTop_toBottomOf="@id/straightening"
+            android:textColor="#777777"
+            android:id="@+id/straighteningTxt"
+            android:gravity="center"
+            android:layout_marginTop="5dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintRight_toRightOf="@id/searchView"
+            app:layout_constraintBottom_toBottomOf="@id/shaving"
+            app:layout_constraintTop_toTopOf="@id/shaving"
+            app:cardBackgroundColor="#E9FFFE"
+            android:id="@+id/pedicure"
+            app:cardElevation="5dp"
+            app:layout_constraintVertical_bias="0.09">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/ic_s_foot"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/blech"
+            android:text="Pedicure"
+            app:layout_constraintRight_toRightOf="@id/blech"
+            app:layout_constraintTop_toBottomOf="@id/pedicure"
+            android:textColor="#777777"
+            android:id="@+id/pedicureTxt"
+            android:gravity="center"
+            android:layout_marginTop="5dp"/>
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintLeft_toLeftOf="@id/searchView"
+            app:layout_constraintTop_toBottomOf="@id/shavingTxt"
+            app:cardBackgroundColor="#E9FFFE"
+            app:cardElevation="5dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/brideGroom"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/ic_s_bride_groom"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/shaving"
+            android:text="Bride groom"
+            app:layout_constraintRight_toRightOf="@id/shaving"
+            app:layout_constraintTop_toBottomOf="@id/brideGroom"
+            android:textColor="#777777"
+            android:id="@+id/brideGroomTxt"
+            android:gravity="center"
+            android:layout_marginTop="5dp"/>
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintRight_toLeftOf="@id/blech"
+            app:layout_constraintLeft_toRightOf="@id/haircut"
+            app:layout_constraintBottom_toBottomOf="@id/brideGroom"
+            app:layout_constraintTop_toTopOf="@id/brideGroom"
+            app:cardBackgroundColor="#E9FFFE"
+            android:id="@+id/manicure"
+            app:cardElevation="5dp"
+            app:layout_constraintVertical_bias="0.15">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/ic_s_nail"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/hairColor"
+            android:text="Manicure"
+            app:layout_constraintRight_toRightOf="@id/hairColor"
+            app:layout_constraintTop_toBottomOf="@id/manicure"
+            android:textColor="#777777"
+            android:id="@+id/manicureTxt"
+            android:gravity="center"
+            android:layout_marginTop="5dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintRight_toRightOf="@id/searchView"
+            app:layout_constraintBottom_toBottomOf="@id/brideGroom"
+            app:layout_constraintTop_toTopOf="@id/brideGroom"
+            app:cardBackgroundColor="#E9FFFE"
+            app:cardElevation="5dp"
+            android:id="@+id/allServices"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/ic_more"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/blech"
+            android:text="All Services"
+            app:layout_constraintRight_toRightOf="@id/blech"
+            app:layout_constraintTop_toBottomOf="@id/allServices"
+            android:textColor="#777777"
+            android:id="@+id/allServicesTxt"
+            android:gravity="center"
+            android:layout_marginTop="5dp"/>
 
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            app:layout_constraintTop_toBottomOf="@id/manicureTxt"
+            android:layout_marginTop="50dp"
+            android:elevation="2dp"
+            android:background="#FFF2F5"
+            android:id="@+id/packageView"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:background="@drawable/ic_resource_package"
+            app:layout_constraintLeft_toLeftOf="@id/packageView"
+            app:layout_constraintRight_toRightOf="@id/packageView"
+            app:layout_constraintTop_toTopOf="@id/packageView"
+            app:layout_constraintBottom_toBottomOf="@id/packageView"
+            android:id="@+id/packageIcon"
+            app:layout_constraintHorizontal_bias="0.05"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            app:layout_constraintLeft_toRightOf="@id/packageIcon"
+            app:layout_constraintRight_toRightOf="@id/packageView"
+            app:layout_constraintTop_toTopOf="@id/packageIcon"
+            app:layout_constraintHorizontal_bias="0.1"
+            android:text="Packages"
+            android:textColor="#FF3B70"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="18sp"
+            android:id="@+id/packageTxt1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            app:layout_constraintLeft_toLeftOf="@id/packageTxt1"
+            app:layout_constraintTop_toBottomOf="@id/packageTxt1"
+            android:text="Custom package for complete care"
+            android:textColor="#555555"
+            android:fontFamily="@font/roboto"
+            android:textSize="13sp"
+            android:id="@+id/packageTxt2"/>
+
+        <com.freelance.anantahairstudio.utils.CustomViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toBottomOf="@id/packageView"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            android:layout_marginTop="50dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintTop_toBottomOf="@id/viewPager"
+            android:layout_marginTop="50dp"
+            android:text="Locate our studio"
+            android:textColor="#999999"
+            android:textSize="18sp"
+            android:id="@+id/locateStudioTxt"
+            android:fontFamily="@font/roboto_medium"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:background="#E9FFFE"
+            app:layout_constraintTop_toBottomOf="@id/locateStudioTxt"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            android:layout_marginTop="10dp"
+            android:elevation="2dp"
+            android:id="@+id/locateStudioView"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/locateStudioView"
+            app:layout_constraintLeft_toLeftOf="@id/locateStudioView"
+            app:layout_constraintBottom_toBottomOf="@id/locateStudioView"
+            app:layout_constraintRight_toRightOf="@id/locateStudioView"
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintHorizontal_bias="0.1"
+            android:text="Ananta Hair Studio"
+            android:textSize="18sp"
+            android:textColor="#0DD3F1"
+            android:elevation="2dp"
+            android:fontFamily="@font/roboto_medium"
+            android:id="@+id/studioNameTxt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/studioNameTxt"
+            app:layout_constraintLeft_toLeftOf="@id/studioNameTxt"
+            android:text="Plot no 270, 4th B Road, Sardarpura "
+            android:textColor="#777777"
+            android:textSize="14sp"
+            android:elevation="2dp"
+            android:id="@+id/address1"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/address1"
+            app:layout_constraintLeft_toLeftOf="@id/studioNameTxt"
+            android:text="Jodhpur, Rajasthan "
+            android:textColor="#777777"
+            android:textSize="14sp"
+            android:elevation="2dp"
+            android:layout_marginTop="2dp"/>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:elevation="2dp"
+            app:layout_constraintTop_toTopOf="@id/locateStudioView"
+            app:layout_constraintBottom_toBottomOf="@id/locateStudioView"
+            app:layout_constraintRight_toRightOf="@id/locateStudioView"
+            app:layout_constraintLeft_toLeftOf="@id/locateStudioView"
+            app:layout_constraintHorizontal_bias="0.9"
+            android:background="@drawable/ic_arrow"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            android:layout_marginTop="86dp"
+            android:background="@drawable/gallery_sample"
+            android:id="@+id/galleryImg"
+            app:layout_constraintTop_toBottomOf="@id/locateStudioView"/>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="5dp"
+            app:layout_constraintTop_toTopOf="@id/galleryImg"
+            app:layout_constraintBottom_toBottomOf="@id/galleryImg"
+            app:layout_constraintLeft_toLeftOf="@id/galleryImg"
+            app:layout_constraintRight_toRightOf="@id/galleryImg"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintHorizontal_bias="0.9">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/ic_image"
+                    app:layout_constraintVertical_bias="0.35"
+                    android:id="@+id/gallery"
+                    android:backgroundTint="@color/colorPrimary"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/gallery"
+                    android:layout_marginTop="2dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

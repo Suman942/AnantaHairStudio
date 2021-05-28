@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.databinding.ActivityReferalBinding;
-import com.freelance.anantahairstudio.home.HomeActivity;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.utils.PrefManager;
 
 public class ReferalActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.freelance.anantahairstudio.home;
+package com.freelance.anantahairstudio.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +14,12 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.cart.CartFragment;
 import com.freelance.anantahairstudio.databinding.ActivityHomeBinding;
+import com.freelance.anantahairstudio.home.HomeFragment;
+import com.freelance.anantahairstudio.myInfo.MeFragment;
+import com.freelance.anantahairstudio.services.ServicesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,7 @@ public class HomeActivity extends AppCompatActivity  {
 
     private void intialise() {
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-//        binding.viewPager.setPagingEnabled(false);
+        binding.viewPager.setPagingEnabled(false);
         binding.viewPager.setAdapter(pagerAdapter);
 
        binding.bottomNavigation.setOnNavigationItemSelectedListener(

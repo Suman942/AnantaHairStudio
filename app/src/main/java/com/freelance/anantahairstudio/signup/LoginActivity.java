@@ -7,13 +7,11 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.databinding.ActivityLoginBinding;
-import com.freelance.anantahairstudio.home.HomeActivity;
 import com.freelance.anantahairstudio.referal.ReferalActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

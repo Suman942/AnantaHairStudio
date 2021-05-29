@@ -5,9 +5,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.ActivityGalleryBinding;
 import com.freelance.anantahairstudio.utils.GlideHelper;
 
@@ -23,6 +26,17 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
         super.onCreate(savedInstanceState);
        binding = DataBindingUtil.setContentView(this,R.layout.activity_gallery);
        initialise();
+       clickViews();
+    }
+
+    private void clickViews() {
+        binding.cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GalleryActivity.this, HomeActivity.class));
+                finish();
+            }
+        });
     }
 
     private void initialise() {

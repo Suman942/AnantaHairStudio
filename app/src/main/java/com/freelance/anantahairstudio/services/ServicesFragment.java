@@ -19,7 +19,7 @@ public class ServicesFragment extends Fragment {
 
     FragmentServicesBinding binding;
     ServiceAdapter serviceAdapter;
-    String serviceName;
+    int serviceNameId;
     public ServicesFragment() {
         // Required empty public constructor
     }
@@ -45,8 +45,7 @@ public class ServicesFragment extends Fragment {
 
     private void getIntents() {
         if (getArguments().getBoolean("fromHome")) {
-            serviceName = getArguments().getString("serviceName");
-            binding.searchView.setQuery(serviceName, true);
+            serviceNameId = getArguments().getInt("serviceName");
         }
     }
 

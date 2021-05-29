@@ -29,13 +29,27 @@ public class HomeActivity extends AppCompatActivity  {
     PagerAdapter pagerAdapter;
     ActivityHomeBinding binding;
     private MenuItem bottomTabMenuItem;
-
+    boolean fromHome ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      binding = DataBindingUtil.setContentView(this,R.layout.activity_home);
 
         intialise();
+        getIntents();
+
+    }
+
+    private void getIntents() {
+        try {
+            fromHome = getIntent().getBooleanExtra("fromHome",false);
+            if (fromHome){
+                binding.viewPager.setCurrentItem(1);
+            }
+        }
+        catch (Exception e){
+
+        }
     }
 
     private void intialise() {
@@ -123,7 +137,14 @@ public class HomeActivity extends AppCompatActivity  {
                 case 0:
                     return new HomeFragment();
                 case 1:
-                    return new ServicesFragment();
+                    Bundle bundle = new Bundle();
+                    if (getIntent().getStringExtra("serviceName") != null){
+                        bundle.putString("serviceName" , getIntent().getStringExtra("serviceName"));
+                        bundle.putBoolean("fromHome",fromHome);
+                    }
+                    ServicesFragment servicesFragment = new ServicesFragment();
+                    servicesFragment.setArguments(bundle);
+                    return  servicesFragment;
                 case 2:
                     return new CartFragment();
                 case 3:

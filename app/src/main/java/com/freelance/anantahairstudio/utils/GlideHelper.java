@@ -14,12 +14,13 @@ import com.bumptech.glide.request.RequestOptions;
  */
 
 public class GlideHelper {
-    public static void setImageView(Context context, ImageView view, String url) {
+    public static void setImageView(Context context, ImageView view, String url,int placeholder) {
         RequestOptions options = new RequestOptions();
         options = options.fitCenter();
         Glide.with(context)
                 .load(url)
                 .apply(options)
+                .placeholder(placeholder)
                 .into(view);
     }
     public static void setImageViewRoundedCorners(Context context, ImageView view, String url) {

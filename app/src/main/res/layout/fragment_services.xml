@@ -1,14 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".services.ServicesFragment">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/white"
+        tools:context=".services.ServicesFragment">
 
-</FrameLayout>
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <!--        <View-->
+        <!--            android:id="@+id/searchView"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            app:layout_constraintLeft_toLeftOf="@id/gL"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/view1"-->
+        <!--            app:layout_constraintRight_toRightOf="@id/gR"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/view1"-->
+        <!--            android:background="@drawable/search_drawable"-->
+        <!--            android:focusableInTouchMode="false"-->
+        <!--            app:layout_constraintVertical_bias="0.4"-->
+        <!--            />-->
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_drawable"
+            android:focusableInTouchMode="true"
+            app:iconifiedByDefault="false"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            app:layout_constraintBottom_toBottomOf="@id/view1"
+            app:queryHint="Search..."
+            android:outlineAmbientShadowColor="#A1B1BD"
+            android:outlineSpotShadowColor="#A1B1BD"
+            android:queryBackground="@android:color/transparent"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintTop_toTopOf="@id/view1"
+
+            app:theme="@style/AppSearchView" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/ic_search"
+                    app:layout_constraintTop_toTopOf="@id/searchView"
+                    app:layout_constraintBottom_toBottomOf="@id/searchView"
+                    app:layout_constraintLeft_toLeftOf="@id/searchView"
+                    android:backgroundTint="#C5C5C5"
+                    app:layout_constraintRight_toRightOf="@id/searchView"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    android:id="@+id/searchIcon"/>
+
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/searchIcon"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/searchIcon"-->
+        <!--            app:layout_constraintLeft_toRightOf="@id/searchIcon"-->
+        <!--            android:text="Search..."-->
+        <!--            android:textColor="#C5C5C5"-->
+        <!--            android:textSize="18sp"-->
+        <!--            app:layout_constraintRight_toRightOf="@id/searchView"-->
+        <!--            app:layout_constraintHorizontal_bias="0.05"/>-->
+
+        <com.freelance.anantahairstudio.utils.EmptyRecyclerView
+            android:id="@+id/serviceRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            app:layout_constraintTop_toBottomOf="@id/searchView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

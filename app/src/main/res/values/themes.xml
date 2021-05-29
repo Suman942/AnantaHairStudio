@@ -20,4 +20,5 @@
     <item name="android:editTextColor">#A1B1BD</item>
         <item name="colorAccent">#A1B1BD</item>
     </style>
+
 </resources>

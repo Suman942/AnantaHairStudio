@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="15dp"
+    android:background="@color/white">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/serviceImg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/serviceNameTxt"
+            android:background="@drawable/ic_image_placeholder"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/serviceImg"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="Service name"
+            android:textColor="#52508B"
+            android:fontFamily="@font/roboto"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:id="@+id/serviceNameTxt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/discountAmount"
+
+            app:layout_constraintTop_toTopOf="@id/amountTxt"
+            app:layout_constraintBottom_toBottomOf="@id/amountTxt"
+            app:layout_constraintLeft_toLeftOf="@id/serviceNameTxt"
+            android:text="\u20B9 100 OFF"
+            android:textSize="12sp"
+            android:textColor="#00E994" />
+
+        <TextView
+            android:id="@+id/amountTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\u20B9 400"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintRight_toRightOf="@id/serviceNameTxt"
+            app:layout_constraintTop_toBottomOf="@id/serviceNameTxt"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/OriginalAmount"
+            app:layout_constraintTop_toTopOf="@id/amountTxt"
+            app:layout_constraintBottom_toBottomOf="@id/amountTxt"
+            app:layout_constraintRight_toLeftOf="@id/amountTxt"
+            android:text="\u20B9 600"
+            android:layout_marginRight="20dp"
+            android:textSize="14sp"
+            android:textColor="#AAAAAA" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            android:id="@+id/g1"/>
+
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="#AAAAAA"
+
+            app:layout_constraintTop_toTopOf="@id/OriginalAmount"
+            app:layout_constraintBottom_toBottomOf="@id/OriginalAmount"
+            android:background="@drawable/ic_amount_cancel_stroke"
+            app:layout_constraintLeft_toLeftOf="@id/OriginalAmount"
+            app:layout_constraintRight_toRightOf="@id/OriginalAmount"/>
+
+        <AutoCompleteTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="@id/amountTxt"
+            app:layout_constraintTop_toBottomOf="@id/amountTxt"
+            android:layout_marginTop="8dp"
+            android:hint="No. of individual"
+            android:textColorHint="#777"
+            android:textSize="12sp"
+            android:textColor="#777"
+            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+            android:editable="false"
+            android:id="@+id/noOfIndividual"/>
+<!--        <View-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
+<!--            android:background="#F4F4F4"-->
+<!--            app:layout_constraintLeft_toRightOf="@id/g1"-->
+<!--            android:id="@+id/minusView"/>-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="@id/minusView"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/minusView"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/minusView"-->
+<!--            app:layout_constraintRight_toRightOf="@id/minusView"-->
+<!--            android:background="@drawable/ic_minus"-->
+<!--            android:id="@+id/minus"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintRight_toLeftOf="@id/addView"-->
+<!--            app:layout_constraintTop_toTopOf="@id/addView"-->
+<!--            app:layout_constraintLeft_toRightOf="@id/minusView"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
+<!--            android:id="@+id/counterTxt"-->
+<!--            android:textSize="18sp"-->
+<!--            android:text="1"-->
+<!--            android:textColor="#777777"/>-->
+
+<!--        <View-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            app:layout_constraintRight_toRightOf="@id/amountTxt"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/amountTxt"-->
+<!--            android:background="#F4F4F4"-->
+<!--            android:layout_marginTop="14dp"-->
+<!--            android:id="@+id/addView"/>-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="@id/addView"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/addView"-->
+<!--            app:layout_constraintRight_toRightOf="@id/addView"-->
+<!--            android:background="@drawable/ic_add"-->
+<!--            android:id="@+id/add"/>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

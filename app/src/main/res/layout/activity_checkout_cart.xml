@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:fillViewport="true"
+    tools:context=".cart.CheckoutCartActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/gL"
+        android:background="@drawable/ic_back_arrow"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#999999"
+        android:id="@+id/back"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/back"
+        app:layout_constraintLeft_toRightOf="@id/back"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/back"
+        android:text="Checkout"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="#999999"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+    <com.freelance.anantahairstudio.utils.EmptyRecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/back"
+        app:layout_constraintLeft_toLeftOf="@id/gL"
+        app:layout_constraintRight_toRightOf="@id/gR"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@id/scheduleSlot"
+        android:background="@color/white"
+        android:id="@+id/checkOutRecyclerView"/>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/gL"
+        app:layout_constraintRight_toRightOf="@id/gR"
+        app:cardBackgroundColor="@color/white"
+        android:id="@+id/scheduleSlot"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toTopOf="@id/billView"
+        app:layout_constraintTop_toBottomOf="@id/checkOutRecyclerView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slot"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="16dp"
+                app:layout_constraintTop_toTopOf="@id/dateView"
+                app:layout_constraintBottom_toBottomOf="@id/dateView"
+                app:layout_constraintRight_toLeftOf="@id/dateView"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:id="@+id/txtSlot"/>
+
+            
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="90dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="@id/timeVIew"
+                app:layout_constraintRight_toLeftOf="@id/timeVIew"
+                app:layout_constraintLeft_toLeftOf="@id/txtSlot"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/stroke_drawable"
+                android:id="@+id/dateView">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintGuide_percent="0.5"
+                    android:orientation="vertical"
+                    android:id="@+id/dateCenter"/>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="@id/dateCenter">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_calender"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="1"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/dateCenter"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintVertical_bias="0.3"
+                    android:id="@+id/setDate"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Jan"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/dateCenter"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintVertical_bias="0.7"
+                    android:id="@+id/setMonth"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="110dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/stroke_drawable"
+                android:id="@+id/timeVIew">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintGuide_percent="0.4"
+                    android:orientation="vertical"
+                    android:id="@+id/timeCenter"/>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="@id/timeCenter"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_time"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Time"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/timeCenter"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/setTime"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            app:cardBackgroundColor="@color/white"
+            android:id="@+id/billView"
+            app:layout_constraintTop_toBottomOf="@id/scheduleSlot">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+</layout>

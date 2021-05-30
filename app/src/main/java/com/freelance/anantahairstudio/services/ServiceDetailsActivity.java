@@ -16,7 +16,6 @@ import com.freelance.anantahairstudio.utils.GlideHelper;
 public class ServiceDetailsActivity extends AppCompatActivity {
     ActivityServiceDetailsBinding binding;
     int counter = 1;
-  String counterTxt = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

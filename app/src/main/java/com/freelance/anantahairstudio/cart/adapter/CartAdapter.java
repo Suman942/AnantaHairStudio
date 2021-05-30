@@ -1,6 +1,7 @@
 package com.freelance.anantahairstudio.cart.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.cart.CheckoutCartActivity;
+import com.google.android.material.card.MaterialCardView;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
@@ -28,6 +31,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
 
+        holder.cartLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CheckoutCartActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -36,8 +47,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
+        MaterialCardView cartLayout;
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
+            cartLayout= itemView.findViewById(R.id.cartLayout);
         }
     }
 }

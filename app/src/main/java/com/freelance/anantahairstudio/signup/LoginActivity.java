@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.databinding.ActivityLoginBinding;
 import com.freelance.anantahairstudio.referal.ReferalActivity;
+import com.freelance.anantahairstudio.utils.PrefManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        PrefManager.getInstance(this, true);
+
         mAuth = FirebaseAuth.getInstance();
         initializationOfGoogleSigninOption();
         clickViews();
@@ -84,8 +89,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         if (mAuth.getCurrentUser() != null) {
+            String name = mAuth.getCurrentUser().getDisplayName();
+            String email = mAuth.getCurrentUser().getEmail();
+            Uri uri = mAuth.getCurrentUser().getPhotoUrl();
+            String profileImg = uri.toString();
+            PrefManager.getInstance().putString(R.string.fullname,name);
+            PrefManager.getInstance().putString(R.string.email,email);
+            PrefManager.getInstance().putString(R.string.profileUrl,profileImg);
+
             finish();
             startActivity(new Intent(this, ReferalActivity.class));
         }
@@ -102,6 +114,14 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, ReferalActivity.class);
                             startActivity(intent);
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            String name = mAuth.getCurrentUser().getDisplayName();
+                            String email = mAuth.getCurrentUser().getEmail();
+                            Uri uri = mAuth.getCurrentUser().getPhotoUrl();
+                            String profileImg = uri.toString();
+                            PrefManager.getInstance().putString(R.string.fullname,name);
+                            PrefManager.getInstance().putString(R.string.email,email);
+                            PrefManager.getInstance().putString(R.string.profileUrl,profileImg);
+
 //                            Toast.makeText(LoginActivity.this, "Successfully logged", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();

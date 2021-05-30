@@ -67,12 +67,13 @@
         app:cardBackgroundColor="@color/white"
         android:id="@+id/scheduleSlot"
         android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toTopOf="@id/billView"
+        app:layout_constraintBottom_toTopOf="@id/book"
         app:layout_constraintTop_toBottomOf="@id/checkOutRecyclerView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,6 +191,113 @@
                     android:id="@+id/setTime"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dateView"
+                android:layout_marginTop="15dp"
+                android:background="#707070"
+                android:id="@+id/v1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_location"
+                app:layout_constraintLeft_toLeftOf="@id/txtSlot"
+                app:layout_constraintTop_toBottomOf="@id/v1"
+                android:layout_marginTop="15dp"
+                android:id="@+id/locationIcon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/locationIcon"
+                app:layout_constraintBottom_toBottomOf="@id/locationIcon"
+                app:layout_constraintLeft_toRightOf="@id/locationIcon"
+                android:layout_marginLeft="15dp"
+                android:text="Address"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/roboto_medium"
+                android:id="@+id/addressLabel"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/addressLabel"
+                app:layout_constraintLeft_toLeftOf="@id/locationIcon"
+                android:layout_marginTop="16dp"
+                android:id="@+id/addressTxt"
+                app:layout_constraintRight_toLeftOf="@id/editLocation"
+                android:text="Rampal Chowk, Dwarka, Delhi "
+                android:layout_marginRight="15dp"
+                android:textColor="#777777"
+                />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_pencil"
+                    app:layout_constraintTop_toBottomOf="@id/addressLabel"
+                    app:layout_constraintRight_toRightOf="@id/timeVIew"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/editLocation"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addressTxt"
+                android:layout_marginTop="15dp"
+                android:background="#707070"
+                android:id="@+id/v2"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_call"
+                app:layout_constraintLeft_toLeftOf="@id/txtSlot"
+                app:layout_constraintTop_toBottomOf="@id/v2"
+                android:layout_marginTop="15dp"
+                android:id="@+id/callIcon"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/callIcon"
+                app:layout_constraintBottom_toBottomOf="@id/callIcon"
+                app:layout_constraintLeft_toRightOf="@id/callIcon"
+                android:layout_marginLeft="15dp"
+                android:text="Contact No."
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/roboto_medium"
+                android:id="@+id/contactLabel"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_pencil"
+                app:layout_constraintTop_toBottomOf="@id/contactLabel"
+                app:layout_constraintRight_toRightOf="@id/timeVIew"
+                android:layout_marginTop="15dp"
+                android:id="@+id/editCall"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/contactLabel"
+                app:layout_constraintLeft_toLeftOf="@id/callIcon"
+                android:layout_marginTop="16dp"
+                android:id="@+id/callTxt"
+                app:layout_constraintRight_toLeftOf="@id/editLocation"
+                android:text="+917005667189 "
+                android:layout_marginRight="15dp"
+                android:textColor="#777777"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -197,19 +305,22 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             app:layout_constraintLeft_toLeftOf="@id/gL"
             app:layout_constraintRight_toRightOf="@id/gR"
-            app:cardBackgroundColor="@color/white"
-            android:id="@+id/billView"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:id="@+id/book"
+            android:layout_marginTop="40dp"
             app:layout_constraintTop_toBottomOf="@id/scheduleSlot">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_medium"/>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

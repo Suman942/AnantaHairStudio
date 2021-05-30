@@ -38,11 +38,12 @@ public class CheckoutCartActivity extends AppCompatActivity {
 
     private void setDefaultDate() {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-
         int currentMonth = calendar.get(Calendar.MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         binding.setDate.setText(String.valueOf(currentDay));
         binding.setMonth.setText( String.valueOf(MONTHS[currentMonth]));
+
+
     }
 
     private void clickViews() {
@@ -81,7 +82,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                binding.setTime.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+                                binding.setTime.setText(String.valueOf(hourOfDay)+"h" + ":" + String.valueOf(minute)+"m");
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();

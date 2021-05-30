@@ -2,5 +2,8 @@
     <string name="app_name">AnantaHairStudio</string>
     <string name="pref_isFirstTimeLaunch_key">pref_isFirstTimeLaunch_key</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fullname">fullname</string>
+    <string name="email">email</string>
+    <string name="profileUrl">profileUrl</string>
+
 </resources>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:fillViewport="true"
+    tools:context=".contactUs.ContactUsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            android:background="@drawable/ic_back_arrow"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#999999"
+            android:id="@+id/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/back"
+            app:layout_constraintLeft_toRightOf="@id/back"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/back"
+            android:text="Contact us"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="#999999"/>
+        
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            app:layout_constraintTop_toBottomOf="@id/back"
+            android:layout_marginTop="32dp"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            android:background="@drawable/imgbg"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            app:layout_constraintTop_toBottomOf="@id/back"
+            android:layout_marginTop="32dp"
+            android:id="@+id/imgBg"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            android:background="@drawable/img"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/imgBg"
+            app:layout_constraintBottom_toBottomOf="@id/imgBg"
+            app:layout_constraintLeft_toLeftOf="@id/imgBg"
+            app:layout_constraintRight_toRightOf="@id/imgBg"
+            android:background="@drawable/ic_logo"
+            android:backgroundTint="@color/white"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imgBg"
+            android:layout_marginTop="32dp"
+            android:id="@+id/location"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="@id/gL"
+            app:layout_constraintRight_toRightOf="@id/gR"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_location"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/locationIcon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/locationIcon"
+                app:layout_constraintBottom_toBottomOf="@id/locationIcon"
+                app:layout_constraintLeft_toRightOf="@id/locationIcon"
+                android:layout_marginLeft="15dp"
+                android:text="Locate us"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/roboto_medium"
+                android:id="@+id/addressLabel"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/addressLabel"
+                app:layout_constraintLeft_toLeftOf="@id/locationIcon"
+                android:text="Plot no 270, 4th B Road, Sardarpura "
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:elevation="2dp"
+                android:id="@+id/address1"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/address1"
+                app:layout_constraintLeft_toLeftOf="@id/address1"
+                android:text="Jodhpur, Rajasthan "
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:elevation="2dp"
+                android:id="@+id/address2"
+                android:paddingBottom="16dp"
+                android:layout_marginTop="2dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/location"
+        android:layout_marginTop="32dp"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/gL"
+        app:layout_constraintRight_toRightOf="@id/gR"
+        android:paddingBottom="16dp"
+        >
+
+        <ImageView
+            android:id="@+id/callIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_call"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/callTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="+917005667189"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/callIcon"
+            app:layout_constraintLeft_toRightOf="@id/callIcon"
+            app:layout_constraintTop_toTopOf="@id/callIcon" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"
+            app:layout_constraintTop_toBottomOf="@id/callTxt"
+            android:layout_marginTop="20dp"
+            android:id="@+id/v1"/>
+
+        <ImageView
+            android:id="@+id/whatsappIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_whatsapp"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v1" />
+
+        <TextView
+            android:id="@+id/contactus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="+917005667189"
+            android:textSize="16sp"
+            android:textColor="#777777"
+            app:layout_constraintBottom_toBottomOf="@id/whatsappIcon"
+            app:layout_constraintLeft_toRightOf="@id/callIcon"
+            app:layout_constraintTop_toTopOf="@id/whatsappIcon" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"
+            app:layout_constraintTop_toBottomOf="@id/contactus"
+            android:layout_marginTop="20dp"
+            android:id="@+id/v2"/>
+
+        <ImageView
+            android:id="@+id/emailIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_email"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v2" />
+
+
+
+        <TextView
+            android:id="@+id/emailTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="suman19da@gmail.com"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/emailIcon"
+            app:layout_constraintLeft_toLeftOf="@id/contactus"
+            app:layout_constraintTop_toTopOf="@id/emailIcon" />
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"
+            app:layout_constraintTop_toBottomOf="@id/emailIcon"
+            android:layout_marginTop="20dp"
+            android:id="@+id/v3"/>
+
+        <ImageView
+            android:id="@+id/fbcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_facebook"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v3" />
+
+
+
+        <TextView
+            android:id="@+id/fbTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="fb.com"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/fbcon"
+            app:layout_constraintLeft_toLeftOf="@id/contactus"
+            app:layout_constraintTop_toTopOf="@id/fbcon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+</layout>

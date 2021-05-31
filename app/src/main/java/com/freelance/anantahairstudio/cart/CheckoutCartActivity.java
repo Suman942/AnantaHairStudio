@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.cart.adapter.CheckoutAdapter;
 import com.freelance.anantahairstudio.databinding.ActivityCheckoutCartBinding;
 
@@ -88,6 +90,14 @@ public class CheckoutCartActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
+                finish();
+            }
+        });
     }
 
     private void intialise() {
@@ -97,5 +107,11 @@ public class CheckoutCartActivity extends AppCompatActivity {
         checkoutAdapter = new CheckoutAdapter(getApplicationContext(),arrayList);
         binding.checkOutRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.checkOutRecyclerView.setAdapter(checkoutAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
+        finish();
     }
 }

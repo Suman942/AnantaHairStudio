@@ -1,5 +1,6 @@
 package com.freelance.anantahairstudio.cart;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -38,7 +39,19 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart, container, false);
         initialise();
+        clickiew();
+
         return binding.getRoot();
+    }
+
+    private void clickiew() {
+        binding.checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CheckoutCartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initialise() {

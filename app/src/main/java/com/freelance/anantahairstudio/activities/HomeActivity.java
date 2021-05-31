@@ -46,6 +46,11 @@ public class HomeActivity extends AppCompatActivity  {
             if (fromHome){
                 binding.viewPager.setCurrentItem(1);
             }
+           if(getIntent().getIntExtra("from",-1) == 0){
+               binding.viewPager.setCurrentItem(3);
+
+           }
+
         }
         catch (Exception e){
 
@@ -179,4 +184,9 @@ public class HomeActivity extends AppCompatActivity  {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

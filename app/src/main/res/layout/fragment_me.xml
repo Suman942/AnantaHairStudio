@@ -3,6 +3,7 @@
 
     <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EFEFEF"
@@ -12,6 +13,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/l1"
@@ -287,40 +289,21 @@
                         android:id="@+id/editLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:layout_marginRight="15dp"
                         android:background="@drawable/ic_pencil"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/addressLabel" />
+                        app:layout_constraintTop_toTopOf="@id/addressLabel" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/conatctCard"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="5dp"
-                app:layout_constraintLeft_toLeftOf="@id/pointsLayout"
-                app:layout_constraintRight_toRightOf="@id/referLayout"
-                app:layout_constraintTop_toBottomOf="@id/addressCard">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="15dp">
 
                     <ImageView
                         android:id="@+id/callIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="25dp"
                         android:background="@drawable/ic_call"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/addressTxt" />
 
                     <TextView
                         android:id="@+id/callLabel"
@@ -343,22 +326,12 @@
                         android:text="+917005667189"
                         android:textColor="#777777"
                         app:layout_constraintLeft_toLeftOf="@id/callIcon"
-                        app:layout_constraintRight_toLeftOf="@id/editCall"
-                        app:layout_constraintTop_toBottomOf="@id/callLabel" />
-
-
-                    <ImageView
-                        android:id="@+id/editCall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@drawable/ic_pencil"
-                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/editLocation"
                         app:layout_constraintTop_toBottomOf="@id/callLabel" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
@@ -369,7 +342,7 @@
 
                 app:layout_constraintLeft_toLeftOf="@id/pointsLayout"
                 app:layout_constraintRight_toRightOf="@id/referLayout"
-                app:layout_constraintTop_toBottomOf="@id/conatctCard">
+                app:layout_constraintTop_toBottomOf="@id/addressCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -400,12 +373,12 @@
                         app:layout_constraintTop_toTopOf="@id/servicesIcon" />
 
                     <View
+                        android:id="@+id/v1"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="#555555"
-                        app:layout_constraintTop_toBottomOf="@id/ongoingServices"
                         android:layout_marginTop="20dp"
-                        android:id="@+id/v1"/>
+                        android:background="#555555"
+                        app:layout_constraintTop_toBottomOf="@id/ongoingServices" />
 
                     <ImageView
                         android:id="@+id/contactUsIcon"
@@ -430,12 +403,12 @@
                         app:layout_constraintTop_toTopOf="@id/contactUsIcon" />
 
                     <View
+                        android:id="@+id/v2"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="#555555"
-                        app:layout_constraintTop_toBottomOf="@id/contactus"
                         android:layout_marginTop="20dp"
-                        android:id="@+id/v2"/>
+                        android:background="#555555"
+                        app:layout_constraintTop_toBottomOf="@id/contactus" />
 
                     <ImageView
                         android:id="@+id/logoutIcon"
@@ -447,7 +420,6 @@
                         android:backgroundTint="@color/colorPrimary"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/v2" />
-
 
 
                     <TextView
@@ -462,6 +434,8 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

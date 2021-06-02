@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnantaHairStudio">
-        <activity android:name=".profileedit.EditDetailsActivity"></activity>
+        <activity android:name=".ongoingServices.OngoingActivity"></activity>
+        <activity android:name=".profileedit.EditDetailsActivity" />
         <activity android:name=".contactUs.ContactUsActivity" />
         <activity android:name=".cart.CheckoutCartActivity" />
         <activity android:name=".services.ServiceDetailsActivity" />

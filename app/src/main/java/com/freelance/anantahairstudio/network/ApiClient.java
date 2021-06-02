@@ -26,7 +26,7 @@ public class ApiClient {
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
-        httpClient.authenticator(new TokenAuthenticator());
+//        httpClient.authenticator(new TokenAuthenticator());
 
 //        httpClient.addInterceptor(new Interceptor() {
 //            @NotNull

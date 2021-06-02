@@ -18,6 +18,7 @@ import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.cart.CheckoutCartActivity;
 import com.freelance.anantahairstudio.contactUs.ContactUsActivity;
 import com.freelance.anantahairstudio.databinding.FragmentMeBinding;
+import com.freelance.anantahairstudio.ongoingServices.OngoingActivity;
 import com.freelance.anantahairstudio.profileedit.EditDetailsActivity;
 import com.freelance.anantahairstudio.utils.GlideHelper;
 import com.freelance.anantahairstudio.utils.PrefManager;
@@ -71,6 +72,14 @@ public class MeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), EditDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.ongoingServices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), OngoingActivity.class);
                 startActivity(intent);
             }
         });

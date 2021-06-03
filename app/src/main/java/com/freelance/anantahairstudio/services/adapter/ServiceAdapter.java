@@ -41,6 +41,13 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
 
         GlideHelper.setImageView(context,holder.serviceImg,"",R.drawable.ic_image_placeholder);
+        if (serviceList.get(position).getCategoryId().equals("1")) {
+            holder.categoryTxt.setText("Hair");
+        }
+        holder.amount.setText("\u20B9 "+serviceList.get(position).getPrice());
+        holder.discountAmount.setText("\u20B9 "+serviceList.get(position).getDiscountedPrice() + " OFF");
+        holder.serviceName.setText(serviceList.get(position).getName());
+
         holder.serviceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +56,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
             }
         });
 
-        holder.serviceName.setText(serviceList.get(position).getName());
     }
 
     @Override
@@ -67,7 +73,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
             serviceName = itemView.findViewById(R.id.serviceNameTxt);
             categoryTxt = itemView.findViewById(R.id.categoryText);
             serviceLayout = itemView.findViewById(R.id.serviceLayout);
-
+            amount = itemView.findViewById(R.id.amountTxt);
+            discountAmount = itemView.findViewById(R.id.discountAmount);
         }
     }
     public void filterList(ArrayList<LocalServiceResponse> filterNames){

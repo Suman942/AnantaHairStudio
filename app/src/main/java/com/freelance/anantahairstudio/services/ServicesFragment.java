@@ -39,9 +39,8 @@ public class ServicesFragment extends Fragment {
     ServicesViewModel servicesViewModel;
     ArrayList<LocalServiceResponse> serviceList = new ArrayList<>();
 
-    ServicesDatabase savedCardsDataBase;
-    AllServicesDao savedcardsDao;
-  boolean fromHome;
+    ServicesDatabase serviceDatabase;
+    AllServicesDao servicesDao;
     public ServicesFragment() {
         // Required empty public constructor
     }
@@ -59,8 +58,8 @@ public class ServicesFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_services, container, false);
 
         servicesViewModel  = new ViewModelProvider(getActivity()).get(ServicesViewModel.class);
-        savedCardsDataBase = ServicesDatabase.getDatabase(getContext());
-        savedcardsDao = savedCardsDataBase.getAllServices();
+        serviceDatabase = ServicesDatabase.getDatabase(getContext());
+        servicesDao = serviceDatabase.getAllServices();
 
         initialise();
         getIntents();
@@ -70,7 +69,7 @@ public class ServicesFragment extends Fragment {
             public void onRefresh() {
 
                 insertServiceListToLocal();
-                savedcardsDao.getAllServicesLiveData().observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
+                servicesDao.getAllServicesLiveData().observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
                     @Override
                     public void onChanged(List<LocalServiceResponse> localServiceResponses) {
                         serviceList.clear();
@@ -114,11 +113,7 @@ public class ServicesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         insertServiceListToLocal();
-
-
-
     }
 
     private void insertServiceListToLocal() {
@@ -132,7 +127,7 @@ public class ServicesFragment extends Fragment {
                                 servicesResponse.getData().getServices().get(i).getCategoryId(),servicesResponse.getData().getServices().get(i).getName(),
                                 servicesResponse.getData().getServices().get(i).getPrice(),servicesResponse.getData().getServices().get(i).getDiscountedPrice(),
                                 servicesResponse.getData().getServices().get(i).getImg());
-                        savedcardsDao.insert(savedCardData);
+                        servicesDao.insert(savedCardData);
                     }
                 }
             }
@@ -143,7 +138,7 @@ public class ServicesFragment extends Fragment {
     private void getIntents() {
         if (getArguments().getBoolean("fromHome")) {
             serviceNameId = getArguments().getString("serviceName");
-            savedcardsDao.filterLiveData(serviceNameId).observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
+            servicesDao.filterLiveData(serviceNameId).observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
                 @Override
                 public void onChanged(List<LocalServiceResponse> localServiceResponses) {
                     serviceList.clear();
@@ -154,7 +149,7 @@ public class ServicesFragment extends Fragment {
 
         }
         else {
-            savedcardsDao.getAllServicesLiveData().observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
+            servicesDao.getAllServicesLiveData().observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
                 @Override
                 public void onChanged(List<LocalServiceResponse> localServiceResponses) {
                     serviceList.addAll(localServiceResponses);

@@ -49,11 +49,12 @@ public class EditDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!binding.editPhno.getText().toString().isEmpty()) {
-                    profileEditViewModel.updatePhone(PrefManager.getInstance().getString(R.string.authToken), "+91 " + binding.editPhno.getText().toString());
+                    profileEditViewModel.updatePhone(PrefManager.getInstance().getString(R.string.authToken),binding.editPhno.getText().toString());
                 }
                 if (!binding.editAddress.getText().toString().isEmpty() && !binding.editLandamrk.getText().toString().isEmpty()) {
-                    profileEditViewModel.updateAddress(PrefManager.getInstance().getString(R.string.authToken), binding.editLandamrk.getText().toString() + " , " + binding.editAddress.getText().toString());
+                    profileEditViewModel.updateAddress(PrefManager.getInstance().getString(R.string.authToken), binding.editAddress.getText().toString() + " , " + binding.editLandamrk.getText().toString());
                 }
+
                 if (binding.editAddress.getText().toString().isEmpty() && binding.editLandamrk.getText().toString().isEmpty() && binding.editPhno.getText().toString().isEmpty()) {
                     Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
                     intent.putExtra("from", 0);

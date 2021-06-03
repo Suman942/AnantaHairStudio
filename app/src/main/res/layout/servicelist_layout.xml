@@ -96,6 +96,7 @@
                 android:layout_marginLeft="20dp"
                 android:textSize="14sp"
                 android:layout_marginBottom="10dp"
+                android:visibility="gone"
 
                 android:textColor="#AAAAAA" />
 
@@ -103,7 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:backgroundTint="#AAAAAA"
-
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="@id/OriginalAmount"
                 app:layout_constraintBottom_toBottomOf="@id/OriginalAmount"
                 android:background="@drawable/ic_amount_cancel_stroke"
@@ -111,16 +112,17 @@
                 app:layout_constraintRight_toRightOf="@id/OriginalAmount"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/discountAmount"
-
-                app:layout_constraintTop_toTopOf="@id/OriginalAmount"
-                app:layout_constraintBottom_toBottomOf="@id/OriginalAmount"
-                app:layout_constraintLeft_toRightOf="@id/OriginalAmount"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toTopOf="@id/amountTxt"
+                app:layout_constraintBottom_toBottomOf="@id/amountTxt"
+                app:layout_constraintLeft_toRightOf="@id/amountTxt"
                 android:text="\u20B9 100 OFF"
                 android:layout_marginLeft="20dp"
-                android:textSize="12sp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="14sp"
                 android:textColor="#00E994" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -40,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:textSize="20sp"
+                    android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@id/profileImg"
                     app:layout_constraintHorizontal_bias="0.15"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -52,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:textSize="16sp"
+                    android:textColor="@color/white"
                     app:layout_constraintLeft_toLeftOf="@id/nameTxt"
                     app:layout_constraintTop_toBottomOf="@id/nameTxt" />
             </androidx.constraintlayout.widget.ConstraintLayout>

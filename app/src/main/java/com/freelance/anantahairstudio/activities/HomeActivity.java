@@ -127,8 +127,6 @@ public class HomeActivity extends AppCompatActivity  {
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
         public final int PAGE_COUNT = 4;
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
         private SparseArray<Fragment> registeredFragments = new SparseArray<>();
 
 

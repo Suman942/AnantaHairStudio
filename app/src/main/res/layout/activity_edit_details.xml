@@ -53,7 +53,9 @@
             android:background="#EEEEEE"
             android:hint="Enter phone number"
             android:paddingLeft="20dp"
+            android:maxLength="10"
             android:textColorHint="#777"
+            android:textColor="#777"
             android:id="@+id/editPhno"/>
 
         <EditText
@@ -65,6 +67,7 @@
             android:layout_marginTop="20dp"
             android:background="#EEEEEE"
             android:hint="Address"
+            android:textColor="#777"
             android:paddingLeft="20dp"
             android:textColorHint="#777"
             android:id="@+id/editAddress"/>
@@ -77,6 +80,7 @@
             android:layout_marginTop="20dp"
             android:background="#EEEEEE"
             android:hint="Landmark"
+            android:textColor="#777"
             android:paddingLeft="20dp"
             android:textColorHint="#777"
             android:id="@+id/editLandamrk"/>

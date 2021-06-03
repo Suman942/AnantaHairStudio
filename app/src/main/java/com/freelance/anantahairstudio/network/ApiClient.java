@@ -26,14 +26,14 @@ public class ApiClient {
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
-//        httpClient.authenticator(new TokenAuthenticator());
+        httpClient.authenticator(new TokenAuthenticator());
 
 //        httpClient.addInterceptor(new Interceptor() {
 //            @NotNull
 //            @Override
 //            public Response intercept(@NotNull Chain chain) throws IOException {
 //                Request newRequest = chain.request().newBuilder()
-//                        .addHeader("Authorization", "Bearer " + PrefManager.getInstance().getString(R.string.pref_netclan_auth_key))
+//                        .addHeader("Authorization", "Bearer " )
 //                        .build();
 //                return chain.proceed(newRequest);
 //            }

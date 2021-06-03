@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.databinding.ActivityLoginBinding;
 import com.freelance.anantahairstudio.referal.ReferalActivity;
+import com.freelance.anantahairstudio.signup.pojo.Authentication;
+import com.freelance.anantahairstudio.signup.viewModel.AuthenticationLoginViewModel;
 import com.freelance.anantahairstudio.utils.PrefManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -36,16 +40,33 @@ public class LoginActivity extends AppCompatActivity {
     private  static final int RC_SIGN_IN = 234;
     GoogleSignInClient googleSignInClient;
 
+    AuthenticationLoginViewModel loginViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         PrefManager.getInstance(this, true);
 
+        loginViewModel = new ViewModelProvider(this).get(AuthenticationLoginViewModel.class);
         mAuth = FirebaseAuth.getInstance();
         initializationOfGoogleSigninOption();
         clickViews();
+        observer();
+    }
 
+    private void observer() {
+        loginViewModel.authenticationLiveData().observe(this, new Observer<Authentication>() {
+            @Override
+            public void onChanged(Authentication authentication) {
+                if (authentication != null){
+                    PrefManager.getInstance().putString(R.string.authToken,authentication.getData().getToken());
+                    Intent intent = new Intent(LoginActivity.this, ReferalActivity.class);
+                    startActivity(intent);
+                    Log.i("authentication","token: "+authentication.getData().getToken());
+                }
+            }
+        });
     }
 
     private void clickViews() {
@@ -111,9 +132,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(LoginActivity.this, ReferalActivity.class);
-                            startActivity(intent);
-                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             String name = mAuth.getCurrentUser().getDisplayName();
                             String email = mAuth.getCurrentUser().getEmail();
                             Uri uri = mAuth.getCurrentUser().getPhotoUrl();
@@ -121,6 +139,10 @@ public class LoginActivity extends AppCompatActivity {
                             PrefManager.getInstance().putString(R.string.fullname,name);
                             PrefManager.getInstance().putString(R.string.email,email);
                             PrefManager.getInstance().putString(R.string.profileUrl,profileImg);
+
+                            loginViewModel.authentication(email);
+
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
 //                            Toast.makeText(LoginActivity.this, "Successfully logged", Toast.LENGTH_SHORT).show();
                         } else {

@@ -13,15 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.services.ServiceDetailsActivity;
+import com.freelance.anantahairstudio.services.local.LocalServiceResponse;
+import com.freelance.anantahairstudio.services.pojo.ServicesResponse;
 import com.freelance.anantahairstudio.utils.GlideHelper;
 import com.google.android.material.card.MaterialCardView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder> {
 
     Context context;
-
-    public ServiceAdapter(Context context) {
+    ArrayList<LocalServiceResponse> serviceList;
+    public ServiceAdapter(Context context,ArrayList<LocalServiceResponse> serviceList) {
         this.context = context;
+        this.serviceList = serviceList;
     }
 
     @NonNull
@@ -42,11 +48,13 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
                 context.startActivity(intent);
             }
         });
+
+        holder.serviceName.setText(serviceList.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return serviceList.size();
     }
 
     public class ServiceViewHolder extends RecyclerView.ViewHolder {
@@ -61,5 +69,9 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
             serviceLayout = itemView.findViewById(R.id.serviceLayout);
 
         }
+    }
+    public void filterList(ArrayList<LocalServiceResponse> filterNames){
+        this.serviceList = filterNames;
+        notifyDataSetChanged();
     }
 }

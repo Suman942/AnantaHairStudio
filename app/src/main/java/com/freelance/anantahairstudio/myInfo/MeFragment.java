@@ -20,18 +20,19 @@ import com.freelance.anantahairstudio.contactUs.ContactUsActivity;
 import com.freelance.anantahairstudio.databinding.FragmentMeBinding;
 import com.freelance.anantahairstudio.ongoingServices.OngoingActivity;
 import com.freelance.anantahairstudio.profileedit.EditDetailsActivity;
+import com.freelance.anantahairstudio.signup.LoginActivity;
 import com.freelance.anantahairstudio.utils.GlideHelper;
 import com.freelance.anantahairstudio.utils.PrefManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MeFragment extends Fragment {
 
      FragmentMeBinding binding;
-    InputMethodManager imm;
+
     public MeFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -45,7 +46,6 @@ public class MeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_me, container, false);
-         imm = ((InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE));
 
         try {
             binding.nameTxt.setText(PrefManager.getInstance().getString(R.string.fullname));
@@ -81,6 +81,14 @@ public class MeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), OngoingActivity.class);
                 startActivity(intent);
+            }
+        });
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finish();
             }
         });
 

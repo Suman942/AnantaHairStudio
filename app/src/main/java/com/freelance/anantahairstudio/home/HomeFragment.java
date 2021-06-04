@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
+                intent.putExtra("search",0);
                 startActivity(intent);
             }
         });

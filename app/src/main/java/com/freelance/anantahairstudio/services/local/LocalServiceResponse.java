@@ -30,8 +30,8 @@ public class LocalServiceResponse {
     @ColumnInfo(name = "img")
     private String img;
 //
-//    @ColumnInfo(name = "info")
-//    private String info;
+    @ColumnInfo(name = "info")
+    private String info;
 
     public String getId() {
         return id;
@@ -81,21 +81,21 @@ public class LocalServiceResponse {
         this.img = img;
     }
 
-//    public String getInfo() {
-//        return info;
-//    }
-//
-//    public void setInfo(String info) {
-//        this.info = info;
-//    }
+    public String getInfo() {
+        return info;
+    }
 
-    public LocalServiceResponse(String id, @NonNull String categoryId, String name, String price, String discountedPrice, String img) {
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public LocalServiceResponse(String id, @NonNull String categoryId, String name, String price, String discountedPrice, String img,String info) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
         this.price = price;
         this.discountedPrice = discountedPrice;
         this.img = img;
-//        this.info = info;
+        this.info = info;
     }
 }

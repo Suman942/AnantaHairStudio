@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.ActivityLoginBinding;
 import com.freelance.anantahairstudio.referal.ReferalActivity;
 import com.freelance.anantahairstudio.signup.pojo.Authentication;
@@ -61,8 +62,17 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(Authentication authentication) {
                 if (authentication != null){
                     PrefManager.getInstance().putString(R.string.authToken,authentication.getData().getToken());
-                    Intent intent = new Intent(LoginActivity.this, ReferalActivity.class);
-                    startActivity(intent);
+                    if (authentication.getData().getIsNewUser() == 1) {
+                        Intent intent = new Intent(LoginActivity.this, ReferalActivity.class);
+                        startActivity(intent);
+                        Log.i("authentication","id: "+authentication.getData().getIsNewUser().intValue());
+
+                    }
+                    else {
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                     Log.i("authentication","token: "+authentication.getData().getToken());
                 }
             }
@@ -119,8 +129,9 @@ public class LoginActivity extends AppCompatActivity {
             PrefManager.getInstance().putString(R.string.email,email);
             PrefManager.getInstance().putString(R.string.profileUrl,profileImg);
 
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
-            startActivity(new Intent(this, ReferalActivity.class));
+
         }
     }
 

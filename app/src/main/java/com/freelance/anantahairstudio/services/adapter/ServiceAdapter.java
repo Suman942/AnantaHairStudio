@@ -25,9 +25,14 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
     Context context;
     ArrayList<LocalServiceResponse> serviceList;
-    public ServiceAdapter(Context context,ArrayList<LocalServiceResponse> serviceList) {
+    public interface Callback{
+        void serviceDetails(String id);
+    }
+    Callback callback;
+    public ServiceAdapter(Context context,ArrayList<LocalServiceResponse> serviceList,Callback callback) {
         this.context = context;
         this.serviceList = serviceList;
+        this.callback = callback;
     }
 
     @NonNull
@@ -51,7 +56,13 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         holder.serviceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ServiceDetailsActivity.class);
+//                callback.serviceDetails("1");
+                Intent intent = new Intent(context,ServiceDetailsActivity.class);
+                intent.putExtra("serviceName",serviceList.get(position).getName());
+                intent.putExtra("serviceImg",serviceList.get(position).getImg());
+                intent.putExtra("id",serviceList.get(position).getId());
+                intent.putExtra("price",serviceList.get(position).getPrice());
+                intent.putExtra("discountedPrice",serviceList.get(position).getDiscountedPrice());
                 context.startActivity(intent);
             }
         });

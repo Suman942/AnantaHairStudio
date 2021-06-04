@@ -102,6 +102,9 @@
             app:layout_constraintRight_toRightOf="@id/gR"
             app:layout_constraintTop_toBottomOf="@id/searchView" />
 
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

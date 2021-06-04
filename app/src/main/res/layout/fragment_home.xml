@@ -86,7 +86,7 @@
             app:cardBackgroundColor="#E9FFFE"
             android:id="@+id/haircut"
             app:cardElevation="5dp"
-            app:layout_constraintVertical_bias="0.12">
+            app:layout_constraintVertical_bias="0.11">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -235,7 +235,7 @@
             app:cardBackgroundColor="#E9FFFE"
             app:cardElevation="5dp"
             android:id="@+id/straightening"
-            app:layout_constraintVertical_bias="0.09">
+           >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -271,7 +271,7 @@
             app:cardBackgroundColor="#E9FFFE"
             android:id="@+id/pedicure"
             app:cardElevation="5dp"
-            app:layout_constraintVertical_bias="0.09">
+            >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

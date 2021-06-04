@@ -1,5 +1,6 @@
 package com.freelance.anantahairstudio.services;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
@@ -31,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ServicesFragment extends Fragment {
+public class ServicesFragment extends Fragment implements ServiceAdapter.Callback{
 
     FragmentServicesBinding binding;
     ServiceAdapter serviceAdapter;
@@ -93,6 +96,13 @@ public class ServicesFragment extends Fragment {
                 return false;
             }
         });
+//        binding.serviceRecyclerView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                binding.serviceDetails.setVisibility(View.GONE);
+//                return false;
+//            }
+//        });
         return binding.getRoot();
     }
 
@@ -126,7 +136,7 @@ public class ServicesFragment extends Fragment {
                         LocalServiceResponse savedCardData = new LocalServiceResponse(servicesResponse.getData().getServices().get(i).getId(),
                                 servicesResponse.getData().getServices().get(i).getCategoryId(),servicesResponse.getData().getServices().get(i).getName(),
                                 servicesResponse.getData().getServices().get(i).getPrice(),servicesResponse.getData().getServices().get(i).getDiscountedPrice(),
-                                servicesResponse.getData().getServices().get(i).getImg());
+                                servicesResponse.getData().getServices().get(i).getImg(),servicesResponse.getData().getServices().get(i).getInfo());
                         servicesDao.insert(savedCardData);
                     }
                 }
@@ -138,6 +148,7 @@ public class ServicesFragment extends Fragment {
     private void getIntents() {
         if (getArguments().getBoolean("fromHome")) {
             serviceNameId = getArguments().getString("serviceName");
+
             servicesDao.filterLiveData(serviceNameId).observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
                 @Override
                 public void onChanged(List<LocalServiceResponse> localServiceResponses) {
@@ -160,9 +171,13 @@ public class ServicesFragment extends Fragment {
     }
 
     private void initialise() {
-            serviceAdapter = new ServiceAdapter(getContext(),serviceList);
+            serviceAdapter = new ServiceAdapter(getContext(),serviceList,this);
             binding.serviceRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             binding.serviceRecyclerView.setAdapter(serviceAdapter);
         }
 
+    @Override
+    public void serviceDetails(String id) {
+//        binding.serviceDetails.setVisibility(View.VISIBLE);
+    }
 }

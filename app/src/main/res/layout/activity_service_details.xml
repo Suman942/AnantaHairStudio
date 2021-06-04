@@ -120,13 +120,14 @@
         android:text="\u20B9 600"
         android:layout_marginLeft="20dp"
         android:textSize="14sp"
-
+        android:visibility="invisible"
         android:textColor="#AAAAAA" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#AAAAAA"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@id/OriginalAmount"
         app:layout_constraintBottom_toBottomOf="@id/OriginalAmount"
         android:background="@drawable/ic_amount_cancel_stroke"

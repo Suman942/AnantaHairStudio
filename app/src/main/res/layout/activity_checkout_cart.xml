@@ -243,6 +243,7 @@
                     app:layout_constraintTop_toBottomOf="@id/addressLabel"
                     app:layout_constraintRight_toRightOf="@id/timeVIew"
                     android:layout_marginTop="15dp"
+                    android:visibility="invisible"
                     android:id="@+id/editLocation"/>
 
             <View
@@ -284,6 +285,7 @@
                 app:layout_constraintTop_toBottomOf="@id/contactLabel"
                 app:layout_constraintRight_toRightOf="@id/timeVIew"
                 android:layout_marginTop="15dp"
+                android:visibility="invisible"
                 android:id="@+id/editCall"/>
 
             <TextView

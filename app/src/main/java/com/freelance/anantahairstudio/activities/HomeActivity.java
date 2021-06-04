@@ -48,9 +48,10 @@ public class HomeActivity extends AppCompatActivity  {
             }
            if(getIntent().getIntExtra("from",-1) == 0){
                binding.viewPager.setCurrentItem(3);
-
            }
-
+            if(getIntent().getIntExtra("from",-1) == 1){
+                binding.viewPager.setCurrentItem(1);
+            }
         }
         catch (Exception e){
 
@@ -145,6 +146,7 @@ public class HomeActivity extends AppCompatActivity  {
                         bundle.putString("serviceName" , getIntent().getStringExtra("serviceName"));
                         bundle.putBoolean("fromHome",fromHome);
                     }
+                    bundle.putInt("search",getIntent().getIntExtra("search",-1));
                     ServicesFragment servicesFragment = new ServicesFragment();
                     servicesFragment.setArguments(bundle);
                     return  servicesFragment;

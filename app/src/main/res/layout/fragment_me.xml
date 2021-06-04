@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout >
 
     <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/scrollView"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EFEFEF"
-        android:fillViewport="true"
         tools:context=".myInfo.MeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,9 +69,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pointsLayout"
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="170dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="32dp"
                 android:background="#0DD3F1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/gC"
@@ -126,9 +127,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/referLayout"
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="170dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="32dp"
                 android:background="#0DD3F1"
                 app:layout_constraintLeft_toRightOf="@id/gC"
                 app:layout_constraintRight_toRightOf="parent"
@@ -144,7 +145,7 @@
                     android:text="Refer"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -280,7 +281,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Rampal Chowk, Dwarka, Delhi "
+                        android:text="N/A"
                         android:textColor="#777777"
                         app:layout_constraintLeft_toLeftOf="@id/locationIcon"
                         app:layout_constraintRight_toLeftOf="@id/editLocation"
@@ -325,7 +326,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="+917005667189"
+                        android:text="N/A"
                         android:textColor="#777777"
                         app:layout_constraintLeft_toLeftOf="@id/callIcon"
                         app:layout_constraintRight_toLeftOf="@id/editLocation"
@@ -344,7 +345,8 @@
 
                 app:layout_constraintLeft_toLeftOf="@id/pointsLayout"
                 app:layout_constraintRight_toRightOf="@id/referLayout"
-                app:layout_constraintTop_toBottomOf="@id/addressCard">
+                app:layout_constraintTop_toBottomOf="@id/addressCard"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

@@ -1,20 +1,20 @@
 package com.freelance.anantahairstudio.network;
 
 
+import com.freelance.anantahairstudio.cart.pojo.AddtoCartResponse;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
 import com.freelance.anantahairstudio.profileedit.ppojo.UpdateData;
+import com.freelance.anantahairstudio.referal.pojo.ReferalResponse;
 import com.freelance.anantahairstudio.services.pojo.ServicesResponse;
 import com.freelance.anantahairstudio.signup.pojo.Authentication;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -25,7 +25,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("login")
     Call<Authentication> authentication(
-      @Field("email") String email
+            @Field("email") String email
     );
 
     @Headers({
@@ -66,5 +66,28 @@ public interface ApiInterface {
     @GET("fetch?account")
     Call<MyAccountResponse> myAccount(
             @Header("Authorization") String token
+    );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("referral")
+    Call<ReferalResponse> referralCode(
+            @Header("Authorization") String token,
+            @Field("code") String code
+    );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("cart")
+    Call<AddtoCartResponse> addToCart(
+            @Header("Authorization") String token,
+            @Field("service_id") String serviceID,
+            @Field("individuals") String individuals
     );
 }

@@ -55,7 +55,7 @@ public class ServicesResponse {
             private String img;
             @SerializedName("info")
             @Expose
-            private Object info;
+            private String info;
 
             public String getId() {
                 return id;
@@ -105,11 +105,11 @@ public class ServicesResponse {
                 this.img = img;
             }
 
-            public Object getInfo() {
+            public String getInfo() {
                 return info;
             }
 
-            public void setInfo(Object info) {
+            public void setInfo(String info) {
                 this.info = info;
             }
 

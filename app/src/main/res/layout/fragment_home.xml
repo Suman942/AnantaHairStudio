@@ -9,7 +9,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp"
         android:fillViewport="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -117,14 +116,14 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:layout_constraintRight_toLeftOf="@id/blech"
+            app:layout_constraintRight_toLeftOf="@id/dTan"
             app:layout_constraintLeft_toRightOf="@id/haircut"
             app:layout_constraintBottom_toBottomOf="@id/haircut"
             app:layout_constraintTop_toTopOf="@id/haircut"
             app:cardBackgroundColor="#E9FFFE"
             app:cardElevation="5dp"
 
-            android:id="@+id/hairColor"
+            android:id="@+id/shaving"
             app:layout_constraintVertical_bias="0.19">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -136,7 +135,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:background="@drawable/ic_s_haircolor"
                     android:backgroundTint="@color/colorPrimary"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -144,12 +142,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/hairColor"
-            android:text="Hair colour"
-            app:layout_constraintRight_toRightOf="@id/hairColor"
-            app:layout_constraintTop_toBottomOf="@id/hairColor"
+            app:layout_constraintLeft_toLeftOf="@id/shaving"
+            android:text="Shaving"
+            app:layout_constraintRight_toRightOf="@id/shaving"
+            app:layout_constraintTop_toBottomOf="@id/shaving"
             android:textColor="#777777"
-            android:id="@+id/hairColorTxt"
+            android:id="@+id/shavingTxt"
             android:gravity="center"
             android:layout_marginTop="5dp"/>
 
@@ -161,7 +159,7 @@
             app:layout_constraintTop_toTopOf="@id/haircut"
             app:cardBackgroundColor="#E9FFFE"
             app:cardElevation="5dp"
-            android:id="@+id/blech"
+            android:id="@+id/dTan"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -181,12 +179,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/blech"
-            android:text="Blech"
-            app:layout_constraintRight_toRightOf="@id/blech"
-            app:layout_constraintTop_toBottomOf="@id/blech"
+            app:layout_constraintLeft_toLeftOf="@id/dTan"
+            android:text="D-Tan"
+            app:layout_constraintRight_toRightOf="@id/dTan"
+            app:layout_constraintTop_toBottomOf="@id/dTan"
             android:textColor="#777777"
-            android:id="@+id/blechTxt"
+            android:id="@+id/dTanTxt"
             android:gravity="center"
             android:layout_marginTop="5dp"/>
 
@@ -197,7 +195,7 @@
             app:layout_constraintLeft_toLeftOf="@id/searchView"
             app:layout_constraintTop_toBottomOf="@id/haircutTxt"
             app:cardBackgroundColor="#E9FFFE"
-            android:id="@+id/shaving"
+            android:id="@+id/facial"
             app:cardElevation="5dp"
             android:layout_marginTop="50dp"
            >
@@ -217,21 +215,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/shaving"
-            android:text="Shaving"
-            app:layout_constraintRight_toRightOf="@id/shaving"
-            app:layout_constraintTop_toBottomOf="@id/shaving"
+            app:layout_constraintLeft_toLeftOf="@id/facial"
+            android:text="Facial"
+            app:layout_constraintRight_toRightOf="@id/facial"
+            app:layout_constraintTop_toBottomOf="@id/facial"
             android:textColor="#777777"
-            android:id="@+id/shavingTxt"
+            android:id="@+id/facialTxt"
             android:gravity="center"
             android:layout_marginTop="5dp"/>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:layout_constraintRight_toLeftOf="@id/blech"
+            app:layout_constraintRight_toLeftOf="@id/dTan"
             app:layout_constraintLeft_toRightOf="@id/haircut"
-            app:layout_constraintBottom_toBottomOf="@id/shaving"
-            app:layout_constraintTop_toTopOf="@id/shaving"
+            app:layout_constraintBottom_toBottomOf="@id/facial"
+            app:layout_constraintTop_toTopOf="@id/facial"
             app:cardBackgroundColor="#E9FFFE"
             app:cardElevation="5dp"
             android:id="@+id/straightening"
@@ -253,9 +251,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/hairColor"
+            app:layout_constraintLeft_toLeftOf="@id/shaving"
             android:text="Straightening"
-            app:layout_constraintRight_toRightOf="@id/hairColor"
+            app:layout_constraintRight_toRightOf="@id/shaving"
             app:layout_constraintTop_toBottomOf="@id/straightening"
             android:textColor="#777777"
             android:id="@+id/straighteningTxt"
@@ -266,8 +264,8 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             app:layout_constraintRight_toRightOf="@id/searchView"
-            app:layout_constraintBottom_toBottomOf="@id/shaving"
-            app:layout_constraintTop_toTopOf="@id/shaving"
+            app:layout_constraintBottom_toBottomOf="@id/facial"
+            app:layout_constraintTop_toTopOf="@id/facial"
             app:cardBackgroundColor="#E9FFFE"
             android:id="@+id/pedicure"
             app:cardElevation="5dp"
@@ -290,9 +288,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/blech"
+            app:layout_constraintLeft_toLeftOf="@id/dTan"
             android:text="Pedicure"
-            app:layout_constraintRight_toRightOf="@id/blech"
+            app:layout_constraintRight_toRightOf="@id/dTan"
             app:layout_constraintTop_toBottomOf="@id/pedicure"
             android:textColor="#777777"
             android:id="@+id/pedicureTxt"
@@ -304,7 +302,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             app:layout_constraintLeft_toLeftOf="@id/searchView"
-            app:layout_constraintTop_toBottomOf="@id/shavingTxt"
+            app:layout_constraintTop_toBottomOf="@id/facialTxt"
             app:cardBackgroundColor="#E9FFFE"
             app:cardElevation="5dp"
             android:layout_marginTop="50dp"
@@ -327,9 +325,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/shaving"
+            app:layout_constraintLeft_toLeftOf="@id/facial"
             android:text="Bride groom"
-            app:layout_constraintRight_toRightOf="@id/shaving"
+            app:layout_constraintRight_toRightOf="@id/facial"
             app:layout_constraintTop_toBottomOf="@id/brideGroom"
             android:textColor="#777777"
             android:id="@+id/brideGroomTxt"
@@ -340,7 +338,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:layout_constraintRight_toLeftOf="@id/blech"
+            app:layout_constraintRight_toLeftOf="@id/dTan"
             app:layout_constraintLeft_toRightOf="@id/haircut"
             app:layout_constraintBottom_toBottomOf="@id/brideGroom"
             app:layout_constraintTop_toTopOf="@id/brideGroom"
@@ -365,9 +363,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/hairColor"
+            app:layout_constraintLeft_toLeftOf="@id/shaving"
             android:text="Manicure"
-            app:layout_constraintRight_toRightOf="@id/hairColor"
+            app:layout_constraintRight_toRightOf="@id/shaving"
             app:layout_constraintTop_toBottomOf="@id/manicure"
             android:textColor="#777777"
             android:id="@+id/manicureTxt"
@@ -402,9 +400,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/blech"
+            app:layout_constraintLeft_toLeftOf="@id/dTan"
             android:text="All Services"
-            app:layout_constraintRight_toRightOf="@id/blech"
+            app:layout_constraintRight_toRightOf="@id/dTan"
             app:layout_constraintTop_toBottomOf="@id/allServices"
             android:textColor="#777777"
             android:id="@+id/allServicesTxt"

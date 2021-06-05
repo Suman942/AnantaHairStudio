@@ -147,11 +147,14 @@ public class MeFragment extends Fragment {
 
                 try {
                     binding.phoneTxt.setText(myAccountResponse.getData().getBasic().getPhone().toString());
+                    PrefManager.getInstance().putString(R.string.phone,myAccountResponse.getData().getBasic().getPhone());
                 } catch (Exception e) {
                 }
 
                 try {
                     binding.addressTxt.setText(myAccountResponse.getData().getAddress().get(0).getAddress());
+                    PrefManager.getInstance().putString(R.string.address,myAccountResponse.getData().getAddress().get(0).getAddress());
+
                 } catch (Exception e) {
                 }
 

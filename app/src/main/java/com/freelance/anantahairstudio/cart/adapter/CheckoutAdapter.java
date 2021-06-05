@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.cart.CheckoutModel;
+import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
+import com.freelance.anantahairstudio.utils.GlideHelper;
 import com.freelance.anantahairstudio.utils.NoOfIndividuals;
 
 import java.util.ArrayList;
@@ -27,12 +29,12 @@ import java.util.List;
 
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.CheckoutViewHolder> {
     Context context;
-    ArrayList<CheckoutModel> arrayList;
-    private ArrayAdapter<String> genderAdapter;
+//    ArrayList<CheckoutModel> arrayList;
+    ArrayList<CartListResponse.Cart> cartList = new ArrayList<>();
 
-    public CheckoutAdapter(Context context, ArrayList<CheckoutModel> arrayList) {
+    public CheckoutAdapter(Context context, ArrayList<CartListResponse.Cart> cartList) {
         this.context = context;
-        this.arrayList = arrayList;
+        this.cartList = cartList;
 
     }
 
@@ -47,50 +49,16 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.Checko
     public void onBindViewHolder(@NonNull CheckoutViewHolder holder, int position) {
 
 
-            noOfindividualsFunc( holder,  position);
-    }
+//            noOfindividualsFunc( holder,  position);
 
-    private void noOfindividualsFunc(CheckoutViewHolder holder, int position) {
-        genderAdapter = new ArrayAdapter<String>(context
-                , android.R.layout.simple_spinner_dropdown_item, NoOfIndividuals.individuals){
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    tv.setTextColor(Color.GRAY);
-                } else {
-                    tv.setTextColor(Color.DKGRAY);
-                }
-                return view;
-            }
-
-
-        };
-
-        holder.noOfIndi.setAdapter(genderAdapter);
-        holder.noOfIndi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setSpinnerTextColor(parent);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        holder.noOfIndi.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                holder.noOfIndi.showDropDown();
-                return false;
-            }
-        });
+        holder.noOfIndividuals.setText("Individuals - "+cartList.get(position).getIndividuals());
+        holder.serviceName.setText(cartList.get(position).getName());
+        holder.price.setText("\u20B9 "+cartList.get(position).getPrice());
+        holder.discountPrice.setText("\u20B9 "+cartList.get(position).getDiscountedPrice()+" OFF");
+        GlideHelper.setImageView(context,holder.serviceImg,cartList.get(position).getImg(),R.drawable.ic_image_placeholder);
 
     }
+
 
     private void setSpinnerTextColor(AdapterView<?> parent){
         try {
@@ -103,14 +71,19 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.Checko
     }
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return cartList.size();
     }
 
     public class CheckoutViewHolder extends RecyclerView.ViewHolder {
-       AutoCompleteTextView noOfIndi;
+        ImageView serviceImg;
+        TextView serviceName, price, discountPrice,noOfIndividuals;
         public CheckoutViewHolder(@NonNull View itemView) {
             super(itemView);
-            noOfIndi = itemView.findViewById(R.id.noOfIndividual);
+            serviceImg= itemView.findViewById(R.id.serviceImg);
+            serviceName= itemView.findViewById(R.id.serviceNameTxt);
+            price= itemView.findViewById(R.id.amountTxt);
+            discountPrice= itemView.findViewById(R.id.discountAmount);
+            noOfIndividuals= itemView.findViewById(R.id.noOfIndividualText);
 
         }
     }

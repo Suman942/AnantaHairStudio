@@ -181,7 +181,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Time"
+                    android:hint="9.00"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
                     app:layout_constraintTop_toTopOf="parent"
@@ -230,7 +230,7 @@
                 android:layout_marginTop="16dp"
                 android:id="@+id/addressTxt"
                 app:layout_constraintRight_toLeftOf="@id/editLocation"
-                android:text="Rampal Chowk, Dwarka, Delhi "
+                android:text="N/A"
                 android:layout_marginRight="15dp"
                 android:textColor="#777777"
                 />
@@ -296,7 +296,7 @@
                 android:layout_marginTop="16dp"
                 android:id="@+id/callTxt"
                 app:layout_constraintRight_toLeftOf="@id/editLocation"
-                android:text="+917005667189 "
+                android:text="N/A"
                 android:layout_marginRight="15dp"
                 android:textColor="#777777"
                 />
@@ -321,6 +321,7 @@
                 android:text="Book"
                 android:textAllCaps="true"
                 android:textSize="20sp"
+                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:fontFamily="@font/roboto_medium"/>
         </com.google.android.material.card.MaterialCardView>

@@ -1,41 +1,124 @@
 package com.freelance.anantahairstudio.cart;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.cart.adapter.CheckoutAdapter;
+import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
+import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
+import com.freelance.anantahairstudio.cart.viewModel.AddToCartViewModel;
 import com.freelance.anantahairstudio.databinding.ActivityCheckoutCartBinding;
+import com.freelance.anantahairstudio.utils.PrefManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class CheckoutCartActivity extends AppCompatActivity {
 
     ActivityCheckoutCartBinding binding;
     CheckoutAdapter checkoutAdapter;
-    ArrayList<CheckoutModel> arrayList = new ArrayList<>();
+    ArrayList<CartListResponse.Cart> cartList = new ArrayList<>();
+    AddToCartViewModel cartViewModel;
     DatePickerDialog picker;
     TimePickerDialog timePickerDialog;
     public static final String[] MONTHS = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    int position;
+    String finalDate, finalTime, finalTimeSlot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       binding = DataBindingUtil.setContentView(this,R.layout.activity_checkout_cart);
-       intialise();
-       clickViews();
-       setDefaultDate();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_checkout_cart);
+        cartViewModel = new ViewModelProvider(this).get(AddToCartViewModel.class);
+
+        setDefaultData();
+        intialise();
+        clickViews();
+        setDefaultDate();
+        observer();
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                switch (direction) {
+                    case ItemTouchHelper.LEFT:
+                        position = viewHolder.getAdapterPosition();
+                        cartViewModel.removeCart(PrefManager.getInstance().getString(R.string.authToken), cartList.get(position).getId());
+                        checkoutAdapter.notifyDataSetChanged();
+                        checkoutAdapter.notifyItemChanged(position);
+                        break;
+                }
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(binding.checkOutRecyclerView);
+
+
+        cartViewModel.getCartList(PrefManager.getInstance().getString(R.string.authToken));
+
+    }
+
+    private void observer() {
+        cartViewModel.getCartListLiveData().observe(this, new Observer<CartListResponse>() {
+            @Override
+            public void onChanged(CartListResponse cartListResponse) {
+                if (cartListResponse != null) {
+                    cartList.addAll(cartListResponse.getData());
+                    checkoutAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+        cartViewModel.removeCartLiveData().observe(this, new Observer<RemoveCartResponse>() {
+            @Override
+            public void onChanged(RemoveCartResponse removeCartResponse) {
+                if (removeCartResponse != null) {
+                    Toast.makeText(getApplicationContext(), "Item removed successfully", Toast.LENGTH_SHORT).show();
+                    cartList.clear();
+                    cartViewModel.getCartList(PrefManager.getInstance().getString(R.string.authToken));
+
+                }
+            }
+        });
+    }
+
+    private void setDefaultData() {
+        try {
+            binding.addressTxt.setText(PrefManager.getInstance().getString(R.string.address));
+        } catch (Exception e) {
+        }
+        try {
+            binding.callTxt.setText(PrefManager.getInstance().getString(R.string.phone));
+        } catch (Exception e) {
+        }
     }
 
     private void setDefaultDate() {
@@ -43,9 +126,10 @@ public class CheckoutCartActivity extends AppCompatActivity {
         int currentMonth = calendar.get(Calendar.MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         binding.setDate.setText(String.valueOf(currentDay));
-        binding.setMonth.setText( String.valueOf(MONTHS[currentMonth]));
+        binding.setMonth.setText(String.valueOf(MONTHS[currentMonth]));
 
-
+        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+        binding.setTime.setText(currentTime);
     }
 
     private void clickViews() {
@@ -63,7 +147,9 @@ public class CheckoutCartActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 binding.setDate.setText(String.valueOf(dayOfMonth));
-                                binding.setMonth.setText( String.valueOf(MONTHS[monthOfYear]));
+                                binding.setMonth.setText(String.valueOf(MONTHS[monthOfYear]));
+                                Log.i("time", " " + String.valueOf(dayOfMonth)+"-"+String.valueOf(MONTHS[monthOfYear])+"-"+String.valueOf(year));
+                                finalDate = String.valueOf(dayOfMonth)+"-"+String.valueOf(MONTHS[monthOfYear])+"-"+String.valueOf(year);
                             }
                         }, year, month, day);
                 picker.show();
@@ -73,21 +159,25 @@ public class CheckoutCartActivity extends AppCompatActivity {
         binding.timeVIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 Calendar c = Calendar.getInstance();
-              int  mHour = c.get(Calendar.HOUR_OF_DAY);
-              int  mMinute = c.get(Calendar.MINUTE);
+                Calendar c = Calendar.getInstance();
+                int mHour = c.get(Calendar.HOUR_OF_DAY);
+                int mMinute = c.get(Calendar.MINUTE);
                 // Launch Time Picker Dialog
-                 timePickerDialog = new TimePickerDialog(CheckoutCartActivity.this,
+                timePickerDialog = new TimePickerDialog(CheckoutCartActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
 
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                binding.setTime.setText(String.valueOf(hourOfDay)+"h" + ":" + String.valueOf(minute)+"m");
+                                binding.setTime.setText(String.valueOf(hourOfDay) + "h" + ":" + String.valueOf(minute) + "m");
+                                Log.i("time", " " +String.valueOf(hourOfDay)+":"+String.valueOf(minute));
+                                finalTime = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
+
+
             }
         });
 
@@ -98,13 +188,18 @@ public class CheckoutCartActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        binding.book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("time"," "+finalDate+" "+finalTime);
+
+            }
+        });
     }
 
     private void intialise() {
-        arrayList.add(new CheckoutModel("Hair Cut",1));
-        arrayList.add(new CheckoutModel("Shaving",2));
-
-        checkoutAdapter = new CheckoutAdapter(getApplicationContext(),arrayList);
+        checkoutAdapter = new CheckoutAdapter(getApplicationContext(), cartList);
         binding.checkOutRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.checkOutRecyclerView.setAdapter(checkoutAdapter);
     }

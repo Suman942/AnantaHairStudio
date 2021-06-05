@@ -1,6 +1,7 @@
 package com.freelance.anantahairstudio.services;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
@@ -44,6 +47,7 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
 
     ServicesDatabase serviceDatabase;
     AllServicesDao servicesDao;
+    int position;
     public ServicesFragment() {
         // Required empty public constructor
     }
@@ -66,6 +70,33 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
 
         initialise();
         getIntents();
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT ) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                switch (direction){
+                    case ItemTouchHelper.RIGHT:
+                        position = viewHolder.getAdapterPosition();
+                        Intent intent = new Intent(getContext(),ServiceDetailsActivity.class);
+                        intent.putExtra("serviceName",serviceList.get(position).getName());
+                        intent.putExtra("serviceImg",serviceList.get(position).getImg());
+                        intent.putExtra("id",serviceList.get(position).getId());
+                        intent.putExtra("price",serviceList.get(position).getPrice());
+                        intent.putExtra("discountedPrice",serviceList.get(position).getDiscountedPrice());
+                        getContext().startActivity(intent);
+                        serviceAdapter.notifyDataSetChanged();
+                        serviceAdapter.notifyItemChanged(position);
+                        break;
+                }
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(binding.serviceRecyclerView);
 
         binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

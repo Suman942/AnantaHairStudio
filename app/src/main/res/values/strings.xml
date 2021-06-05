@@ -6,5 +6,7 @@
     <string name="email">email</string>
     <string name="profileUrl">profileUrl</string>
     <string name="authToken">authToken</string>
+    <string name="address">address</string>
+    <string name="phone">phone</string>
 
 </resources>

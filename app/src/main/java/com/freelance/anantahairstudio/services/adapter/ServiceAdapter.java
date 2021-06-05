@@ -53,19 +53,19 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         holder.discountAmount.setText("\u20B9 "+serviceList.get(position).getDiscountedPrice() + " OFF");
         holder.serviceName.setText(serviceList.get(position).getName());
 
-        holder.serviceLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                callback.serviceDetails("1");
-                Intent intent = new Intent(context,ServiceDetailsActivity.class);
-                intent.putExtra("serviceName",serviceList.get(position).getName());
-                intent.putExtra("serviceImg",serviceList.get(position).getImg());
-                intent.putExtra("id",serviceList.get(position).getId());
-                intent.putExtra("price",serviceList.get(position).getPrice());
-                intent.putExtra("discountedPrice",serviceList.get(position).getDiscountedPrice());
-                context.startActivity(intent);
-            }
-        });
+//        holder.serviceLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                callback.serviceDetails("1");
+//                Intent intent = new Intent(context,ServiceDetailsActivity.class);
+//                intent.putExtra("serviceName",serviceList.get(position).getName());
+//                intent.putExtra("serviceImg",serviceList.get(position).getImg());
+//                intent.putExtra("id",serviceList.get(position).getId());
+//                intent.putExtra("price",serviceList.get(position).getPrice());
+//                intent.putExtra("discountedPrice",serviceList.get(position).getDiscountedPrice());
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 

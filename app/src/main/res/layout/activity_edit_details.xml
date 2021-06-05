@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eee"
+    android:background="#eeeeee"
     tools:context=".profileedit.EditDetailsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,6 +54,7 @@
             android:hint="Enter phone number"
             android:paddingLeft="20dp"
             android:maxLength="10"
+            android:inputType="number"
             android:textColorHint="#777"
             android:textColor="#777"
             android:id="@+id/editPhno"/>
@@ -68,9 +69,11 @@
             android:background="#EEEEEE"
             android:hint="Address"
             android:textColor="#777"
+            android:inputType="textPostalAddress"
             android:paddingLeft="20dp"
             android:textColorHint="#777"
             android:id="@+id/editAddress"/>
+
         <EditText
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -81,6 +84,7 @@
             android:background="#EEEEEE"
             android:hint="Landmark"
             android:textColor="#777"
+            android:inputType="textPostalAddress"
             android:paddingLeft="20dp"
             android:textColorHint="#777"
             android:id="@+id/editLandamrk"/>

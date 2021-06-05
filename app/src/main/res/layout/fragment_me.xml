@@ -110,6 +110,7 @@
                     android:id="@+id/redeemBtn"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
+                    android:visibility="invisible"
                     app:cardBackgroundColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent">
 

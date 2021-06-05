@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        binding.hairColor.setOnClickListener(new View.OnClickListener() {
+        binding.facial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.blech.setOnClickListener(new View.OnClickListener() {
+        binding.dTan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);

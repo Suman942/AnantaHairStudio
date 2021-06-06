@@ -84,6 +84,7 @@
             app:layout_constraintBottom_toBottomOf="@id/cartTxt"
             android:text="Checkout"
             android:textAllCaps="true"
+            android:visibility="invisible"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:id="@+id/checkout"

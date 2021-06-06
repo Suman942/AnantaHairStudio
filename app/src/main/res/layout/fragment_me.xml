@@ -20,7 +20,7 @@
                 android:id="@+id/l1"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:background="#0DD3F1"
+                android:background="@color/colorPrimary"
                 android:elevation="5dp"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -72,7 +72,7 @@
                 android:layout_width="150dp"
                 android:layout_height="170dp"
                 android:layout_marginTop="32dp"
-                android:background="#0DD3F1"
+                android:background="@color/colorPrimary"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/gC"
                 app:layout_constraintTop_toBottomOf="@id/l1">
@@ -131,7 +131,7 @@
                 android:layout_width="150dp"
                 android:layout_height="170dp"
                 android:layout_marginTop="32dp"
-                android:background="#0DD3F1"
+                android:background="@color/colorPrimary"
                 app:layout_constraintLeft_toRightOf="@id/gC"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/l1">
@@ -176,7 +176,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/colorPrimary"
+                    android:background="#0DD3F1"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/gRefer"
                     app:layout_constraintTop_toBottomOf="@id/referTxt2">
@@ -209,7 +209,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/colorPrimary"
+                    android:background="#0DD3F1"
                     app:layout_constraintLeft_toRightOf="@id/gRefer"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/referTxt2">
@@ -382,7 +382,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_marginTop="20dp"
-                        android:background="#555555"
+                        android:background="#eee"
                         app:layout_constraintTop_toBottomOf="@id/ongoingServices" />
 
                     <ImageView
@@ -412,7 +412,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_marginTop="20dp"
-                        android:background="#555555"
+                        android:background="#eeeeee"
                         app:layout_constraintTop_toBottomOf="@id/contactus" />
 
                     <ImageView

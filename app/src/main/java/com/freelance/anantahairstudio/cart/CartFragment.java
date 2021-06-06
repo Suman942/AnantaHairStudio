@@ -120,6 +120,7 @@ public class CartFragment extends Fragment {
                     try {
                         cartList.addAll(cartListResponse.getData());
                         cartAdapter.notifyDataSetChanged();
+                        binding.checkout.setVisibility(View.VISIBLE);
                     }
                    catch (Exception e){
 

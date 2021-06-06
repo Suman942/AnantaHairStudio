@@ -2,6 +2,7 @@ package com.freelance.anantahairstudio.network;
 
 
 import com.freelance.anantahairstudio.cart.pojo.AddtoCartResponse;
+import com.freelance.anantahairstudio.cart.pojo.BookingResponse;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
@@ -113,4 +114,16 @@ public interface ApiInterface {
             @Header("Authorization") String token,
             @Field("remove") String removeCartId
     );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("booking")
+    Call<BookingResponse> booking(
+            @Header("Authorization") String token,
+            @Field("slot") String slot,
+            @Field("book") String book
+            );
 }

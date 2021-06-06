@@ -11,7 +11,7 @@ import android.view.View;
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.ActivityOngoingBinding;
-import com.freelance.anantahairstudio.profileedit.EditDetailsActivity;
+import com.freelance.anantahairstudio.ongoingServices.adapter.OngoingServiceAdapter;
 
 public class OngoingActivity extends AppCompatActivity {
   ActivityOngoingBinding binding;

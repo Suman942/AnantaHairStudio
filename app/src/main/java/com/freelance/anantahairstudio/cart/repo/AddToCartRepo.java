@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.freelance.anantahairstudio.cart.pojo.AddtoCartResponse;
+import com.freelance.anantahairstudio.cart.pojo.BookingResponse;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.network.ApiClient;
@@ -80,6 +81,24 @@ public class AddToCartRepo {
             @Override
             public void onFailure(Call<RemoveCartResponse> call, Throwable t) {
                 Log.i("removeCart","failure: "+t.getMessage());
+                mutableLiveData.setValue(null);
+            }
+        });
+    }
+
+    public void booking(String token, String slot, String book, MutableLiveData<BookingResponse> mutableLiveData){
+        apiInterface.booking(token,slot,book).enqueue(new Callback<BookingResponse>() {
+            @Override
+            public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
+                if (response.code() == 200){
+                    Log.i("booking","successful");
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookingResponse> call, Throwable t) {
+                Log.i("booking","failure: "+t.getMessage());
                 mutableLiveData.setValue(null);
             }
         });

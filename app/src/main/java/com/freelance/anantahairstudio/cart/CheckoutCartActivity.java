@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.cart.adapter.CheckoutAdapter;
+import com.freelance.anantahairstudio.cart.pojo.BookingResponse;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.cart.viewModel.AddToCartViewModel;
@@ -108,6 +109,17 @@ public class CheckoutCartActivity extends AppCompatActivity {
                 }
             }
         });
+
+        cartViewModel.bookingLiveData().observe(this, new Observer<BookingResponse>() {
+            @Override
+            public void onChanged(BookingResponse bookingResponse) {
+                if (bookingResponse != null){
+                    Toast.makeText(CheckoutCartActivity.this, "Booked Successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(CheckoutCartActivity.this,HomeActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 
     private void setDefaultData() {
@@ -148,8 +160,8 @@ public class CheckoutCartActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 binding.setDate.setText(String.valueOf(dayOfMonth));
                                 binding.setMonth.setText(String.valueOf(MONTHS[monthOfYear]));
-                                Log.i("time", " " + String.valueOf(dayOfMonth)+"-"+String.valueOf(MONTHS[monthOfYear])+"-"+String.valueOf(year));
-                                finalDate = String.valueOf(dayOfMonth)+"-"+String.valueOf(MONTHS[monthOfYear])+"-"+String.valueOf(year);
+                                Log.i("time", " " + String.valueOf(dayOfMonth) + "-" + String.valueOf(MONTHS[monthOfYear]) + "-" + String.valueOf(year));
+                                finalDate = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear) + "-" + String.valueOf(year);
                             }
                         }, year, month, day);
                 picker.show();
@@ -171,8 +183,8 @@ public class CheckoutCartActivity extends AppCompatActivity {
                                                   int minute) {
 
                                 binding.setTime.setText(String.valueOf(hourOfDay) + "h" + ":" + String.valueOf(minute) + "m");
-                                Log.i("time", " " +String.valueOf(hourOfDay)+":"+String.valueOf(minute));
-                                finalTime = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
+                                Log.i("time", " " + String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+                                finalTime = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
@@ -192,8 +204,14 @@ public class CheckoutCartActivity extends AppCompatActivity {
         binding.book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("time"," "+finalDate+" "+finalTime);
-
+                if (finalTime != null && finalDate != null) {
+                    finalTimeSlot = finalDate + " " + finalTime;
+                    Log.i("time", " " + finalTimeSlot);
+                    cartViewModel.booking(PrefManager.getInstance().getString(R.string.authToken), finalTimeSlot,"1");
+                }
+                else {
+                    Toast.makeText(CheckoutCartActivity.this, "Select time slot", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

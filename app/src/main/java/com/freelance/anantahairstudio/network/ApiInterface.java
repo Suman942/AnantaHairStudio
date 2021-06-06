@@ -6,6 +6,7 @@ import com.freelance.anantahairstudio.cart.pojo.BookingResponse;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
+import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
 import com.freelance.anantahairstudio.profileedit.ppojo.UpdateData;
 import com.freelance.anantahairstudio.referal.pojo.ReferalResponse;
 import com.freelance.anantahairstudio.services.pojo.ServicesResponse;
@@ -126,4 +127,13 @@ public interface ApiInterface {
             @Field("slot") String slot,
             @Field("book") String book
             );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @GET("booking?fetch=1")
+    Call<OnGoingServiceResponse> ongoingService(
+            @Header("Authorization") String token
+    );
 }

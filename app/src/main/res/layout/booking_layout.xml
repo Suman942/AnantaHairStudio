@@ -8,8 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="10dp"
-        >
+        android:paddingBottom="10dp">
 
 
 
@@ -126,6 +125,30 @@
             android:gravity="center"
             android:textColor="#777"
             />
+
+        <View
+            android:id="@+id/payBackground"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/curved_view_pending"
+            app:layout_constraintLeft_toLeftOf="@id/serviceNameTxt"
+            app:layout_constraintTop_toTopOf="@id/noOfIndividualText"
+            />
+
+        <TextView
+            android:id="@+id/payTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:text="Pay"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/payBackground"
+            app:layout_constraintLeft_toLeftOf="@id/payBackground"
+            app:layout_constraintRight_toRightOf="@id/payBackground"
+            app:layout_constraintTop_toTopOf="@id/payBackground" />
+
         <View
             android:id="@+id/statusBackground"
             android:layout_width="100dp"

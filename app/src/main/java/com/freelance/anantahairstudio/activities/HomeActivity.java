@@ -8,10 +8,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.cart.CartFragment;
@@ -19,7 +25,10 @@ import com.freelance.anantahairstudio.databinding.ActivityHomeBinding;
 import com.freelance.anantahairstudio.home.HomeFragment;
 import com.freelance.anantahairstudio.myInfo.MeFragment;
 import com.freelance.anantahairstudio.services.ServicesFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +46,33 @@ public class HomeActivity extends AppCompatActivity  {
 
         intialise();
         getIntents();
+        notifications();
+    }
 
+    private void notifications() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+
+            NotificationChannel channel = new NotificationChannel(
+                    "AnantaHairStudioNotification",
+                    "AnantaHairStudio",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("Booking")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+//                            Toast.makeText(HomeActivity.this, "Notification Sent", Toast.LENGTH_SHORT).show();
+                        }
+////                        Log.d(TAG, msg);
+                    }
+                });
     }
 
     private void getIntents() {

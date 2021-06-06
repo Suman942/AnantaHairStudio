@@ -6,14 +6,17 @@ import com.freelance.anantahairstudio.cart.pojo.BookingResponse;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
+import com.freelance.anantahairstudio.notification.FcmResponse;
 import com.freelance.anantahairstudio.ongoingServices.pojo.CancelBookingResponse;
 import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
 import com.freelance.anantahairstudio.profileedit.ppojo.UpdateData;
 import com.freelance.anantahairstudio.referal.pojo.ReferalResponse;
 import com.freelance.anantahairstudio.services.pojo.ServicesResponse;
 import com.freelance.anantahairstudio.signup.pojo.Authentication;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -149,4 +152,12 @@ public interface ApiInterface {
             @Field("cancel") String bookingId
     );
 
+    @Headers({
+            "Content-Type: application/json",
+            "Authorization:key=AAAAlZCQ3F8:APA91bEKy8G_coXnOmT7-kkvnDX4YtKqkVetcF7iawq8ICHKnX5YOoAsXzd3sTkaOMEt-eaDo69GqOCOyvxCSdyBD8N0VCKfUcRyAdkqSSUufUyz8tA0n-nqBYwZ96e9PJyZgid_NfJb"
+    })
+    @POST("https://fcm.googleapis.com/fcm/send")
+    Call<FcmResponse> sendNotifications(
+            @Body JsonObject jsonObject
+            );
 }

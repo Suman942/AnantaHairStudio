@@ -116,9 +116,14 @@ public class CartFragment extends Fragment {
         cartViewModel.getCartListLiveData().observe(getViewLifecycleOwner(), new Observer<CartListResponse>() {
             @Override
             public void onChanged(CartListResponse cartListResponse) {
-                if (cartListResponse != null){
-                    cartList.addAll(cartListResponse.getData());
-                    cartAdapter.notifyDataSetChanged();
+                if (cartListResponse != null && cartListResponse.getData().size() > 0){
+                    try {
+                        cartList.addAll(cartListResponse.getData());
+                        cartAdapter.notifyDataSetChanged();
+                    }
+                   catch (Exception e){
+
+                   }
                 }
             }
         });

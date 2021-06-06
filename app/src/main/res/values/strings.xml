@@ -8,5 +8,7 @@
     <string name="authToken">authToken</string>
     <string name="address">address</string>
     <string name="phone">phone</string>
+    <string name="default_notification_channel_id">AnantaHairStudioNotification</string>
 
 </resources>
+

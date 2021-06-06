@@ -27,6 +27,8 @@ import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.cart.viewModel.AddToCartViewModel;
 import com.freelance.anantahairstudio.databinding.ActivityCheckoutCartBinding;
+import com.freelance.anantahairstudio.network.RequestFormatter;
+import com.freelance.anantahairstudio.notification.NotificationViewModel;
 import com.freelance.anantahairstudio.utils.PrefManager;
 
 import java.text.SimpleDateFormat;
@@ -48,11 +50,14 @@ public class CheckoutCartActivity extends AppCompatActivity {
     int position;
     String finalDate, finalTime, finalTimeSlot;
 
+    NotificationViewModel notificationViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_checkout_cart);
         cartViewModel = new ViewModelProvider(this).get(AddToCartViewModel.class);
+        notificationViewModel = new ViewModelProvider(this).get(NotificationViewModel.class);
 
         setDefaultData();
         intialise();
@@ -113,9 +118,10 @@ public class CheckoutCartActivity extends AppCompatActivity {
         cartViewModel.bookingLiveData().observe(this, new Observer<BookingResponse>() {
             @Override
             public void onChanged(BookingResponse bookingResponse) {
-                if (bookingResponse != null){
+                if (bookingResponse != null) {
                     Toast.makeText(CheckoutCartActivity.this, "Booked Successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(CheckoutCartActivity.this,HomeActivity.class));
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/Booking", "Ananta Hair Studio", "New Booking Alert"));
+                    startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
                     finish();
                 }
             }
@@ -207,9 +213,8 @@ public class CheckoutCartActivity extends AppCompatActivity {
                 if (finalTime != null && finalDate != null) {
                     finalTimeSlot = finalDate + " " + finalTime;
                     Log.i("time", " " + finalTimeSlot);
-                    cartViewModel.booking(PrefManager.getInstance().getString(R.string.authToken), finalTimeSlot,"1");
-                }
-                else {
+                    cartViewModel.booking(PrefManager.getInstance().getString(R.string.authToken), finalTimeSlot, "1");
+                } else {
                     Toast.makeText(CheckoutCartActivity.this, "Select time slot", Toast.LENGTH_SHORT).show();
                 }
             }

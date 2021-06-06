@@ -31,6 +31,8 @@ public class OngoingServiceAdapter extends RecyclerView.Adapter<OngoingServiceAd
         this.serviceArrayList = serviceArrayList;
     }
 
+
+
     @NonNull
     @Override
     public OngoingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,25 +45,12 @@ public class OngoingServiceAdapter extends RecyclerView.Adapter<OngoingServiceAd
     @Override
     public void onBindViewHolder(@NonNull OngoingViewHolder holder, int position) {
 
-        if (position == 0){
-            holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_reject));
-            holder.statusTxt.setText("Rejected");
-        }
-        if (position == 1){
-            holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_accept));
-            holder.statusTxt.setText("Confirmed");
-        }
-        if (position == 2){
-            holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_pending));
-            holder.statusTxt.setText("Pending");
-        }
 
         holder.serviceName.setText(serviceArrayList.get(position).getName());
         holder.price.setText("\u20B9 "+serviceArrayList.get(position).getPrice());
         holder.discountPrice.setText("\u20B9 "+serviceArrayList.get(position).getDiscountedPrice()+" OFF");
         holder.individuals.setText("Individuals - "+serviceArrayList.get(position).getIndividuals());
 
-//        Toast.makeText(context, ""+bookingIdList.get(position).getData().get(position).getBookingId(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

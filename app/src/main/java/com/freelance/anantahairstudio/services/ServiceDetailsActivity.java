@@ -47,7 +47,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                 try {
                     binding.addtocartBtn.setBackgroundColor(Color.parseColor("#FF3B70"));
                     binding.addtocartBtn.setText("ADDED");
-                    Toast.makeText(ServiceDetailsActivity.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ServiceDetailsActivity.this, "Successfully added to cart", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ServiceDetailsActivity.this, HomeActivity.class);
                     intent.putExtra("from",1);
                     startActivity(intent);

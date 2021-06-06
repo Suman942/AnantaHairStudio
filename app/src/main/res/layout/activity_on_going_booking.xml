@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="#eee"
-    tools:context=".ongoingServices.OngoingActivity">
+    android:layout_height="match_parent"
+    tools:context=".ongoingServices.OnGoingBookingActivity">
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,10 +25,19 @@
         app:layout_constraintLeft_toRightOf="@id/back"
         android:layout_marginLeft="8dp"
         app:layout_constraintBottom_toBottomOf="@id/back"
-        android:text="Ongoing Services"
+        android:text="All Bookings"
         android:textSize="16sp"
         android:fontFamily="@font/roboto_medium"
         android:textColor="#999999"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/loader"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gL"
@@ -42,14 +52,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/loader"/>
+
     <com.freelance.anantahairstudio.utils.EmptyRecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"

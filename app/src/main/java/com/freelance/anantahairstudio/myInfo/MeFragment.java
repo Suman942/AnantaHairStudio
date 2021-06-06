@@ -28,6 +28,7 @@ import com.freelance.anantahairstudio.contactUs.ContactUsActivity;
 import com.freelance.anantahairstudio.databinding.FragmentMeBinding;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
 import com.freelance.anantahairstudio.myInfo.viewModel.MyAccountInfoViewModel;
+import com.freelance.anantahairstudio.ongoingServices.OnGoingBookingActivity;
 import com.freelance.anantahairstudio.ongoingServices.OngoingActivity;
 import com.freelance.anantahairstudio.profileedit.EditDetailsActivity;
 import com.freelance.anantahairstudio.signup.LoginActivity;
@@ -95,7 +96,7 @@ public class MeFragment extends Fragment {
         binding.ongoingServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), OngoingActivity.class);
+                Intent intent = new Intent(getContext(), OnGoingBookingActivity.class);
                 startActivity(intent);
             }
         });

@@ -22,19 +22,25 @@ import com.freelance.anantahairstudio.utils.PrefManager;
 import java.util.ArrayList;
 
 public class OngoingActivity extends AppCompatActivity {
-  ActivityOngoingBinding binding;
-  OngoingServiceAdapter adapter;
-  ArrayList<OnGoingServiceResponse.Data.Service> serviceArrayList = new ArrayList<>();
-  ArrayList<OnGoingServiceResponse> bookingIdList = new ArrayList<>();
-  OngoingServiceViewModel serviceViewModel ;
+    ActivityOngoingBinding binding;
+    OngoingServiceAdapter adapter;
+    ArrayList<OnGoingServiceResponse.Data.Service> serviceArrayList = new ArrayList<>();
+    OngoingServiceViewModel serviceViewModel;
+    String bookingId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     binding = DataBindingUtil.setContentView(this,R.layout.activity_ongoing);
-     serviceViewModel = new ViewModelProvider(this).get(OngoingServiceViewModel.class);
-     initialise();
-     clickViews();
-     observer();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_ongoing);
+        serviceViewModel = new ViewModelProvider(this).get(OngoingServiceViewModel.class);
+        getIntentData();
+        initialise();
+        clickViews();
+        observer();
+    }
+
+    private void getIntentData() {
+        bookingId = getIntent().getStringExtra("bookingId");
     }
 
     private void observer() {
@@ -43,13 +49,17 @@ public class OngoingActivity extends AppCompatActivity {
         serviceViewModel.ongoingServiceLiveData().observe(this, new Observer<OnGoingServiceResponse>() {
             @Override
             public void onChanged(OnGoingServiceResponse onGoingServiceResponse) {
-                if (onGoingServiceResponse != null){
-                    for (int i =0 ; i < onGoingServiceResponse.getData().size();i++) {
-                        serviceArrayList.addAll(onGoingServiceResponse.getData().get(i).getServices());
+                if (onGoingServiceResponse != null) {
+                    for (int i = 0; i < onGoingServiceResponse.getData().size(); i++) {
+                        if (onGoingServiceResponse.getData().get(i).getBookingId().equals(bookingId)){
+                            for (int j = 0 ; j < onGoingServiceResponse.getData().get(i).getServices().size();j++) {
+                                serviceArrayList.add(onGoingServiceResponse.getData().get(i).getServices().get(j));
+                            }
+                        }
                     }
-//                    bookingIdList.add(onGoingServiceResponse);
-
                     adapter.notifyDataSetChanged();
+                    binding.loader.setVisibility(View.GONE);
+
                 }
             }
         });
@@ -57,26 +67,26 @@ public class OngoingActivity extends AppCompatActivity {
 
     private void clickViews() {
 
-      binding.back.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Intent intent = new Intent(OngoingActivity.this, HomeActivity.class);
-              intent.putExtra("from",0);
-              startActivity(intent);
-          }
-      });
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OngoingActivity.this, OnGoingBookingActivity.class);
+                intent.putExtra("from", 0);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initialise() {
-        adapter = new OngoingServiceAdapter(this,serviceArrayList);
+        adapter = new OngoingServiceAdapter(this, serviceArrayList);
         binding.serviceRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.serviceRecyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(OngoingActivity.this, HomeActivity.class);
-        intent.putExtra("from",0);
+        Intent intent = new Intent(OngoingActivity.this, OnGoingBookingActivity.class);
+        intent.putExtra("from", 0);
         startActivity(intent);
     }
 }

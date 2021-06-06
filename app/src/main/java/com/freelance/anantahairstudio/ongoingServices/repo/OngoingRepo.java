@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.freelance.anantahairstudio.cart.repo.AddToCartRepo;
 import com.freelance.anantahairstudio.network.ApiClient;
 import com.freelance.anantahairstudio.network.ApiInterface;
+import com.freelance.anantahairstudio.ongoingServices.pojo.CancelBookingResponse;
 import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
 
 import retrofit2.Call;
@@ -39,6 +40,23 @@ public class OngoingRepo {
             @Override
             public void onFailure(Call<OnGoingServiceResponse> call, Throwable t) {
                     mutableLiveData.setValue(null);
+            }
+        });
+    }
+
+    public void cancelBooking(String token, String bookingId, MutableLiveData<CancelBookingResponse> mutableLiveData){
+        apiInterface.cancelBooking(token, bookingId).enqueue(new Callback<CancelBookingResponse>() {
+            @Override
+            public void onResponse(Call<CancelBookingResponse> call, Response<CancelBookingResponse> response) {
+                if (response.code() == 200){
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CancelBookingResponse> call, Throwable t) {
+                mutableLiveData.setValue(null);
+
             }
         });
     }

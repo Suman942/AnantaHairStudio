@@ -2,28 +2,21 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
-    android:layout_marginBottom="15dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginBottom="15dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="10dp"
         >
 
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:id="@+id/serviceImg"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/serviceNameTxt"
-            android:background="@drawable/ic_image_placeholder"
-            android:scaleType="centerCrop"/>
+
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/serviceImg"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
             app:layout_constraintRight_toRightOf="parent"
@@ -38,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/discountAmount"
-
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="@id/amountTxt"
             app:layout_constraintBottom_toBottomOf="@id/amountTxt"
             app:layout_constraintLeft_toLeftOf="@id/serviceNameTxt"
@@ -52,6 +45,7 @@
             android:layout_height="wrap_content"
             android:text="\u20B9 400"
             android:textColor="#777777"
+            android:visibility="gone"
             android:textSize="16sp"
             android:layout_marginRight="15dp"
             app:layout_constraintRight_toRightOf="@id/serviceNameTxt"
@@ -67,7 +61,7 @@
             app:layout_constraintRight_toLeftOf="@id/amountTxt"
             android:text="\u20B9 600"
             android:layout_marginRight="20dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:textSize="14sp"
             android:textColor="#AAAAAA" />
 
@@ -84,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:backgroundTint="#AAAAAA"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="@id/OriginalAmount"
             app:layout_constraintBottom_toBottomOf="@id/OriginalAmount"
             android:background="@drawable/ic_amount_cancel_stroke"
@@ -100,10 +94,9 @@
             android:textColorHint="#777"
             android:textSize="12sp"
             android:textColor="#777"
-            android:visibility="gone"
             android:text="Date - 21/02/2021"
             android:id="@+id/dateTxt"
-           />
+            />
 
 
         <TextView
@@ -114,9 +107,8 @@
             android:layout_marginTop="8dp"
             android:text="Time - 9.00 Am"
             android:textColorHint="#777"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:textSize="12sp"
-            android:visibility="gone"
             android:textColor="#777"
             android:id="@+id/timeTxt"/>
 
@@ -130,6 +122,7 @@
             android:id="@+id/noOfIndividualText"
             android:textColorHint="#777"
             android:textSize="12sp"
+            android:visibility="gone"
             android:gravity="center"
             android:textColor="#777"
             />
@@ -137,10 +130,10 @@
             android:id="@+id/statusBackground"
             android:layout_width="100dp"
             android:layout_height="20dp"
-            android:visibility="gone"
+            android:layout_marginTop="5dp"
             app:layout_constraintRight_toRightOf="@id/timeTxt"
             app:layout_constraintTop_toTopOf="@id/noOfIndividualText"
-           />
+            />
 
         <TextView
             android:id="@+id/adStatusTxt"
@@ -148,7 +141,6 @@
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/statusBackground"
             app:layout_constraintLeft_toLeftOf="@id/statusBackground"
             app:layout_constraintRight_toRightOf="@id/statusBackground"
@@ -195,6 +187,5 @@
         <!--            android:background="@drawable/ic_add"-->
         <!--            android:id="@+id/add"/>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </com.google.android.material.card.MaterialCardView>

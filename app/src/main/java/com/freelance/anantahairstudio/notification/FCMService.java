@@ -1,5 +1,6 @@
 package com.freelance.anantahairstudio.notification;
 
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class FCMService extends FirebaseMessagingService {
     }
 
     public  void showNotifications(String title, String message){
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"AnantaHairStudioNotification")
                 .setSmallIcon(R.drawable.main_logo)
                 .setContentTitle(title)

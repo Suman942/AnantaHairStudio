@@ -25,6 +25,7 @@ import com.freelance.anantahairstudio.databinding.ActivityHomeBinding;
 import com.freelance.anantahairstudio.home.HomeFragment;
 import com.freelance.anantahairstudio.myInfo.MeFragment;
 import com.freelance.anantahairstudio.services.ServicesFragment;
+import com.freelance.anantahairstudio.utils.PrefManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,6 +40,8 @@ public class HomeActivity extends AppCompatActivity  {
     ActivityHomeBinding binding;
     private MenuItem bottomTabMenuItem;
     boolean fromHome ;
+    String emailSplit[];
+    String topic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,12 @@ public class HomeActivity extends AppCompatActivity  {
         intialise();
         getIntents();
         notifications();
+
+      topic = PrefManager.getInstance().getString(R.string.email).substring(0,PrefManager.getInstance().getString(R.string.email).indexOf("@"));
+            Log.i("token",topic+"\n");
+
+
+
     }
 
     private void notifications() {
@@ -63,7 +72,7 @@ public class HomeActivity extends AppCompatActivity  {
             }
         }
 
-        FirebaseMessaging.getInstance().subscribeToTopic("Booking")
+        FirebaseMessaging.getInstance().subscribeToTopic(""+topic)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

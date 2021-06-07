@@ -120,7 +120,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
             public void onChanged(BookingResponse bookingResponse) {
                 if (bookingResponse != null) {
                     Toast.makeText(CheckoutCartActivity.this, "Booked Successfully", Toast.LENGTH_SHORT).show();
-                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/Booking", "Ananta Hair Studio", "New Booking Alert"));
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/"+"suman.19da", "Ananta Hair Studio", "New Booking Alert"));
                     startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
                     finish();
                 }

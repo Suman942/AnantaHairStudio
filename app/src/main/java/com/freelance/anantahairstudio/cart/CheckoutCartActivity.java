@@ -120,7 +120,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
             public void onChanged(BookingResponse bookingResponse) {
                 if (bookingResponse != null) {
                     Toast.makeText(CheckoutCartActivity.this, "Booked Successfully", Toast.LENGTH_SHORT).show();
-                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/"+"suman.19da", "Ananta Hair Studio", "New Booking Alert"));
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/"+"suman.19da", "Booking Alert", "New Booking request from "+PrefManager.getInstance().getString(R.string.email),R.drawable.main_logo));
                     startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
                     finish();
                 }
@@ -183,11 +183,9 @@ public class CheckoutCartActivity extends AppCompatActivity {
                 // Launch Time Picker Dialog
                 timePickerDialog = new TimePickerDialog(CheckoutCartActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
-
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
-
                                 binding.setTime.setText(String.valueOf(hourOfDay) + "h" + ":" + String.valueOf(minute) + "m");
                                 Log.i("time", " " + String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
                                 finalTime = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);

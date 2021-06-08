@@ -23,13 +23,18 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
     Context context;
     ArrayList<OnGoingServiceResponse.Data> serviceArrayList ;
-
-    public BookingAdapter(Context context, ArrayList<OnGoingServiceResponse.Data> serviceArrayList) {
+    public interface Callback{
+        void pay(String bookingId) ;
+    }
+    Callback callback;
+    public BookingAdapter(Context context, ArrayList<OnGoingServiceResponse.Data> serviceArrayList,Callback callback) {
         this.context = context;
         this.serviceArrayList = serviceArrayList;
+        this.callback = callback;
     }
 
     @NonNull
@@ -73,7 +78,12 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             holder.time.setText("Time: " + hr + ":" + mm+" AM");
         }
 
-
+        holder.pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.pay(serviceArrayList.get(position).getBookingId());
+            }
+        });
 
     }
 
@@ -84,7 +94,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
     public class BookingViewHolder  extends RecyclerView.ViewHolder {
         View statusBackground;
-        TextView statusTxt,time,date,bookingId;
+        TextView statusTxt,time,date,bookingId,pay;
         public BookingViewHolder(@NonNull View itemView) {
             super(itemView);
             statusBackground = itemView.findViewById(R.id.statusBackground);
@@ -92,6 +102,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             time = itemView.findViewById(R.id.timeTxt);
             date = itemView.findViewById(R.id.dateTxt);
             bookingId = itemView.findViewById(R.id.serviceNameTxt);
+            pay = itemView.findViewById(R.id.payTxt);
 
         }
     }

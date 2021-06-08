@@ -4,6 +4,7 @@
     package="com.freelance.anantahairstudio">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC_PREFERRED_PAYMENT_INFO"></uses-permission>
 
     <application
         android:allowBackup="true"

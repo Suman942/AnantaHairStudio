@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
             PrefManager.getInstance().putString(R.string.fullname,name);
             PrefManager.getInstance().putString(R.string.email,email);
             PrefManager.getInstance().putString(R.string.profileUrl,profileImg);
+            Log.i("authentication","token: "+PrefManager.getInstance().getString(R.string.authToken));
 
             startActivity(new Intent(this, HomeActivity.class));
             finish();

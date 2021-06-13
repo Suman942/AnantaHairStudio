@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.utils.LocalTime;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,16 +69,17 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         String dateString = formatter.format(new Date(slot));
         holder.date.setText("Date: "+dateString);
 
-        Date date = new Date(slot);
-        String hr = String.valueOf(date.getHours());
-        String mm = String.valueOf(date.getMinutes());
-        if (date.getHours() >= 12) {
-            holder.time.setText("Time: " + hr + ":" + mm+" PM");
-        }
-        else {
-            holder.time.setText("Time: " + hr + ":" + mm+" AM");
-        }
+//        Date date = new Date(slot);
+//        String hr = String.valueOf(date.getHours());
+//        String mm = String.valueOf(date.getMinutes());
+//        if (date.getHours() >= 12) {
+//            holder.time.setText("Time: " + hr + ":" + mm+" PM");
+//        }
+//        else {
+//            holder.time.setText("Time: " + hr + ":" + mm+" AM");
+//        }
 
+        holder.time.setText("Time: "+ LocalTime.getLocalTime(slot));
         holder.pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

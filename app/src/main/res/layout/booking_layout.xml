@@ -17,7 +17,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
             app:layout_constraintRight_toRightOf="parent"
-            android:text="Service name"
             android:textColor="#52508B"
             android:fontFamily="@font/roboto"
             android:textSize="18sp"

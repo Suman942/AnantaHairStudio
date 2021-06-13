@@ -28,6 +28,7 @@ import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.cart.viewModel.AddToCartViewModel;
 import com.freelance.anantahairstudio.databinding.ActivityCheckoutCartBinding;
 import com.freelance.anantahairstudio.network.RequestFormatter;
+import com.freelance.anantahairstudio.notification.FcmResponse;
 import com.freelance.anantahairstudio.notification.NotificationViewModel;
 import com.freelance.anantahairstudio.utils.PrefManager;
 
@@ -120,12 +121,14 @@ public class CheckoutCartActivity extends AppCompatActivity {
             public void onChanged(BookingResponse bookingResponse) {
                 if (bookingResponse != null) {
                     Toast.makeText(CheckoutCartActivity.this, "Booked Successfully", Toast.LENGTH_SHORT).show();
-                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/"+"suman.19da", "Booking Alert", "New Booking request from "+PrefManager.getInstance().getString(R.string.email),R.drawable.main_logo));
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/Booking", "Booking Alert", "New Booking request from "+PrefManager.getInstance().getString(R.string.email),R.drawable.main_logo));
                     startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
                     finish();
                 }
             }
         });
+
+
     }
 
     private void setDefaultData() {

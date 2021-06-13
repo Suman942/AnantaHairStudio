@@ -46,12 +46,12 @@ public class HomeActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      binding = DataBindingUtil.setContentView(this,R.layout.activity_home);
-
+    PrefManager.getInstance();
         intialise();
         getIntents();
         notifications();
 
-      topic = PrefManager.getInstance().getString(R.string.email).substring(0,PrefManager.getInstance().getString(R.string.email).indexOf("@"));
+      topic = PrefManager.getInstance().getString(R.string.email).substring(0,PrefManager.getInstance().getString(R.string.email).indexOf("@")).trim();
             Log.i("token",topic+"\n");
 
 

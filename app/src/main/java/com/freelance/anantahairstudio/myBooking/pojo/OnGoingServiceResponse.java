@@ -1,4 +1,4 @@
-package com.freelance.anantahairstudio.ongoingServices.pojo;
+package com.freelance.anantahairstudio.myBooking.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -8,28 +8,23 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudio.BuildConfig;
 import com.freelance.anantahairstudio.R;
-import com.freelance.anantahairstudio.cart.CheckoutCartActivity;
 import com.freelance.anantahairstudio.contactUs.ContactUsActivity;
 import com.freelance.anantahairstudio.databinding.FragmentMeBinding;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
 import com.freelance.anantahairstudio.myInfo.viewModel.MyAccountInfoViewModel;
-import com.freelance.anantahairstudio.ongoingServices.OnGoingBookingActivity;
-import com.freelance.anantahairstudio.ongoingServices.OngoingActivity;
+import com.freelance.anantahairstudio.myBooking.OnGoingBookingActivity;
 import com.freelance.anantahairstudio.profileedit.EditDetailsActivity;
 import com.freelance.anantahairstudio.signup.LoginActivity;
 import com.freelance.anantahairstudio.utils.GlideHelper;

@@ -1,23 +1,20 @@
-package com.freelance.anantahairstudio.ongoingServices.adapter;
+package com.freelance.anantahairstudio.myBooking.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudio.R;
-import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
 
 import java.util.ArrayList;
 

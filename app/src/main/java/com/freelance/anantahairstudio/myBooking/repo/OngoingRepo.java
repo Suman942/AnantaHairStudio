@@ -1,12 +1,11 @@
-package com.freelance.anantahairstudio.ongoingServices.repo;
+package com.freelance.anantahairstudio.myBooking.repo;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.freelance.anantahairstudio.cart.repo.AddToCartRepo;
 import com.freelance.anantahairstudio.network.ApiClient;
 import com.freelance.anantahairstudio.network.ApiInterface;
-import com.freelance.anantahairstudio.ongoingServices.pojo.CancelBookingResponse;
-import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

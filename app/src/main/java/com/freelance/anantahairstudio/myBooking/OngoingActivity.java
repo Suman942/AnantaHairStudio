@@ -1,4 +1,4 @@
-package com.freelance.anantahairstudio.ongoingServices;
+package com.freelance.anantahairstudio.myBooking;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -11,12 +11,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.freelance.anantahairstudio.R;
-import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.ActivityOngoingBinding;
-import com.freelance.anantahairstudio.ongoingServices.adapter.OngoingServiceAdapter;
-import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
-import com.freelance.anantahairstudio.ongoingServices.repo.OngoingRepo;
-import com.freelance.anantahairstudio.ongoingServices.viewModel.OngoingServiceViewModel;
+import com.freelance.anantahairstudio.myBooking.adapter.OngoingServiceAdapter;
+import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.myBooking.viewModel.OngoingServiceViewModel;
 import com.freelance.anantahairstudio.utils.PrefManager;
 
 import java.util.ArrayList;

@@ -5,17 +5,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.freelance.anantahairstudio.R;
-import com.freelance.anantahairstudio.ongoingServices.OnGoingBookingActivity;
+import com.freelance.anantahairstudio.myBooking.OnGoingBookingActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
 
 public class FCMService extends FirebaseMessagingService {
 
@@ -25,7 +22,7 @@ public class FCMService extends FirebaseMessagingService {
 //    @Override
 //    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 //        super.onMessageReceived(remoteMessage);
-//        showNotifications(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+//        showNotifications();
 //    }
 
     @Override
@@ -48,11 +45,11 @@ public class FCMService extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"AnantaHairStudioNotification")
                 .setSmallIcon(R.drawable.main_logo)
                 .setContentTitle("Hey! Congratulations")
-                .setContentText("Your appointment is accepted")
+                .setContentText("Your appointment request is accepted")
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                 .setVibrate(new long[]{0L})
                 .setContentIntent(pendingIntent)
-                .setAutoCancel(false);
+                .setAutoCancel(true);
 
         NotificationManager notificationManager =
                 (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);

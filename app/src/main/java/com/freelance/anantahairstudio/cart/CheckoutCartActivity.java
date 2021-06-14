@@ -50,7 +50,6 @@ public class CheckoutCartActivity extends AppCompatActivity {
     public static final String[] MONTHS = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     int position;
     String finalDate, finalTime, finalTimeSlot;
-
     NotificationViewModel notificationViewModel;
 
     @Override
@@ -99,6 +98,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
                 if (cartListResponse != null) {
                     cartList.addAll(cartListResponse.getData());
                     checkoutAdapter.notifyDataSetChanged();
+                    binding.loader.setVisibility(View.GONE);
                 }
             }
         });
@@ -121,6 +121,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
             public void onChanged(BookingResponse bookingResponse) {
                 if (bookingResponse != null) {
                     Toast.makeText(CheckoutCartActivity.this, "Booked Successfully", Toast.LENGTH_SHORT).show();
+                    binding.book.setEnabled(true);
                     notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/Booking", "Booking Alert", "New Booking request from "+PrefManager.getInstance().getString(R.string.email),R.drawable.main_logo));
                     startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
                     finish();
@@ -133,11 +134,15 @@ public class CheckoutCartActivity extends AppCompatActivity {
 
     private void setDefaultData() {
         try {
-            binding.addressTxt.setText(PrefManager.getInstance().getString(R.string.address));
+            if( PrefManager.getInstance().getString(R.string.address) != null) {
+                binding.addressTxt.setText(PrefManager.getInstance().getString(R.string.address));
+            }
         } catch (Exception e) {
         }
         try {
-            binding.callTxt.setText(PrefManager.getInstance().getString(R.string.phone));
+            if (PrefManager.getInstance().getString(R.string.phone) != null) {
+                binding.callTxt.setText(PrefManager.getInstance().getString(R.string.phone));
+            }
         } catch (Exception e) {
         }
     }
@@ -149,8 +154,8 @@ public class CheckoutCartActivity extends AppCompatActivity {
         binding.setDate.setText(String.valueOf(currentDay));
         binding.setMonth.setText(String.valueOf(MONTHS[currentMonth]));
 
-        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
-        binding.setTime.setText(currentTime);
+//        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+        binding.setTime.setText("00:00");
     }
 
     private void clickViews() {
@@ -215,8 +220,9 @@ public class CheckoutCartActivity extends AppCompatActivity {
                     finalTimeSlot = finalDate + " " + finalTime;
                     Log.i("time", " " + finalTimeSlot);
                     cartViewModel.booking(PrefManager.getInstance().getString(R.string.authToken), finalTimeSlot, "1");
+                    binding.book.setEnabled(false);
                 } else {
-                    Toast.makeText(CheckoutCartActivity.this, "Select time slot", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckoutCartActivity.this, "Select date and time slot", Toast.LENGTH_SHORT).show();
                 }
             }
         });

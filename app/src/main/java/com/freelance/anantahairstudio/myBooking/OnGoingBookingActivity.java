@@ -1,4 +1,4 @@
-package com.freelance.anantahairstudio.ongoingServices;
+package com.freelance.anantahairstudio.myBooking;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,13 +18,11 @@ import android.widget.Toast;
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.ActivityOnGoingBookingBinding;
-import com.freelance.anantahairstudio.ongoingServices.adapter.BookingAdapter;
-import com.freelance.anantahairstudio.ongoingServices.adapter.OngoingServiceAdapter;
-import com.freelance.anantahairstudio.ongoingServices.pojo.CancelBookingResponse;
-import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
-import com.freelance.anantahairstudio.ongoingServices.viewModel.OngoingServiceViewModel;
+import com.freelance.anantahairstudio.myBooking.adapter.BookingAdapter;
+import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.myBooking.viewModel.OngoingServiceViewModel;
 import com.freelance.anantahairstudio.utils.PrefManager;
-import com.google.gson.JsonObject;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 

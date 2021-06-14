@@ -1,11 +1,11 @@
-package com.freelance.anantahairstudio.ongoingServices.viewModel;
+package com.freelance.anantahairstudio.myBooking.viewModel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.freelance.anantahairstudio.ongoingServices.pojo.CancelBookingResponse;
-import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
-import com.freelance.anantahairstudio.ongoingServices.repo.OngoingRepo;
+import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.myBooking.repo.OngoingRepo;
 
 public class OngoingServiceViewModel extends ViewModel {
     MutableLiveData<OnGoingServiceResponse> goingServiceResponseMutableLiveData = new MutableLiveData<>();

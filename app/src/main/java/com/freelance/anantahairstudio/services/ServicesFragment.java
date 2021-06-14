@@ -63,7 +63,9 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_services, container, false);
-
+        binding.searchView.setFocusable(false);
+        InputMethodManager imm = ((InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE));
+        imm.hideSoftInputFromWindow(binding.getRoot().getWindowToken(), 0);
         servicesViewModel  = new ViewModelProvider(getActivity()).get(ServicesViewModel.class);
         serviceDatabase = ServicesDatabase.getDatabase(getContext());
         servicesDao = serviceDatabase.getAllServices();
@@ -71,32 +73,32 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
         initialise();
         getIntents();
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT ) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                switch (direction){
-                    case ItemTouchHelper.RIGHT:
-                        position = viewHolder.getAdapterPosition();
-                        Intent intent = new Intent(getContext(),ServiceDetailsActivity.class);
-                        intent.putExtra("serviceName",serviceList.get(position).getName());
-                        intent.putExtra("serviceImg",serviceList.get(position).getImg());
-                        intent.putExtra("id",serviceList.get(position).getId());
-                        intent.putExtra("price",serviceList.get(position).getPrice());
-                        intent.putExtra("discountedPrice",serviceList.get(position).getDiscountedPrice());
-                        getContext().startActivity(intent);
-                        serviceAdapter.notifyDataSetChanged();
-                        serviceAdapter.notifyItemChanged(position);
-                        break;
-                }
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(binding.serviceRecyclerView);
+//        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT ) {
+//            @Override
+//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+//                switch (direction){
+//                    case ItemTouchHelper.RIGHT:
+//                        position = viewHolder.getAdapterPosition();
+//                        Intent intent = new Intent(getContext(),ServiceDetailsActivity.class);
+//                        intent.putExtra("serviceName",serviceList.get(position).getName());
+//                        intent.putExtra("serviceImg",serviceList.get(position).getImg());
+//                        intent.putExtra("id",serviceList.get(position).getId());
+//                        intent.putExtra("price",serviceList.get(position).getPrice());
+//                        intent.putExtra("discountedPrice",serviceList.get(position).getDiscountedPrice());
+//                        getContext().startActivity(intent);
+//                        serviceAdapter.notifyDataSetChanged();
+//                        serviceAdapter.notifyItemChanged(position);
+//                        break;
+//                }
+//            }
+//        };
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+//        itemTouchHelper.attachToRecyclerView(binding.serviceRecyclerView);
 
         binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -156,6 +158,7 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
         super.onViewCreated(view, savedInstanceState);
         insertServiceListToLocal();
     }
+
 
     private void insertServiceListToLocal() {
         servicesViewModel.getAllServices(PrefManager.getInstance().getString(R.string.authToken));

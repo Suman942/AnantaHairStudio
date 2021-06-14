@@ -1,9 +1,7 @@
-package com.freelance.anantahairstudio.ongoingServices.adapter;
+package com.freelance.anantahairstudio.myBooking.adapter;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +12,18 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudio.R;
-import com.freelance.anantahairstudio.ongoingServices.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
 import com.freelance.anantahairstudio.utils.LocalTime;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
     Context context;
     ArrayList<OnGoingServiceResponse.Data> serviceArrayList ;
+
     public interface Callback{
         void pay(String bookingId) ;
     }
@@ -64,6 +60,13 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_pending));
             holder.statusTxt.setText("Pending");
         }
+
+
+        if (serviceArrayList.get(position).getStatus().equals("accepted")){
+            holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_accept));
+            holder.statusTxt.setText("Confirmed");
+        }
+
         long slot = Long.parseLong(serviceArrayList.get(position).getSlot());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(slot));

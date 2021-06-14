@@ -49,12 +49,12 @@ public class HomeActivity extends AppCompatActivity  {
     PrefManager.getInstance();
         intialise();
         getIntents();
-        notifications();
+
 
       topic = PrefManager.getInstance().getString(R.string.email).substring(0,PrefManager.getInstance().getString(R.string.email).indexOf("@")).trim();
             Log.i("token",topic+"\n");
 
-
+        notifications();
 
     }
 
@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity  {
             }
         }
 
-        FirebaseMessaging.getInstance().subscribeToTopic(""+topic)
+        FirebaseMessaging.getInstance().subscribeToTopic(topic)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -101,6 +101,8 @@ public class HomeActivity extends AppCompatActivity  {
 
         }
     }
+
+
 
     private void intialise() {
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());

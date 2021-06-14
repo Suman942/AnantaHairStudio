@@ -150,10 +150,9 @@
         <View
             android:id="@+id/statusBackground"
             android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="25dp"
             app:layout_constraintRight_toRightOf="@id/timeTxt"
-            app:layout_constraintTop_toTopOf="@id/noOfIndividualText"
+            app:layout_constraintTop_toTopOf="@id/payBackground"
             />
 
         <TextView
@@ -167,46 +166,7 @@
             app:layout_constraintRight_toRightOf="@id/statusBackground"
             app:layout_constraintTop_toTopOf="@id/statusBackground" />
 
-        <!--        <ImageView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintTop_toTopOf="@id/minusView"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/minusView"-->
-        <!--            app:layout_constraintLeft_toLeftOf="@id/minusView"-->
-        <!--            app:layout_constraintRight_toRightOf="@id/minusView"-->
-        <!--            android:background="@drawable/ic_minus"-->
-        <!--            android:id="@+id/minus"/>-->
 
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintRight_toLeftOf="@id/addView"-->
-        <!--            app:layout_constraintTop_toTopOf="@id/addView"-->
-        <!--            app:layout_constraintLeft_toRightOf="@id/minusView"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
-        <!--            android:id="@+id/counterTxt"-->
-        <!--            android:textSize="18sp"-->
-        <!--            android:text="1"-->
-        <!--            android:textColor="#777777"/>-->
-
-        <!--        <View-->
-        <!--            android:layout_width="30dp"-->
-        <!--            android:layout_height="30dp"-->
-        <!--            app:layout_constraintRight_toRightOf="@id/amountTxt"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/amountTxt"-->
-        <!--            android:background="#F4F4F4"-->
-        <!--            android:layout_marginTop="14dp"-->
-        <!--            android:id="@+id/addView"/>-->
-
-        <!--        <ImageView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintTop_toTopOf="@id/addView"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
-        <!--            app:layout_constraintLeft_toLeftOf="@id/addView"-->
-        <!--            app:layout_constraintRight_toRightOf="@id/addView"-->
-        <!--            android:background="@drawable/ic_add"-->
-        <!--            android:id="@+id/add"/>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

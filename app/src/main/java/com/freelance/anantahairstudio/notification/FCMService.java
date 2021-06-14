@@ -22,11 +22,11 @@ public class FCMService extends FirebaseMessagingService {
     public FCMService() {
     }
 
-    @Override
-    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
-        showNotifications(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
-    }
+//    @Override
+//    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+//        super.onMessageReceived(remoteMessage);
+//        showNotifications(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+//    }
 
     @Override
     public void onNewToken(@NonNull String token) {
@@ -34,15 +34,21 @@ public class FCMService extends FirebaseMessagingService {
         Log.i("token"," "+token);
     }
 
-    public  void showNotifications(String title, String message){
+    @Override
+    public void handleIntent(Intent intent) {
+        Log.d( "FCM", "handleIntent ");
+        showNotifications();
+    }
+
+    public  void showNotifications(){
         Intent intent = new Intent(this, OnGoingBookingActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"AnantaHairStudioNotification")
                 .setSmallIcon(R.drawable.main_logo)
-                .setContentTitle(title)
-                .setContentText(message)
+                .setContentTitle("Hey! Congratulations")
+                .setContentText("Your appointment is accepted")
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                 .setVibrate(new long[]{0L})
                 .setContentIntent(pendingIntent)

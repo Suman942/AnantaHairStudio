@@ -172,6 +172,7 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
                                 servicesResponse.getData().getServices().get(i).getPrice(),servicesResponse.getData().getServices().get(i).getDiscountedPrice(),
                                 servicesResponse.getData().getServices().get(i).getImg(),servicesResponse.getData().getServices().get(i).getInfo());
                         servicesDao.insert(savedCardData);
+                        binding.loader.setVisibility(View.GONE);
                     }
                 }
             }
@@ -189,6 +190,7 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
                     serviceList.clear();
                     serviceList.addAll(localServiceResponses);
                     serviceAdapter.notifyDataSetChanged();
+                    binding.loader.setVisibility(View.GONE);
                 }
             });
 
@@ -199,6 +201,7 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
                 public void onChanged(List<LocalServiceResponse> localServiceResponses) {
                     serviceList.addAll(localServiceResponses);
                     serviceAdapter.notifyDataSetChanged();
+                    binding.loader.setVisibility(View.GONE);
                 }
             });
         }

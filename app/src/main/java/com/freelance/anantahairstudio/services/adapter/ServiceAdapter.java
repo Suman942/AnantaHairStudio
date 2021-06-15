@@ -43,6 +43,16 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
 
         GlideHelper.setImageView(context,holder.serviceImg,"",R.drawable.ic_image_placeholder);

@@ -72,7 +72,7 @@ public class CartFragment extends Fragment {
                     case ItemTouchHelper.LEFT:
                         position = viewHolder.getAdapterPosition();
                         cartViewModel.removeCart(PrefManager.getInstance().getString(R.string.authToken),cartList.get(position).getId());
-                        cartAdapter.notifyDataSetChanged();
+//                        cartAdapter.notifyDataSetChanged();
                         cartAdapter.notifyItemChanged(position);
                         break;
                 }
@@ -116,7 +116,7 @@ public class CartFragment extends Fragment {
         cartViewModel.getCartListLiveData().observe(getViewLifecycleOwner(), new Observer<CartListResponse>() {
             @Override
             public void onChanged(CartListResponse cartListResponse) {
-                if (cartListResponse != null && cartListResponse.getData().size() > 0){
+                if (cartListResponse != null || cartListResponse.getData().size() > 0){
                     try {
                         cartList.addAll(cartListResponse.getData());
                         cartAdapter.notifyDataSetChanged();

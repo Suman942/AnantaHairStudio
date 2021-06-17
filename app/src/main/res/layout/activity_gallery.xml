@@ -49,12 +49,12 @@
     
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_height="100dp"
         app:layout_constraintLeft_toLeftOf="@id/gL"
         app:layout_constraintRight_toRightOf="@id/gR"
         app:layout_constraintTop_toBottomOf="@id/gB"
         android:id="@+id/galleryRecyclerView"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="25dp"/>
 
 
     <com.google.android.material.card.MaterialCardView

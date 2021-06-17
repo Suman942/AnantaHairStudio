@@ -2,17 +2,22 @@ package com.freelance.anantahairstudio.gallery;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.ActivityGalleryBinding;
 import com.freelance.anantahairstudio.utils.GlideHelper;
+import com.freelance.anantahairstudio.utils.PrefManager;
 
 import java.util.ArrayList;
 
@@ -20,13 +25,39 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
 
     ActivityGalleryBinding binding;
     GalleryAdapter galleryAdapter ;
-    ArrayList<GalleryModel> imageList = new ArrayList<>();
+    ArrayList<FetchGalleryResponse.Data.Image> imageList = new ArrayList<>();
+    String url;
+    GalleryViewModel galleryViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        binding = DataBindingUtil.setContentView(this,R.layout.activity_gallery);
+        galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
+
+        observer();
        initialise();
        clickViews();
+    }
+
+    private void observer() {
+        galleryViewModel.fetchGalleryImg(PrefManager.getInstance().getString(R.string.authToken));
+        galleryViewModel.fetchGalleryImgLiveData().observe(this, new Observer<FetchGalleryResponse>() {
+            @Override
+            public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
+                imageList.addAll(fetchGalleryResponse.getData().getImages());
+                url = fetchGalleryResponse.getData().getBaseUrl();
+                Log.i("file","2: "+url);
+
+
+                GlideHelper.setImageView(getApplicationContext(),binding.galleryImg,url+imageList.get(0).getImage(),R.drawable.ic_image_placeholder);
+
+                galleryAdapter = new GalleryAdapter(getApplicationContext(),imageList,GalleryActivity.this::setImageToImageView,url);
+                binding.galleryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+                binding.galleryRecyclerView.setAdapter(galleryAdapter);
+            }
+        });
+
     }
 
     private void clickViews() {
@@ -40,22 +71,12 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
     }
 
     private void initialise() {
-        imageList.add(new GalleryModel("https://thumbs.dreamstime.com/z/male-hairdresser-work-female-cutting-hair-smiling-men-client-beauty-parlour-34402169.jpg"));
-        imageList.add(new GalleryModel("https://www.rd.com/wp-content/uploads/2016/08/07-make-manicure-last.jpg"));
-        imageList.add(new GalleryModel("https://thumbs.dreamstime.com/z/man-hair-washing-hairdressing-salon-client-beauty-parlour-33444905.jpg"));
-        imageList.add(new GalleryModel("https://thumbs.dreamstime.com/z/male-hairdresser-work-female-cutting-hair-smiling-men-client-beauty-parlour-34402169.jpg"));
-        imageList.add(new GalleryModel("https://d2zdpiztbgorvt.cloudfront.net/us/13371/521c96dae3364629a2809a89e2751674-Urban-Fellow-Barbershop-Shave-Parlour-inspiration.PNG"));
-
-        galleryAdapter = new GalleryAdapter(this,imageList,this::setImageToImageView);
-       binding.galleryRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
-       binding.galleryRecyclerView.setAdapter(galleryAdapter);
-
-        GlideHelper.setImageView(this,binding.galleryImg,imageList.get(0).getImageUrl(),R.drawable.ic_image_placeholder);
+       
 
     }
 
     @Override
     public void setImageToImageView(String imageUrl) {
-        GlideHelper.setImageView(this,binding.galleryImg,imageUrl,R.drawable.ic_image_placeholder);
+        GlideHelper.setImageView(getApplicationContext(),binding.galleryImg,imageUrl,R.drawable.ic_image_placeholder);
     }
 }

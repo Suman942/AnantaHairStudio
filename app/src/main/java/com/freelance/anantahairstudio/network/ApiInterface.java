@@ -5,6 +5,7 @@ import com.freelance.anantahairstudio.cart.pojo.AddtoCartResponse;
 import com.freelance.anantahairstudio.cart.pojo.BookingResponse;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
+import com.freelance.anantahairstudio.gallery.FetchGalleryResponse;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
 import com.freelance.anantahairstudio.notification.FcmResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
@@ -160,4 +161,14 @@ public interface ApiInterface {
     Call<FcmResponse> sendNotifications(
             @Body JsonObject jsonObject
             );
+
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @GET("fetch?gallery")
+    Call<FetchGalleryResponse> getGalleryPic(
+            @Header("Authorization") String token
+    );
 }

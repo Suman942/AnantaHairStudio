@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.telecom.Call;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +21,18 @@ import java.util.ArrayList;
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
     Context context;
-    ArrayList<GalleryModel> imageList ;
+    ArrayList<FetchGalleryResponse.Data.Image> imageList ;
+    String url ;
     public interface Callback{
         void setImageToImageView(String imageUrl);
     }
     Callback callback;
 
-    public GalleryAdapter(Context context, ArrayList<GalleryModel> imageList,Callback callback) {
+    public GalleryAdapter(Context context, ArrayList<FetchGalleryResponse.Data.Image> imageList,Callback callback,String url) {
         this.context = context;
         this.imageList = imageList;
         this.callback  = callback;
+        this.url = url;
     }
 
     @NonNull
@@ -42,13 +45,15 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
 
-        GlideHelper.setImageView(context,holder.galleryImg,imageList.get(position).getImageUrl(),R.drawable.ic_image_placeholder);
+        GlideHelper.setImageView(context,holder.galleryImg,url+imageList.get(position).getImage(),R.drawable.ic_image_placeholder);
         holder.galleryImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.setImageToImageView(imageList.get(position).getImageUrl());
+                callback.setImageToImageView(url+imageList.get(position).getImage());
             }
         });
+        Log.i("file",""+url+imageList.get(position).getImage());
+
     }
 
     @Override

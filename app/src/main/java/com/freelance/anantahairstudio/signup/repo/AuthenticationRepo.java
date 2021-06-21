@@ -31,8 +31,8 @@ public class AuthenticationRepo {
         return authenticationRepo;
     }
 
-    public void authentication(String email, MutableLiveData<Authentication> mutableLiveData){
-        apiInterface.authentication(email).enqueue(new Callback<Authentication>() {
+    public void authentication(String email,String name, MutableLiveData<Authentication> mutableLiveData){
+        apiInterface.authentication(email,name).enqueue(new Callback<Authentication>() {
             @Override
             public void onResponse(Call<Authentication> call, Response<Authentication> response) {
                 if (response.code() == 200){

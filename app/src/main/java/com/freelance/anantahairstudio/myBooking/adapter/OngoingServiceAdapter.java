@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.myBooking.pojo.BookingDetailsResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
 
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ import java.util.ArrayList;
 public class OngoingServiceAdapter extends RecyclerView.Adapter<OngoingServiceAdapter.OngoingViewHolder> {
 
     Context context;
-    ArrayList<OnGoingServiceResponse.Data.Service> serviceArrayList ;
+    ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList ;
 
-    public OngoingServiceAdapter(Context context, ArrayList<OnGoingServiceResponse.Data.Service> serviceArrayList) {
+    public OngoingServiceAdapter(Context context, ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList) {
         this.context = context;
         this.serviceArrayList = serviceArrayList;
     }

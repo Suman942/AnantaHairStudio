@@ -11,12 +11,16 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/main_logo"
         android:supportsRtl="true"
+        android:imeOptions="flagNoExtractUi"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
         android:theme="@style/Theme.AnantaHairStudio"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".myBooking.OnGoingBookingActivity"></activity>
         <activity android:name=".myBooking.OngoingActivity" />
-        <activity android:name=".profileedit.EditDetailsActivity" />
+        <activity android:name=".profileedit.EditDetailsActivity"
+            />
         <activity android:name=".contactUs.ContactUsActivity" />
         <activity android:name=".cart.CheckoutCartActivity" />
         <activity android:name=".services.ServiceDetailsActivity" />

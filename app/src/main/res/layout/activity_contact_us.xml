@@ -12,6 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gL"
             android:layout_width="wrap_content"
@@ -142,7 +144,6 @@
         android:background="@color/white"
         app:layout_constraintLeft_toLeftOf="@id/gL"
         app:layout_constraintRight_toRightOf="@id/gR"
-        android:paddingBottom="16dp"
         >
 
         <ImageView
@@ -161,7 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="+917005667189"
+            android:text="N/A"
             android:textColor="#777777"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/callIcon"
@@ -192,7 +193,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="+917005667189"
+            android:text="N/A"
             android:textSize="16sp"
             android:textColor="#777777"
             app:layout_constraintBottom_toBottomOf="@id/whatsappIcon"
@@ -224,7 +225,7 @@
             android:id="@+id/emailTxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="suman19da@gmail.com"
+            android:text="N/A"
             android:textColor="#777777"
             android:textSize="16sp"
             app:layout_constraintRight_toRightOf="parent"
@@ -243,30 +244,39 @@
             android:layout_marginTop="20dp"
             android:id="@+id/v3"/>
 
-        <ImageView
-            android:id="@+id/fbcon"
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ic_facebook"
-            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v3" />
-
-
-
-        <TextView
-            android:id="@+id/fbTxt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="fb.com"
-            android:textColor="#777777"
-            android:textSize="16sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/fbcon"
-            app:layout_constraintLeft_toLeftOf="@id/contactus"
-            app:layout_constraintTop_toTopOf="@id/fbcon" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/loader"/>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/fbcon"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="@drawable/ic_facebook"-->
+<!--            android:backgroundTint="@color/colorPrimary"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/v3" />-->
+
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/fbTxt"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="fb.com"-->
+<!--            android:textColor="#777777"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/fbcon"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/contactus"-->
+<!--            app:layout_constraintTop_toTopOf="@id/fbcon" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

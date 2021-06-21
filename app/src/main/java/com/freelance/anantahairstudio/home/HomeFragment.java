@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","1");
+                intent.putExtra("serviceName","100");
                 startActivity(intent);
             }
         });
@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","8");
+                intent.putExtra("serviceName","103");
                 startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","8");
+                intent.putExtra("serviceName","102");
                 startActivity(intent);
             }
         });
@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","2");
+                intent.putExtra("serviceName","101");
                 startActivity(intent);
             }
         });
@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","9");
+                intent.putExtra("serviceName","104");
                 startActivity(intent);
             }
         });
@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","11");
+                intent.putExtra("serviceName","105");
                 startActivity(intent);
             }
         });
@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","99");
+                intent.putExtra("serviceName","106");
                 startActivity(intent);
             }
         });
@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext() , HomeActivity.class);
                 intent.putExtra("fromHome",true);
-                intent.putExtra("serviceName","10");
+                intent.putExtra("serviceName","107");
                 startActivity(intent);
             }
         });

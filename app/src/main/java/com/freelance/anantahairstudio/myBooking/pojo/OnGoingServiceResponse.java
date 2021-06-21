@@ -9,123 +9,146 @@ public class OnGoingServiceResponse {
 
     @SerializedName("data")
     @Expose
-    private List<Data> data = null;
+    private Data data;
 
-    public List<Data> getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(List<Data> data) {
+    public void setData(Data data) {
         this.data = data;
     }
 
     public class Data {
 
-        @SerializedName("booking_id")
+        @SerializedName("bookings")
         @Expose
-        private String bookingId;
-        @SerializedName("status")
+        private List<Booking> bookings = null;
+        @SerializedName("page")
         @Expose
-        private String status;
-        @SerializedName("slot")
-        @Expose
-        private String slot;
-        @SerializedName("services")
-        @Expose
-        private List<Service> services = null;
+        private Integer page;
 
-        public String getBookingId() {
-            return bookingId;
+        public List<Booking> getBookings() {
+            return bookings;
         }
 
-        public void setBookingId(String bookingId) {
-            this.bookingId = bookingId;
+        public void setBookings(List<Booking> bookings) {
+            this.bookings = bookings;
         }
 
-        public String getStatus() {
-            return status;
+        public Integer getPage() {
+            return page;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setPage(Integer page) {
+            this.page = page;
         }
+        public class Booking {
 
-        public String getSlot() {
-            return slot;
-        }
-
-        public void setSlot(String slot) {
-            this.slot = slot;
-        }
-
-        public List<Service> getServices() {
-            return services;
-        }
-
-        public void setServices(List<Service> services) {
-            this.services = services;
-        }
-
-        public class Service {
-
-            @SerializedName("individuals")
+            @SerializedName("booking_id")
             @Expose
-            private String individuals;
-            @SerializedName("name")
+            private String bookingId;
+            @SerializedName("status")
             @Expose
-            private String name;
-            @SerializedName("img")
+            private String status;
+            @SerializedName("slot")
             @Expose
-            private String img;
-            @SerializedName("price")
+            private String slot;
+            @SerializedName("services")
             @Expose
-            private String price;
-            @SerializedName("discounted_price")
-            @Expose
-            private String discountedPrice;
+            private List<Service> services = null;
 
-            public String getIndividuals() {
-                return individuals;
+            public String getBookingId() {
+                return bookingId;
             }
 
-            public void setIndividuals(String individuals) {
-                this.individuals = individuals;
+            public void setBookingId(String bookingId) {
+                this.bookingId = bookingId;
             }
 
-            public String getName() {
-                return name;
+            public String getStatus() {
+                return status;
             }
 
-            public void setName(String name) {
-                this.name = name;
+            public void setStatus(String status) {
+                this.status = status;
             }
 
-            public String getImg() {
-                return img;
+            public String getSlot() {
+                return slot;
             }
 
-            public void setImg(String img) {
-                this.img = img;
+            public void setSlot(String slot) {
+                this.slot = slot;
             }
 
-            public String getPrice() {
-                return price;
+            public List<Service> getServices() {
+                return services;
             }
 
-            public void setPrice(String price) {
-                this.price = price;
+            public void setServices(List<Service> services) {
+                this.services = services;
             }
+            public class Service {
 
-            public String getDiscountedPrice() {
-                return discountedPrice;
+                @SerializedName("individuals")
+                @Expose
+                private String individuals;
+                @SerializedName("name")
+                @Expose
+                private String name;
+                @SerializedName("img")
+                @Expose
+                private String img;
+                @SerializedName("price")
+                @Expose
+                private String price;
+                @SerializedName("discounted_price")
+                @Expose
+                private String discountedPrice;
+
+                public String getIndividuals() {
+                    return individuals;
+                }
+
+                public void setIndividuals(String individuals) {
+                    this.individuals = individuals;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getImg() {
+                    return img;
+                }
+
+                public void setImg(String img) {
+                    this.img = img;
+                }
+
+                public String getPrice() {
+                    return price;
+                }
+
+                public void setPrice(String price) {
+                    this.price = price;
+                }
+
+                public String getDiscountedPrice() {
+                    return discountedPrice;
+                }
+
+                public void setDiscountedPrice(String discountedPrice) {
+                    this.discountedPrice = discountedPrice;
+                }
+
             }
-
-            public void setDiscountedPrice(String discountedPrice) {
-                this.discountedPrice = discountedPrice;
-            }
-
         }
 
     }
-
 }

@@ -120,11 +120,18 @@ public class CartFragment extends Fragment {
                     try {
                         cartList.addAll(cartListResponse.getData());
                         cartAdapter.notifyDataSetChanged();
-                        binding.checkout.setVisibility(View.VISIBLE);
+
                     }
                    catch (Exception e){
 
                    }
+                    if (cartList.size()==0) {
+                        binding.checkout.setVisibility(View.GONE);
+                    }
+                    else {
+                        binding.checkout.setVisibility(View.VISIBLE);
+
+                    }
                 }
             }
         });

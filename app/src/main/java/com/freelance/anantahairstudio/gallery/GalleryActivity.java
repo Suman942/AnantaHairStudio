@@ -26,9 +26,8 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
     ActivityGalleryBinding binding;
     GalleryAdapter galleryAdapter ;
     ArrayList<FetchGalleryResponse.Data.Image> imageList = new ArrayList<>();
-    String url;
     GalleryViewModel galleryViewModel;
-
+ String url = "https://xbytelab.com/projects/ananta-salon/image/gallery/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +45,7 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
             @Override
             public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
                 imageList.addAll(fetchGalleryResponse.getData().getImages());
-                url = fetchGalleryResponse.getData().getBaseUrl();
-                Log.i("file","2: "+url);
+
 
 
                 GlideHelper.setImageView(getApplicationContext(),binding.galleryImg,url+imageList.get(0).getImage(),R.drawable.ic_image_placeholder);

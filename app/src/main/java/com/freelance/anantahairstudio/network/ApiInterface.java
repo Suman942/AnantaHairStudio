@@ -1,11 +1,13 @@
 package com.freelance.anantahairstudio.network;
 
 
+import com.freelance.anantahairstudio.contactUs.ContactUpdateResponse;
 import com.freelance.anantahairstudio.cart.pojo.AddtoCartResponse;
 import com.freelance.anantahairstudio.cart.pojo.BookingResponse;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.gallery.FetchGalleryResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.BookingDetailsResponse;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
 import com.freelance.anantahairstudio.notification.FcmResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
@@ -24,6 +26,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -34,7 +37,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("login")
     Call<Authentication> authentication(
-            @Field("email") String email
+            @Field("email") String email,
+            @Field("name") String name
     );
 
     @Headers({
@@ -105,7 +109,7 @@ public interface ApiInterface {
             "Content-Type: application/x-www-form-urlencoded",
             "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
     })
-    @GET("cart?fetch")
+    @GET("cart?fetch=1")
     Call<CartListResponse> getCartList(
             @Header("Authorization") String token
     );
@@ -137,9 +141,11 @@ public interface ApiInterface {
             "Content-Type: application/x-www-form-urlencoded",
             "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
     })
-    @GET("booking?fetch=1")
+    @GET("booking?")
     Call<OnGoingServiceResponse> ongoingService(
-            @Header("Authorization") String token
+            @Header("Authorization") String token,
+            @Query("fetch") String fetch,
+            @Query("page") String page
     );
 
     @Headers({
@@ -171,4 +177,23 @@ public interface ApiInterface {
     Call<FetchGalleryResponse> getGalleryPic(
             @Header("Authorization") String token
     );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @GET("fetch?business_info=1")
+    Call<ContactUpdateResponse> getAdminDetails(
+            @Header("Authorization") String token
+    );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @GET("admin/booking?")
+    Call<BookingDetailsResponse> allBookingDetails(
+            @Query("fetch_details") String fetch
+    );
+
 }

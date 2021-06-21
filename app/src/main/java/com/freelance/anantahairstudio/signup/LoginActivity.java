@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                             PrefManager.getInstance().putString(R.string.email,email);
                             PrefManager.getInstance().putString(R.string.profileUrl,profileImg);
 
-                            loginViewModel.authentication(email);
+                            loginViewModel.authentication(email,name);
 
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
 

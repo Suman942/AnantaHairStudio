@@ -22,13 +22,13 @@ import java.util.Date;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
     Context context;
-    ArrayList<OnGoingServiceResponse.Data> serviceArrayList ;
+    ArrayList<OnGoingServiceResponse.Data.Booking> serviceArrayList ;
 
     public interface Callback{
         void pay(String bookingId) ;
     }
     Callback callback;
-    public BookingAdapter(Context context, ArrayList<OnGoingServiceResponse.Data> serviceArrayList,Callback callback) {
+    public BookingAdapter(Context context, ArrayList<OnGoingServiceResponse.Data.Booking> serviceArrayList,Callback callback) {
         this.context = context;
         this.serviceArrayList = serviceArrayList;
         this.callback = callback;

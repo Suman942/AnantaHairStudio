@@ -44,7 +44,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-
+  url="https://xbytelab.com/projects/ananta-salon/image/gallery/";
         GlideHelper.setImageView(context,holder.galleryImg,url+imageList.get(position).getImage(),R.drawable.ic_image_placeholder);
         holder.galleryImg.setOnClickListener(new View.OnClickListener() {
             @Override

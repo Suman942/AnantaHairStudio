@@ -35,10 +35,15 @@ import java.util.ArrayList;
 public class OnGoingBookingActivity extends AppCompatActivity implements BookingAdapter.Callback, PaymentResultListener {
 
     ActivityOnGoingBookingBinding binding;
-    ArrayList<OnGoingServiceResponse.Data> serviceArrayList = new ArrayList<>();
+    ArrayList<OnGoingServiceResponse.Data.Booking> serviceArrayList = new ArrayList<>();
     OngoingServiceViewModel serviceViewModel;
     BookingAdapter adapter;
     int position;
+    int totalItems, scrollOutItems, currentVisibleItems;
+    LinearLayoutManager mLayoutManager;
+    boolean isLoading = false;
+    int page = 1;
+
 
     String GOOGLE_PAY_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
     int GOOGLE_PAY_REQUEST_CODE = 123;
@@ -51,6 +56,9 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
         initialise();
         clickViews();
         observer();
+
+        mLayoutManager = new LinearLayoutManager(this);
+        binding.serviceRecyclerView.setLayoutManager(mLayoutManager);
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -82,20 +90,48 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(binding.serviceRecyclerView);
 
+        binding.serviceRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (!isLoading ) {
+                    currentVisibleItems = mLayoutManager.getChildCount();
+                    totalItems = mLayoutManager.getItemCount();
+                    scrollOutItems = mLayoutManager.findFirstVisibleItemPosition();
+                    if ((currentVisibleItems + scrollOutItems == totalItems)) {
+
+                        isLoading = true;
+                        page++;
+                        Log.i("page", "pageNo: " + page);
+                        Log.i("data", "response1: ");
+
+                        serviceViewModel.ongoingService(PrefManager.getInstance().getString(R.string.authToken),"1",String.valueOf(page));
+                        binding.paginationLoader.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
     }
 
     private void observer() {
-        serviceViewModel.ongoingService(PrefManager.getInstance().getString(R.string.authToken));
+        serviceViewModel.ongoingService(PrefManager.getInstance().getString(R.string.authToken),"1",String.valueOf(page));
 
         serviceViewModel.ongoingServiceLiveData().observe(this, new Observer<OnGoingServiceResponse>() {
             @Override
             public void onChanged(OnGoingServiceResponse onGoingServiceResponse) {
-                if (onGoingServiceResponse != null) {
-                    serviceArrayList.addAll(onGoingServiceResponse.getData());
-
-                    adapter.notifyDataSetChanged();
-                    binding.loader.setVisibility(View.GONE);
+                if (onGoingServiceResponse.getData().getBookings().size() >0) {
+                    serviceArrayList.addAll(onGoingServiceResponse.getData().getBookings());
                 }
+                if (onGoingServiceResponse.getData().getBookings().size() == 0)
+                {
+//                    serviceArrayList.clear();
+                }
+                adapter.notifyDataSetChanged();
+                binding.loader.setVisibility(View.GONE);
+                binding.paginationLoader.setVisibility(View.GONE);
+                isLoading = false;
             }
         });
 
@@ -105,7 +141,7 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
                 Toast.makeText(OnGoingBookingActivity.this, "Booking Cancelled Successfully ", Toast.LENGTH_SHORT).show();
                 serviceArrayList.clear();
                 binding.loader.setVisibility(View.VISIBLE);
-                serviceViewModel.ongoingService(PrefManager.getInstance().getString(R.string.authToken));
+                serviceViewModel.ongoingService(PrefManager.getInstance().getString(R.string.authToken),"1","1");
 
             }
         });
@@ -125,7 +161,6 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
 
     private void initialise() {
         adapter = new BookingAdapter(this, serviceArrayList, this::pay);
-        binding.serviceRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.serviceRecyclerView.setAdapter(adapter);
     }
 
@@ -139,23 +174,6 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
 
     @Override
     public void pay(String bookingId) {
-        Checkout checkout = new Checkout();
-        checkout.setKeyID("rzp_test_i9JXCe3R8lHDsn");
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("name","Ananta Hair Studio");
-            jsonObject.put("description","test payment");
-            jsonObject.put("currency","INR");
-            jsonObject.put("amount",100);
-            jsonObject.put( "upi_link", true);
-            jsonObject.put("prefill.contact","9854758965");
-            jsonObject.put("prefill.email","suman.19da@gmail.com");
-            checkout.open(OnGoingBookingActivity.this,jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.i("payment","Exception: "+e.getMessage());
-
-        }
 
 
     }

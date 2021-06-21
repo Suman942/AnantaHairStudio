@@ -56,8 +56,45 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
 
         GlideHelper.setImageView(context,holder.serviceImg,"",R.drawable.ic_image_placeholder);
-        if (serviceList.get(position).getCategoryId().equals("1")) {
+        if (serviceList.get(position).getCategoryId().equals("100")) {
+            holder.categoryTxt.setText("Hair cut");
+        }
+        if (serviceList.get(position).getCategoryId().equals("101")) {
+            holder.categoryTxt.setText("Shaving");
+        }
+        if (serviceList.get(position).getCategoryId().equals("102")) {
+            holder.categoryTxt.setText("D-tan");
+        }
+        if (serviceList.get(position).getCategoryId().equals("103")) {
+            holder.categoryTxt.setText("Facial");
+        }
+
+        if (serviceList.get(position).getCategoryId().equals("104")) {
+            holder.categoryTxt.setText("Straightening");
+        }
+        if (serviceList.get(position).getCategoryId().equals("105")) {
+            holder.categoryTxt.setText("Pedicure");
+        }
+        if (serviceList.get(position).getCategoryId().equals("106")) {
+            holder.categoryTxt.setText("Bride/Groom");
+        }
+        if (serviceList.get(position).getCategoryId().equals("107")) {
+            holder.categoryTxt.setText("Manicure");
+        }
+        if (serviceList.get(position).getCategoryId().equals("108")) {
+            holder.categoryTxt.setText("Massage");
+        }
+        if (serviceList.get(position).getCategoryId().equals("109")) {
+            holder.categoryTxt.setText("Waxing");
+        }
+        if (serviceList.get(position).getCategoryId().equals("110")) {
             holder.categoryTxt.setText("Hair");
+        }
+        if (serviceList.get(position).getCategoryId().equals("111")) {
+            holder.categoryTxt.setText("Child mundan");
+        }
+        if (serviceList.get(position).getCategoryId().equals("112")) {
+            holder.categoryTxt.setText("Eye brow");
         }
         holder.amount.setText("\u20B9 "+serviceList.get(position).getPrice());
         holder.discountAmount.setText("\u20B9 "+serviceList.get(position).getDiscountedPrice() + " OFF");

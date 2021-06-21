@@ -86,5 +86,6 @@ dependencies {
 //    For RoomDatabase Debug
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
 }

@@ -1,7 +1,10 @@
 package com.freelance.anantahairstudio.myBooking.repo;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
+import com.freelance.anantahairstudio.myBooking.pojo.BookingDetailsResponse;
 import com.freelance.anantahairstudio.network.ApiClient;
 import com.freelance.anantahairstudio.network.ApiInterface;
 import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
@@ -27,8 +30,8 @@ public class OngoingRepo {
     }
 
 
-    public void ongoingService(String token, MutableLiveData<OnGoingServiceResponse> mutableLiveData){
-        apiInterface.ongoingService(token).enqueue(new Callback<OnGoingServiceResponse>() {
+    public void ongoingService(String token,String fetch,String page, MutableLiveData<OnGoingServiceResponse> mutableLiveData){
+        apiInterface.ongoingService(token,fetch,page).enqueue(new Callback<OnGoingServiceResponse>() {
             @Override
             public void onResponse(Call<OnGoingServiceResponse> call, Response<OnGoingServiceResponse> response) {
                 if (response.code() == 200){
@@ -59,4 +62,23 @@ public class OngoingRepo {
             }
         });
     }
+
+    public void bookingDetails(String fetchDetails, MutableLiveData<BookingDetailsResponse> mutableLiveData){
+        apiInterface.allBookingDetails(fetchDetails).enqueue(new Callback<BookingDetailsResponse>() {
+            @Override
+            public void onResponse(Call<BookingDetailsResponse> call, Response<BookingDetailsResponse> response) {
+                if (response.code() ==200){
+                    Log.i("bookingDetails","success");
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookingDetailsResponse> call, Throwable t) {
+                Log.i("bookingDetails","failure: "+t.getMessage());
+                mutableLiveData.setValue(null);
+            }
+        });
+    }
+
 }

@@ -3,6 +3,7 @@ package com.freelance.anantahairstudio.myBooking.viewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.freelance.anantahairstudio.myBooking.pojo.BookingDetailsResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
 import com.freelance.anantahairstudio.myBooking.repo.OngoingRepo;
@@ -10,12 +11,20 @@ import com.freelance.anantahairstudio.myBooking.repo.OngoingRepo;
 public class OngoingServiceViewModel extends ViewModel {
     MutableLiveData<OnGoingServiceResponse> goingServiceResponseMutableLiveData = new MutableLiveData<>();
     MutableLiveData<CancelBookingResponse> cancelBookingResponseMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<BookingDetailsResponse> bookingDetailsResponseMutableLiveData = new MutableLiveData<>();
 
-    public void ongoingService(String token){
-        OngoingRepo.getInstance().ongoingService(token,goingServiceResponseMutableLiveData);
+    public void ongoingService(String token, String fetch,String page){
+        OngoingRepo.getInstance().ongoingService(token,fetch,page,goingServiceResponseMutableLiveData);
     }
     public MutableLiveData<OnGoingServiceResponse> ongoingServiceLiveData(){
         return  goingServiceResponseMutableLiveData;
+    }
+
+    public void bookingDetails(String fetchDetails){
+        OngoingRepo.getInstance().bookingDetails(fetchDetails,bookingDetailsResponseMutableLiveData);
+    }
+    public MutableLiveData<BookingDetailsResponse> bookingDetailsLiveData(){
+        return bookingDetailsResponseMutableLiveData;
     }
 
     public void cancelBooking(String token,String bookingId){

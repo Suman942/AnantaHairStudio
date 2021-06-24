@@ -40,6 +40,53 @@ public class ContactUpdateResponse {
             @Expose
             private String email;
 
+            @SerializedName("facebook")
+            @Expose
+            private String facebook;
+
+            @SerializedName("instagram")
+            @Expose
+            private String instagram;
+
+            @SerializedName("youtube")
+            @Expose
+            private String youtube;
+            @SerializedName("website")
+            @Expose
+            private String website;
+
+            public String getFacebook() {
+                return facebook;
+            }
+
+            public void setFacebook(String facebook) {
+                this.facebook = facebook;
+            }
+
+            public String getInstagram() {
+                return instagram;
+            }
+
+            public void setInstagram(String instagram) {
+                this.instagram = instagram;
+            }
+
+            public String getYoutube() {
+                return youtube;
+            }
+
+            public void setYoutube(String youtube) {
+                this.youtube = youtube;
+            }
+
+            public String getWebsite() {
+                return website;
+            }
+
+            public void setWebsite(String website) {
+                this.website = website;
+            }
+
             public String getPhone() {
                 return phone;
             }

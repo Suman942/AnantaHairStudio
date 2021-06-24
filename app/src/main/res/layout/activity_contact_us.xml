@@ -148,8 +148,8 @@
 
         <ImageView
             android:id="@+id/callIcon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/ic_call"
@@ -210,8 +210,8 @@
 
         <ImageView
             android:id="@+id/emailIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/ic_email"
@@ -253,30 +253,140 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/loader"/>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/fbcon"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="15dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:background="@drawable/ic_facebook"-->
-<!--            android:backgroundTint="@color/colorPrimary"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/v3" />-->
+        <ImageView
+            android:id="@+id/fbcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_facebook"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v3" />
 
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/fbTxt"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="fb.com"-->
-<!--            android:textColor="#777777"-->
-<!--            android:textSize="16sp"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/fbcon"-->
-<!--            app:layout_constraintLeft_toLeftOf="@id/contactus"-->
-<!--            app:layout_constraintTop_toTopOf="@id/fbcon" />-->
+        <TextView
+            android:id="@+id/fbTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="N/A"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/fbcon"
+            app:layout_constraintLeft_toLeftOf="@id/contactus"
+            app:layout_constraintTop_toTopOf="@id/fbcon" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"
+            app:layout_constraintTop_toBottomOf="@id/fbcon"
+            android:layout_marginTop="20dp"
+            android:id="@+id/v4"/>
+
+        <ImageView
+            android:id="@+id/instaIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/instagram_icon"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v4" />
+
+        <TextView
+            android:id="@+id/instaTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="N/A"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/instaIcon"
+            app:layout_constraintLeft_toLeftOf="@id/contactus"
+            app:layout_constraintTop_toTopOf="@id/instaIcon" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"
+            app:layout_constraintTop_toBottomOf="@id/instaIcon"
+            android:layout_marginTop="20dp"
+            android:id="@+id/v5"/>
+
+        <ImageView
+            android:id="@+id/youtubeIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_youtube_icon"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v5" />
+
+        <TextView
+            android:id="@+id/youtubeTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="N/A"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/youtubeIcon"
+            app:layout_constraintLeft_toLeftOf="@id/contactus"
+            app:layout_constraintTop_toTopOf="@id/youtubeIcon" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"
+            app:layout_constraintTop_toBottomOf="@id/youtubeIcon"
+            android:layout_marginTop="20dp"
+            android:id="@+id/v6"/>
+
+        <ImageView
+            android:id="@+id/websiteIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/website"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v6" />
+
+        <TextView
+            android:id="@+id/websiteTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="N/A"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/websiteIcon"
+            app:layout_constraintLeft_toLeftOf="@id/contactus"
+            app:layout_constraintTop_toTopOf="@id/websiteIcon" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"
+            app:layout_constraintTop_toBottomOf="@id/websiteIcon"
+            android:layout_marginTop="20dp"
+            android:id="@+id/v7"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

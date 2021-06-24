@@ -25,8 +25,9 @@ import com.freelance.anantahairstudio.utils.PrefManager;
 public class ServiceDetailsActivity extends AppCompatActivity {
     ActivityServiceDetailsBinding binding;
     int counter = 1;
-    String serviceName,serviceImg,price,discountedPrice,id;
+    String serviceName,serviceImg,price,discountedPrice,id,categoryId,description;
     AddToCartViewModel addToCartViewModel;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,47 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         binding.amountTxt.setText("\u20B9 "+price);
         binding.discountAmount.setText("\u20B9 "+discountedPrice+" OFF");
         GlideHelper.setImageView(this,binding.serviceImage,serviceImg,R.drawable.ic_image_placeholder);
+        if (description != null){
+            binding.serviceDescription.setText(description);
+        }
+        else {
+            binding.serviceDescription.setText("No description available");
+        }
+        if (categoryId.equals("100")) {
+            binding.categoryText.setText("Hair cut");
+        } else if (categoryId.equals("101")) {
+            binding.categoryText.setText("Shaving");
+        } else if (categoryId.equals("102")) {
+            binding.categoryText.setText("D-tan");
+        } else if (categoryId.equals("103")) {
+            binding.categoryText.setText("Facial");
+        } else if (categoryId.equals("104")) {
+            binding.categoryText.setText("Straightening");
+        } else if (categoryId.equals("105")) {
+            binding.categoryText.setText("Pedicure");
+        } else if (categoryId.equals("106")) {
+            binding.categoryText.setText("Bride/Groom");
+        } else if (categoryId.equals("107")) {
+            binding.categoryText.setText("Manicure");
+        } else if (categoryId.equals("108")) {
+            binding.categoryText.setText("Massage");
+        } else if (categoryId.equals("109")) {
+            binding.categoryText.setText("Waxing");
+        } else if (categoryId.equals("110")) {
+            binding.categoryText.setText("Hair");
+        } else if (categoryId.equals("111")) {
+            binding.categoryText.setText("Child mundan");
+        } else if (categoryId.equals("112")) {
+            binding.categoryText.setText("Eye brow");
+        } else if (categoryId.equals("113")) {
+            binding.categoryText.setText("Dandruff");
+        } else if (categoryId.equals("114")) {
+            binding.categoryText.setText("Spa");
+        } else if (categoryId.equals("115")) {
+            binding.categoryText.setText("Colour");
+        } else if (categoryId.equals("116")) {
+            binding.categoryText.setText("Other");
+        }
     }
 
     private void getIntentData() {
@@ -72,6 +114,9 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         price = getIntent().getStringExtra("price");
         discountedPrice = getIntent().getStringExtra("discountedPrice");
         id = getIntent().getStringExtra("id");
+        categoryId = getIntent().getStringExtra("categoryId");
+        description = getIntent().getStringExtra("description");
+
     }
 
     private void clickAllView() {

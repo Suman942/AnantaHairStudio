@@ -1,7 +1,6 @@
-package com.freelance.anantahairstudio.services;
+ package com.freelance.anantahairstudio.services;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,17 +10,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.databinding.FragmentServicesBinding;
@@ -125,7 +120,9 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
 
             @Override
             public boolean onQueryTextChange(String newText) {
-               filtercards(newText);
+                if (!newText.isEmpty()) {
+                    filterServices(newText);
+                }
                 return false;
             }
         });
@@ -139,8 +136,8 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
         return binding.getRoot();
     }
 
-    private void filtercards(String newText) {
-        final ArrayList<LocalServiceResponse> filteredList = new ArrayList<>();
+    private void filterServices(String newText) {
+         ArrayList<LocalServiceResponse> filteredList = new ArrayList<>();
         String serviceName;
         for (LocalServiceResponse result : serviceList) {
             serviceName = result.getName();
@@ -149,8 +146,6 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
             }
         }
         serviceAdapter.filterList(filteredList);
-        binding.serviceRecyclerView.setAdapter(serviceAdapter);
-        binding.serviceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
@@ -178,7 +173,6 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
             }
         });
     }
-
 
     private void getIntents() {
         if (getArguments().getBoolean("fromHome")) {

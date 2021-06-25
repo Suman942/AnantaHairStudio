@@ -56,9 +56,10 @@ public class EditDetailsActivity extends AppCompatActivity {
                 }
 
                 if (binding.editAddress.getText().toString().isEmpty() && binding.editLandamrk.getText().toString().isEmpty() && binding.editPhno.getText().toString().isEmpty()) {
-                    Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
-                    intent.putExtra("from", 0);
-                    startActivity(intent);
+                    Toast.makeText(EditDetailsActivity.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
+//                    intent.putExtra("from", 0);
+//                    startActivity(intent);
                 }
             }
         });

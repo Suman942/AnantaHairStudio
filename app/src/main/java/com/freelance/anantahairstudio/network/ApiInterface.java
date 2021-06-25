@@ -196,4 +196,12 @@ public interface ApiInterface {
             @Query("fetch_details") String fetch
     );
 
+//    @Headers({
+//            "Content-Type: application/x-www-form-urlencoded",
+//            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+//    })
+//    @GET("payment")
+//    Call<> paymentDone();
+
+
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,14 +52,16 @@ public class CheckoutCartActivity extends AppCompatActivity {
     int position;
     String finalDate, finalTime, finalTimeSlot;
     NotificationViewModel notificationViewModel;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_checkout_cart);
         cartViewModel = new ViewModelProvider(this).get(AddToCartViewModel.class);
         notificationViewModel = new ViewModelProvider(this).get(NotificationViewModel.class);
-
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please wait..");
         setDefaultData();
         intialise();
         clickViews();
@@ -125,6 +128,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
                     notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/Booking", "Booking Alert", "New Booking request from "+PrefManager.getInstance().getString(R.string.email),R.drawable.main_logo));
                     startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
                     finish();
+                    progressDialog.dismiss();
                 }
             }
         });
@@ -221,6 +225,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
                     Log.i("time", " " + finalTimeSlot);
                     cartViewModel.booking(PrefManager.getInstance().getString(R.string.authToken), finalTimeSlot, "1");
                     binding.book.setEnabled(false);
+                    progressDialog.show();
                 } else {
                     Toast.makeText(CheckoutCartActivity.this, "Select date and time slot", Toast.LENGTH_SHORT).show();
                 }

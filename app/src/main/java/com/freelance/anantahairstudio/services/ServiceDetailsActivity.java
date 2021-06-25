@@ -116,7 +116,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         id = getIntent().getStringExtra("id");
         categoryId = getIntent().getStringExtra("categoryId");
         description = getIntent().getStringExtra("description");
-
+        GlideHelper.setImageView(this,binding.serviceImage,serviceImg,R.drawable.ic_image_placeholder);
     }
 
     private void clickAllView() {

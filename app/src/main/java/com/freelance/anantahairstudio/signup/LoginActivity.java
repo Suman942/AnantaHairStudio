@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,13 +43,15 @@ public class LoginActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
 
     AuthenticationLoginViewModel loginViewModel;
-
+   ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         PrefManager.getInstance(this, true);
-
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
         loginViewModel = new ViewModelProvider(this).get(AuthenticationLoginViewModel.class);
         mAuth = FirebaseAuth.getInstance();
         initializationOfGoogleSigninOption();
@@ -65,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (authentication.getData().getIsNewUser() == 1) {
                         Intent intent = new Intent(LoginActivity.this, ReferalActivity.class);
                         startActivity(intent);
+                        progressDialog.dismiss();
                         Log.i("authentication","id: "+authentication.getData().getIsNewUser().intValue());
 
                     }
@@ -83,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.googleLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 signIn();
             }
         });
@@ -121,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
+            progressDialog.show();
             String name = mAuth.getCurrentUser().getDisplayName();
             String email = mAuth.getCurrentUser().getEmail();
             Uri uri = mAuth.getCurrentUser().getPhotoUrl();
@@ -132,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
             startActivity(new Intent(this, HomeActivity.class));
             finish();
-
+           progressDialog.dismiss();
         }
     }
 

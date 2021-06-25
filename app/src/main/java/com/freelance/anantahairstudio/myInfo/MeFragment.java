@@ -109,7 +109,10 @@ public class MeFragment extends Fragment {
             public void onClick(View v) {
                 ClipboardManager clipboard = (ClipboardManager) getActivity().
                         getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Referral Code", referralCode);
+                String shareMessage= "\nLet me recommend you this application\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n"+"You will earn bonus points on using/ "+referralCode;
+
+                ClipData clip = ClipData.newPlainText("Referral Code", shareMessage);
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(getContext(), "Referral code copied successfully", Toast.LENGTH_SHORT).show();
             }

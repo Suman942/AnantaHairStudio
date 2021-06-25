@@ -83,6 +83,7 @@
             app:layout_constraintTop_toBottomOf="@id/imgBg"
             android:layout_marginTop="32dp"
             android:id="@+id/location"
+            android:foreground="?attr/selectableItemBackground"
             android:background="@color/white"
             app:layout_constraintLeft_toLeftOf="@id/gL"
             app:layout_constraintRight_toRightOf="@id/gR"
@@ -148,8 +149,9 @@
 
         <ImageView
             android:id="@+id/callIcon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:foreground="?attr/selectableItemBackground"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/ic_call"
@@ -164,6 +166,7 @@
             android:layout_marginLeft="20dp"
             android:text="N/A"
             android:textColor="#777777"
+            android:foreground="?attr/selectableItemBackground"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/callIcon"
             app:layout_constraintLeft_toRightOf="@id/callIcon"
@@ -179,10 +182,11 @@
 
         <ImageView
             android:id="@+id/whatsappIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
+            android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/ic_whatsapp"
             android:backgroundTint="@color/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -196,6 +200,7 @@
             android:text="N/A"
             android:textSize="16sp"
             android:textColor="#777777"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="@id/whatsappIcon"
             app:layout_constraintLeft_toRightOf="@id/callIcon"
             app:layout_constraintTop_toTopOf="@id/whatsappIcon" />
@@ -210,8 +215,8 @@
 
         <ImageView
             android:id="@+id/emailIcon"
-            android:layout_width="25dp"
-            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_height="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/ic_email"
@@ -274,6 +279,7 @@
             android:textColor="#777777"
             android:textSize="16sp"
             android:linksClickable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:autoLink="web"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/fbcon"
@@ -308,6 +314,7 @@
             android:textSize="16sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/instaIcon"
             app:layout_constraintLeft_toLeftOf="@id/contactus"
@@ -323,8 +330,8 @@
 
         <ImageView
             android:id="@+id/youtubeIcon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/ic_youtube_icon"
@@ -341,6 +348,7 @@
             android:textSize="16sp"
             android:linksClickable="true"
             android:autoLink="web"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/youtubeIcon"
             app:layout_constraintLeft_toLeftOf="@id/contactus"
@@ -373,6 +381,7 @@
             android:text="N/A"
             android:textColor="#777777"
             android:textSize="16sp"
+            android:foreground="?attr/selectableItemBackground"
             android:linksClickable="true"
             android:autoLink="web"
             app:layout_constraintRight_toRightOf="parent"

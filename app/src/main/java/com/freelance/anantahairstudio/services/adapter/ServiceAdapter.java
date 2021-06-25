@@ -59,7 +59,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
 
-        GlideHelper.setImageView(context, holder.serviceImg, "", R.drawable.ic_image_placeholder);
+        GlideHelper.setImageView(context, holder.serviceImg, serviceList.get(position).getImg(), R.drawable.ic_image_placeholder);
         if (serviceList.get(position).getCategoryId().equals("100")) {
             holder.categoryTxt.setText("Hair cut");
         } else if (serviceList.get(position).getCategoryId().equals("101")) {

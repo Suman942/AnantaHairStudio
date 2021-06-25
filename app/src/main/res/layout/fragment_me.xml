@@ -177,6 +177,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="18dp"
                     android:background="#0DD3F1"
+                    android:foreground="?attr/selectableItemBackground"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/gRefer"
                     app:layout_constraintTop_toBottomOf="@id/referTxt2">
@@ -210,6 +211,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="18dp"
                     android:background="#0DD3F1"
+                    android:foreground="?attr/selectableItemBackground"
                     app:layout_constraintLeft_toRightOf="@id/gRefer"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/referTxt2">
@@ -295,6 +297,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="15dp"
                         android:background="@drawable/ic_pencil"
+                        android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@id/addressLabel" />
 
@@ -372,7 +375,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="My bookings"
                         android:textColor="#0DD3F1"
-
+                        android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="@id/servicesIcon"
                         app:layout_constraintLeft_toRightOf="@id/servicesIcon"
                         app:layout_constraintTop_toTopOf="@id/servicesIcon" />
@@ -403,6 +406,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="Contact us"
                         android:textColor="#0DD3F1"
+                        android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="@id/contactUsIcon"
                         app:layout_constraintLeft_toRightOf="@id/servicesIcon"
                         app:layout_constraintTop_toTopOf="@id/contactUsIcon" />
@@ -432,6 +436,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Logout"
+                        android:foreground="?attr/selectableItemBackground"
                         android:textColor="#0DD3F1"
                         app:layout_constraintBottom_toBottomOf="@id/logoutIcon"
                         app:layout_constraintLeft_toLeftOf="@id/contactus"

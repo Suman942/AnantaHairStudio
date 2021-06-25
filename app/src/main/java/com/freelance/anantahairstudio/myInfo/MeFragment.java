@@ -122,7 +122,7 @@ public class MeFragment extends Fragment {
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, "AnantaHairStudio");
-                    String shareMessage= "\nLet me recommend you this application\n\n";
+                    String shareMessage= "\nLet me recommend you this application\n";
                     shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n"+"You will earn bonus points on using/ "+referralCode;
                     shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                     startActivity(Intent.createChooser(shareIntent, "choose one"));
@@ -156,6 +156,8 @@ public class MeFragment extends Fragment {
 
                 try {
                     binding.pointsTxt.setText(myAccountResponse.getData().getPoints().toString());
+                    PrefManager.getInstance().putString(R.string.points,myAccountResponse.getData().getPoints());
+
                 } catch (Exception e) {
                 }
 

@@ -46,9 +46,10 @@ public class ReferalActivity extends AppCompatActivity {
                     Toast.makeText(ReferalActivity.this, "Congratulations you earned "+referalResponse.getData().getPoints().intValue()+" points", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                     finish();
+                    binding.submitBtn.setEnabled(true);
                 }
               catch (Exception e){
-
+                  Toast.makeText(ReferalActivity.this, "Technical issue", Toast.LENGTH_SHORT).show();
               }
 
             }
@@ -70,6 +71,7 @@ public class ReferalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!binding.edtReferralCode.getText().toString().isEmpty()) {
                     referralViewModel.referralCode(PrefManager.getInstance().getString(R.string.authToken), binding.edtReferralCode.getText().toString());
+                    binding.submitBtn.setEnabled(false);
                 }
             }
         });

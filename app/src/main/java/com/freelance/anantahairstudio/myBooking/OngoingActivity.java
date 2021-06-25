@@ -1,15 +1,18 @@
 package com.freelance.anantahairstudio.myBooking;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.databinding.ActivityOngoingBinding;
@@ -28,13 +31,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class OngoingActivity extends AppCompatActivity implements PaymentResultListener {
+public class OngoingActivity extends AppCompatActivity implements PaymentResultListener ,OngoingServiceAdapter.Callback{
     ActivityOngoingBinding binding;
     OngoingServiceAdapter adapter;
     ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList = new ArrayList<>();
     OngoingServiceViewModel serviceViewModel;
     String bookingId;
-
+    String priceTobePaid = null;
+    Integer price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,28 +62,8 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
             @Override
             public void onChanged(BookingDetailsResponse bookingDetailsResponse) {
                 if (bookingDetailsResponse != null) {
-//                    try {
-//                        if (bookingDetailsResponse.getData().getName() != null) {
-//                            binding.name.setText("Name: " + bookingDetailsResponse.getData().getName());
-//                        } else {
-//                            binding.name.setText("Name: N/A");
-//                        }
-//                        if (bookingDetailsResponse.getData().getPhone() != null) {
-//                            binding.phone.setText("Contact: " + bookingDetailsResponse.getData().getPhone());
-//                        } else {
-//                            binding.phone.setText("Contact: N/A");
-//                        }
-//                    } catch (Exception e) {
-//                    }
-//                    binding.bookingId.setText("BookingId: #" + bookingDetailsResponse.getData().getId());
-//                    long slot = Long.parseLong(bookingDetailsResponse.getData().getSlot());
-//                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-//                    String dateString = formatter.format(new Date(slot));
-//                    binding.dateTxt.setText("Date: " + dateString);
-//                    binding.timeTxt.setText("Time: " + LocalTime.getLocalTime(slot));
-//                    topic = bookingDetailsResponse.getData().getEmail().substring(0, bookingDetailsResponse.getData().getEmail().indexOf("@")).trim();
+//
                     serviceArrayList.addAll(bookingDetailsResponse.getData().getServices());
-
                     binding.loader.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }
@@ -88,25 +72,6 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
 
 
 
-//        serviceViewModel.ongoingService(PrefManager.getInstance().getString(R.string.authToken),"1","0");
-//
-//        serviceViewModel.ongoingServiceLiveData().observe(this, new Observer<OnGoingServiceResponse>() {
-//            @Override
-//            public void onChanged(OnGoingServiceResponse onGoingServiceResponse) {
-//                if (onGoingServiceResponse != null) {
-//                    for (int i = 0; i < onGoingServiceResponse.getData().getBookings().size(); i++) {
-//                        if (onGoingServiceResponse.getData().getBookings().get(i).getBookingId().equals(bookingId)){
-//                            for (int j = 0 ; j < onGoingServiceResponse.getData().getBookings().get(i).getServices().size();j++) {
-//                                serviceArrayList.add(onGoingServiceResponse.getData().getBookings().get(i).getServices().get(j));
-//                            }
-//                        }
-//                    }
-//                    adapter.notifyDataSetChanged();
-//                    binding.loader.setVisibility(View.GONE);
-//
-//                }
-//            }
-//        });
     }
 
     private void clickViews() {
@@ -120,23 +85,19 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
             }
         });
 
-        binding.paybtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makePayment();
-            }
-        });
+
     }
 
     private void makePayment() {
         Checkout checkout = new Checkout();
-        checkout.setKeyID("rzp_test_i9JXCe3R8lHDsn");
+        checkout.setKeyID("rzp_live_AhfLKFC3Kd9d7N");
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("name","Ananta Hair Studio");
-            jsonObject.put("description","test payment");
+            jsonObject.put("description","Payment for bookingId: #"+bookingId);
             jsonObject.put("currency","INR");
-            jsonObject.put("amount",100);
+//            jsonObject.put("image", );
+            jsonObject.put("amount",price);
             jsonObject.put( "upi_link", true);
             jsonObject.put("prefill.contact",PrefManager.getInstance().getString(R.string.phone));
             jsonObject.put("prefill.email",PrefManager.getInstance().getString(R.string.email));
@@ -150,7 +111,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
     }
 
     private void initialise() {
-        adapter = new OngoingServiceAdapter(this, serviceArrayList);
+        adapter = new OngoingServiceAdapter(this, serviceArrayList,this::totalPrice);
         binding.serviceRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.serviceRecyclerView.setAdapter(adapter);
     }
@@ -166,10 +127,68 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
     @Override
     public void onPaymentSuccess(String s) {
         Log.i("payment","Success: "+s);
+        Toast.makeText(this, "Paid Successfully", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onPaymentError(int i, String s) {
         Log.i("payment","Error: "+i+ " "+s);
+        Toast.makeText(this, "Please try again later", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void totalPrice(int subtotal) {
+         price = subtotal * 100;
+//        priceTobePaid = String.valueOf(price);
+//        Toast.makeText(this, ""+price, Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
+        binding.paybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                builder.setTitle("Use Points");
+                builder.setMessage("Do you want to use your points?")
+
+                //Setting message manually and performing action on button click
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Integer points = Integer.parseInt(PrefManager.getInstance().getString(R.string.points));
+                                Double pointsToRs = points * 0.1;
+
+                                price  -=  pointsToRs.intValue();
+                                if (price > 0) {
+                                    makePayment();
+                                }
+                                else {
+                                    Toast.makeText(OngoingActivity.this, "Price cannot be \u20B9 0", Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                                if (price != 0) {
+                                    makePayment();
+                                }
+                                else {
+                                    Toast.makeText(OngoingActivity.this, "Price cannot be \u20B9 0", Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.dismiss();
+
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.show();
+
+
+
+            }
+        });
     }
 }

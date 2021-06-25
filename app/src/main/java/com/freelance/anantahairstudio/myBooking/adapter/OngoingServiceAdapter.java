@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -23,10 +24,15 @@ public class OngoingServiceAdapter extends RecyclerView.Adapter<OngoingServiceAd
 
     Context context;
     ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList ;
-
-    public OngoingServiceAdapter(Context context, ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList) {
+    int price,discount,subtotal;
+    public interface Callback{
+        void totalPrice(int subtotal);
+    }
+    Callback callback;
+    public OngoingServiceAdapter(Context context, ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList,Callback callback) {
         this.context = context;
         this.serviceArrayList = serviceArrayList;
+        this.callback = callback;
     }
 
 
@@ -48,6 +54,11 @@ public class OngoingServiceAdapter extends RecyclerView.Adapter<OngoingServiceAd
         holder.price.setText("\u20B9 "+serviceArrayList.get(position).getPrice());
         holder.discountPrice.setText("\u20B9 "+serviceArrayList.get(position).getDiscountedPrice()+" OFF");
         holder.individuals.setText("Individuals - "+serviceArrayList.get(position).getIndividuals());
+
+        price += Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getPrice());
+        discount += Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getDiscountedPrice());
+        subtotal = price - discount;
+        callback.totalPrice(subtotal);
 
     }
 

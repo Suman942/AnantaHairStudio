@@ -8,6 +8,7 @@ import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.gallery.FetchGalleryResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.BookingDetailsResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.PaymentDoneResponse;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
 import com.freelance.anantahairstudio.notification.FcmResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
@@ -196,12 +197,18 @@ public interface ApiInterface {
             @Query("fetch_details") String fetch
     );
 
-//    @Headers({
-//            "Content-Type: application/x-www-form-urlencoded",
-//            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
-//    })
-//    @GET("payment")
-//    Call<> paymentDone();
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("payment")
+    Call<PaymentDoneResponse> paymentDone(
+            @Header("Authorization") String token,
+            @Field("booking_id") String bookingId,
+            @Field("amount")  String amount,
+            @Field("points")  String points
+    );
 
 
 }

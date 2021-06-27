@@ -19,6 +19,7 @@ import com.freelance.anantahairstudio.databinding.ActivityOngoingBinding;
 import com.freelance.anantahairstudio.myBooking.adapter.OngoingServiceAdapter;
 import com.freelance.anantahairstudio.myBooking.pojo.BookingDetailsResponse;
 import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.PaymentDoneResponse;
 import com.freelance.anantahairstudio.myBooking.viewModel.OngoingServiceViewModel;
 import com.freelance.anantahairstudio.utils.PrefManager;
 import com.razorpay.Checkout;
@@ -39,6 +40,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
     String bookingId;
     String priceTobePaid = null;
     Integer price;
+    Integer points;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,14 +129,23 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
     @Override
     public void onPaymentSuccess(String s) {
         Log.i("payment","Success: "+s);
-        Toast.makeText(this, "Paid Successfully", Toast.LENGTH_SHORT).show();
+        price /= 100;
+        serviceViewModel.paymentDone(PrefManager.getInstance().getString(R.string.authToken),bookingId,String.valueOf(price),String.valueOf(points));
+        serviceViewModel.paymentDoneLiveData().observe(this, new Observer<PaymentDoneResponse>() {
+            @Override
+            public void onChanged(PaymentDoneResponse paymentDoneResponse) {
+                Toast.makeText(getApplicationContext(), "Payment done Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(OngoingActivity.this,OnGoingBookingActivity.class));
+                finish();
+            }
+        });
     }
 
     @Override
     public void onPaymentError(int i, String s) {
         Log.i("payment","Error: "+i+ " "+s);
-        Toast.makeText(this, "Please try again later", Toast.LENGTH_SHORT).show();
 
+        Toast.makeText(this, "Please try again later ", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -155,7 +166,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Integer points = Integer.parseInt(PrefManager.getInstance().getString(R.string.points));
+                                 points = Integer.parseInt(PrefManager.getInstance().getString(R.string.points));
                                 Double pointsToRs = points * 0.1;
 
                                 price  -=  pointsToRs.intValue();
@@ -171,7 +182,8 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //  Action for 'NO' Button
-                                if (price != 0) {
+                                points = 0;
+                                if (price > 0) {
                                     makePayment();
                                 }
                                 else {

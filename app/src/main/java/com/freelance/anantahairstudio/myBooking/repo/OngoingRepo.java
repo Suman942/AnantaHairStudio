@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.freelance.anantahairstudio.myBooking.pojo.BookingDetailsResponse;
+import com.freelance.anantahairstudio.myBooking.pojo.PaymentDoneResponse;
 import com.freelance.anantahairstudio.network.ApiClient;
 import com.freelance.anantahairstudio.network.ApiInterface;
 import com.freelance.anantahairstudio.myBooking.pojo.CancelBookingResponse;
@@ -81,4 +82,19 @@ public class OngoingRepo {
         });
     }
 
+    public void paymentDone(String token, String bookingId, String amount, String points, MutableLiveData<PaymentDoneResponse> mutableLiveData){
+        apiInterface.paymentDone(token,bookingId,amount,points).enqueue(new Callback<PaymentDoneResponse>() {
+            @Override
+            public void onResponse(Call<PaymentDoneResponse> call, Response<PaymentDoneResponse> response) {
+                if (response.code() == 200){
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PaymentDoneResponse> call, Throwable t) {
+            mutableLiveData.setValue(null);
+            }
+        });
+    }
 }

@@ -33,6 +33,12 @@ public class ContactUsActivity extends AppCompatActivity {
         observer();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     private void observer() {
         adminInfoViewModel.getAdminDetailsLiveData().observe(this, new Observer<ContactUpdateResponse>() {
             @Override
@@ -183,4 +189,5 @@ public class ContactUsActivity extends AppCompatActivity {
         });
 
     }
+
 }

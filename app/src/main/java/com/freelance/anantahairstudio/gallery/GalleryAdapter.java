@@ -22,17 +22,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     Context context;
     ArrayList<FetchGalleryResponse.Data.Image> imageList ;
-    String url ;
+
     public interface Callback{
         void setImageToImageView(String imageUrl);
     }
     Callback callback;
 
-    public GalleryAdapter(Context context, ArrayList<FetchGalleryResponse.Data.Image> imageList,Callback callback,String url) {
+    public GalleryAdapter(Context context, ArrayList<FetchGalleryResponse.Data.Image> imageList,Callback callback) {
         this.context = context;
         this.imageList = imageList;
         this.callback  = callback;
-        this.url = url;
     }
 
     @NonNull
@@ -44,15 +43,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-  url="https://xbytelab.com/projects/ananta-salon/image/gallery/";
-        GlideHelper.setImageView(context,holder.galleryImg,url+imageList.get(position).getImage(),R.drawable.ic_image_placeholder);
+        GlideHelper.setImageView(context,holder.galleryImg,imageList.get(position).getImage(),R.drawable.ic_image_placeholder);
         holder.galleryImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.setImageToImageView(url+imageList.get(position).getImage());
+                callback.setImageToImageView(imageList.get(position).getImage());
             }
         });
-        Log.i("file",""+url+imageList.get(position).getImage());
+        Log.i("file",""+imageList.get(position).getImage());
 
     }
 

@@ -24,19 +24,19 @@ import java.util.ArrayList;
 public class GalleryActivity extends AppCompatActivity implements GalleryAdapter.Callback {
 
     ActivityGalleryBinding binding;
-    GalleryAdapter galleryAdapter ;
+    GalleryAdapter galleryAdapter;
     ArrayList<FetchGalleryResponse.Data.Image> imageList = new ArrayList<>();
     GalleryViewModel galleryViewModel;
- String url = "https://xbytelab.com/projects/ananta-salon/image/gallery/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       binding = DataBindingUtil.setContentView(this,R.layout.activity_gallery);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_gallery);
         galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
 
         observer();
-       initialise();
-       clickViews();
+        initialise();
+        clickViews();
     }
 
     private void observer() {
@@ -45,13 +45,12 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
             @Override
             public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
                 imageList.addAll(fetchGalleryResponse.getData().getImages());
+                if (imageList.size() > 0) {
+                    GlideHelper.setImageView(getApplicationContext(), binding.galleryImg, imageList.get(0).getImage(), R.drawable.ic_image_placeholder);
+                }
 
-
-
-                GlideHelper.setImageView(getApplicationContext(),binding.galleryImg,url+imageList.get(0).getImage(),R.drawable.ic_image_placeholder);
-
-                galleryAdapter = new GalleryAdapter(getApplicationContext(),imageList,GalleryActivity.this::setImageToImageView,url);
-                binding.galleryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+                galleryAdapter = new GalleryAdapter(getApplicationContext(), imageList, GalleryActivity.this::setImageToImageView);
+                binding.galleryRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false));
                 binding.galleryRecyclerView.setAdapter(galleryAdapter);
             }
         });
@@ -69,12 +68,12 @@ public class GalleryActivity extends AppCompatActivity implements GalleryAdapter
     }
 
     private void initialise() {
-       
+
 
     }
 
     @Override
     public void setImageToImageView(String imageUrl) {
-        GlideHelper.setImageView(getApplicationContext(),binding.galleryImg,imageUrl,R.drawable.ic_image_placeholder);
+        GlideHelper.setImageView(getApplicationContext(), binding.galleryImg, imageUrl, R.drawable.ic_image_placeholder);
     }
 }

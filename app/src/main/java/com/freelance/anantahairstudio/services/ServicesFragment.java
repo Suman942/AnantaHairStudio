@@ -68,38 +68,11 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
         initialise();
         getIntents();
 
-//        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT ) {
-//            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                switch (direction){
-//                    case ItemTouchHelper.RIGHT:
-//                        position = viewHolder.getAdapterPosition();
-//                        Intent intent = new Intent(getContext(),ServiceDetailsActivity.class);
-//                        intent.putExtra("serviceName",serviceList.get(position).getName());
-//                        intent.putExtra("serviceImg",serviceList.get(position).getImg());
-//                        intent.putExtra("id",serviceList.get(position).getId());
-//                        intent.putExtra("price",serviceList.get(position).getPrice());
-//                        intent.putExtra("discountedPrice",serviceList.get(position).getDiscountedPrice());
-//                        getContext().startActivity(intent);
-//                        serviceAdapter.notifyDataSetChanged();
-//                        serviceAdapter.notifyItemChanged(position);
-//                        break;
-//                }
-//            }
-//        };
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-//        itemTouchHelper.attachToRecyclerView(binding.serviceRecyclerView);
-
         binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                insertServiceListToLocal();
+//                insertServiceListToLocal();
                 servicesDao.getAllServicesLiveData().observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
                     @Override
                     public void onChanged(List<LocalServiceResponse> localServiceResponses) {
@@ -193,6 +166,7 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
             servicesDao.getAllServicesLiveData().observe(getViewLifecycleOwner(), new Observer<List<LocalServiceResponse>>() {
                 @Override
                 public void onChanged(List<LocalServiceResponse> localServiceResponses) {
+                    serviceList.clear();
                     serviceList.addAll(localServiceResponses);
                     serviceAdapter.notifyDataSetChanged();
                     binding.loader.setVisibility(View.GONE);

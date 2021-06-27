@@ -1,4 +1,4 @@
- package com.freelance.anantahairstudio.services;
+package com.freelance.anantahairstudio.services;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -33,6 +33,7 @@ import com.freelance.anantahairstudio.notification.FcmResponse;
 import com.freelance.anantahairstudio.notification.NotificationViewModel;
 import com.freelance.anantahairstudio.utils.PrefManager;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,6 +54,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
     String finalDate, finalTime, finalTimeSlot;
     NotificationViewModel notificationViewModel;
     ProgressDialog progressDialog;
+    int currentDay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,7 +156,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
     private void setDefaultDate() {
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         int currentMonth = calendar.get(Calendar.MONTH);
-        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+         currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         binding.setDate.setText(String.valueOf(currentDay));
         binding.setMonth.setText(String.valueOf(MONTHS[currentMonth]));
 
@@ -182,6 +184,8 @@ public class CheckoutCartActivity extends AppCompatActivity {
                                 finalDate = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear) + "-" + String.valueOf(year);
                             }
                         }, year, month, day);
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
                 picker.show();
             }
         });
@@ -198,8 +202,17 @@ public class CheckoutCartActivity extends AppCompatActivity {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
-                                binding.setTime.setText(String.valueOf(hourOfDay) + "h" + ":" + String.valueOf(minute) + "m");
-                                Log.i("time", " " + String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+                                Time time = new Time(hourOfDay, minute, 0);
+
+                                //little h uses 12 hour format and big H uses 24 hour format
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h : mm a");
+
+                                //format takes in a Date, and Time is a sublcass of Date
+                                String s = simpleDateFormat.format(time);
+                                binding.setTime.setText(s);
+//                                finalTime =
+//                                binding.setTime.setText(String.valueOf(hourOfDay) + "h" + ":" + String.valueOf(minute) + "m");
+//                                Log.i("time", " " + String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
                                 finalTime = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
                             }
                         }, mHour, mMinute, false);

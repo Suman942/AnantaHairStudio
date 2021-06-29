@@ -1,10 +1,12 @@
 package com.freelance.anantahairstudio.cart;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -29,7 +31,7 @@ import com.freelance.anantahairstudio.utils.PrefManager;
 import java.util.ArrayList;
 
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartAdapter.Callback{
 
 
     FragmentCartBinding binding;
@@ -74,6 +76,7 @@ public class CartFragment extends Fragment {
                         cartViewModel.removeCart(PrefManager.getInstance().getString(R.string.authToken),cartList.get(position).getId());
 //                        cartAdapter.notifyDataSetChanged();
                         cartAdapter.notifyItemChanged(position);
+                        binding.loader.setVisibility(View.VISIBLE);
                         break;
                 }
             }
@@ -93,7 +96,7 @@ public class CartFragment extends Fragment {
                     Toast.makeText(getContext(), "Item removed successfully", Toast.LENGTH_SHORT).show();
                     cartList.clear();
                     cartViewModel.getCartList(PrefManager.getInstance().getString(R.string.authToken));
-
+                    binding.loader.setVisibility(View.GONE);
                 }
             }
         });
@@ -120,17 +123,16 @@ public class CartFragment extends Fragment {
                     try {
                         cartList.addAll(cartListResponse.getData());
                         cartAdapter.notifyDataSetChanged();
-
+                        binding.loader.setVisibility(View.GONE);
                     }
-                   catch (Exception e){
-
-                   }
+                   catch (Exception e){}
                     if (cartList.size()==0) {
                         binding.checkout.setVisibility(View.GONE);
+                        binding.loader.setVisibility(View.GONE);
+
                     }
                     else {
                         binding.checkout.setVisibility(View.VISIBLE);
-
                     }
                 }
             }
@@ -140,7 +142,12 @@ public class CartFragment extends Fragment {
     private void initialise() {
         binding.cartRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.cartRecyclerView.setEmptyView(binding.emptyCart);
-        cartAdapter = new CartAdapter(getContext(),cartList);
+        cartAdapter = new CartAdapter(getContext(),cartList,this);
         binding.cartRecyclerView.setAdapter(cartAdapter);
+    }
+
+    @Override
+    public void delete(String id) {
+        cartViewModel.removeCart(PrefManager.getInstance().getString(R.string.authToken),cartList.get(position).getId());
     }
 }

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
+    android:id="@+id/layout"
     android:layout_marginBottom="15dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,12 +17,24 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/cancel"
             android:textColor="#52508B"
             android:fontFamily="@font/roboto"
             android:textSize="18sp"
             android:layout_marginLeft="16dp"
             android:id="@+id/serviceNameTxt"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_cross"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:padding="5dp"
+            android:id="@+id/cancel"
+            android:foreground="?attr/selectableItemBackground"
+            />
+
 
         <TextView
             android:layout_width="wrap_content"

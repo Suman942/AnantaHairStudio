@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.activities.HomeActivity;
+import com.freelance.anantahairstudio.cart.CheckoutCartActivity;
 import com.freelance.anantahairstudio.databinding.ActivityEditDetailsBinding;
 import com.freelance.anantahairstudio.profileedit.ppojo.UpdateData;
 import com.freelance.anantahairstudio.profileedit.viewModel.ProfileEditViewModel;
@@ -21,12 +22,13 @@ public class EditDetailsActivity extends AppCompatActivity {
 
     ActivityEditDetailsBinding binding;
     ProfileEditViewModel profileEditViewModel;
+    int from;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_details);
         profileEditViewModel = new ViewModelProvider(this).get(ProfileEditViewModel.class);
-
+        from = getIntent().getIntExtra("from",0);
         clickView();
         observer();
 
@@ -37,8 +39,15 @@ public class EditDetailsActivity extends AppCompatActivity {
             @Override
             public void onChanged(UpdateData updateData) {
                 Toast.makeText(EditDetailsActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
-                intent.putExtra("from",0);
+                Intent intent = null;
+                if (from == 2){
+                    intent = new Intent(EditDetailsActivity.this, CheckoutCartActivity.class);
+                }
+                else {
+                     intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
+                    intent.putExtra("from",0);
+                }
+
                 startActivity(intent);
             }
         });
@@ -63,11 +72,20 @@ public class EditDetailsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
-        intent.putExtra("from",0);
-        startActivity(intent);    }
+//        Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
+//        intent.putExtra("from",0);
+//        startActivity(intent);
+        finish();
+        }
 }

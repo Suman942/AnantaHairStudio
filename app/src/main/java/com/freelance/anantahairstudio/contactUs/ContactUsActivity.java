@@ -188,6 +188,13 @@ public class ContactUsActivity extends AppCompatActivity {
             }
         });
 
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
 }

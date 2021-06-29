@@ -28,9 +28,12 @@ import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
 import com.freelance.anantahairstudio.cart.viewModel.AddToCartViewModel;
 import com.freelance.anantahairstudio.databinding.ActivityCheckoutCartBinding;
+import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
+import com.freelance.anantahairstudio.myInfo.viewModel.MyAccountInfoViewModel;
 import com.freelance.anantahairstudio.network.RequestFormatter;
 import com.freelance.anantahairstudio.notification.FcmResponse;
 import com.freelance.anantahairstudio.notification.NotificationViewModel;
+import com.freelance.anantahairstudio.profileedit.EditDetailsActivity;
 import com.freelance.anantahairstudio.utils.PrefManager;
 
 import java.sql.Time;
@@ -55,12 +58,16 @@ public class CheckoutCartActivity extends AppCompatActivity {
     NotificationViewModel notificationViewModel;
     ProgressDialog progressDialog;
     int currentDay;
+    MyAccountInfoViewModel myAccountInfoViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_checkout_cart);
         cartViewModel = new ViewModelProvider(this).get(AddToCartViewModel.class);
         notificationViewModel = new ViewModelProvider(this).get(NotificationViewModel.class);
+        myAccountInfoViewModel = new ViewModelProvider(this).get(MyAccountInfoViewModel.class);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please wait..");
@@ -132,6 +139,27 @@ public class CheckoutCartActivity extends AppCompatActivity {
                     finish();
                     progressDialog.dismiss();
                 }
+            }
+        });
+        myAccountInfoViewModel.myAccount(PrefManager.getInstance().getString(R.string.authToken));
+        myAccountInfoViewModel.myAccountLiveData().observe(this, new Observer<MyAccountResponse>() {
+            @Override
+            public void onChanged(MyAccountResponse myAccountResponse) {
+
+                try {
+                    binding.callTxt.setText(myAccountResponse.getData().getBasic().getPhone().toString());
+                    PrefManager.getInstance().putString(R.string.phone,myAccountResponse.getData().getBasic().getPhone());
+                } catch (Exception e) {
+                }
+
+                try {
+                    binding.addressTxt.setText(myAccountResponse.getData().getAddress().get(0).getAddress());
+                    PrefManager.getInstance().putString(R.string.address,myAccountResponse.getData().getAddress().get(0).getAddress());
+
+                } catch (Exception e) {
+                }
+
+
             }
         });
 
@@ -222,6 +250,14 @@ public class CheckoutCartActivity extends AppCompatActivity {
             }
         });
 
+        binding.editLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CheckoutCartActivity.this, EditDetailsActivity.class);
+                intent.putExtra("from",2);
+                startActivity(intent);
+            }
+        });
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

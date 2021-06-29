@@ -60,35 +60,28 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
         mLayoutManager = new LinearLayoutManager(this);
         binding.serviceRecyclerView.setLayoutManager(mLayoutManager);
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                switch (direction) {
-                    case ItemTouchHelper.LEFT:
-                        position = viewHolder.getAdapterPosition();
-                        serviceViewModel.cancelBooking(PrefManager.getInstance().getString(R.string.authToken), serviceArrayList.get(position).getBookingId());
-                        adapter.notifyDataSetChanged();
-                        adapter.notifyItemChanged(position);
-                        break;
-
-                    case ItemTouchHelper.RIGHT:
-                        position = viewHolder.getAdapterPosition();
-                        Intent intent = new Intent(OnGoingBookingActivity.this, OngoingActivity.class);
-                        intent.putExtra("bookingId", serviceArrayList.get(position).getBookingId());
-                        startActivity(intent);
-                        adapter.notifyDataSetChanged();
-                        adapter.notifyItemChanged(position);
-                        break;
-                }
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(binding.serviceRecyclerView);
+//        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+//            @Override
+//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+//                switch (direction) {
+//                    case ItemTouchHelper.LEFT:
+//                        position = viewHolder.getAdapterPosition();
+//                        serviceViewModel.cancelBooking(PrefManager.getInstance().getString(R.string.authToken), serviceArrayList.get(position).getBookingId());
+//                        adapter.notifyDataSetChanged();
+//                        adapter.notifyItemChanged(position);
+//                        break;
+//
+//
+//                }
+//            }
+//        };
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+//        itemTouchHelper.attachToRecyclerView(binding.serviceRecyclerView);
 
         binding.serviceRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -130,6 +123,7 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
                 }
                 adapter.notifyDataSetChanged();
                 binding.loader.setVisibility(View.GONE);
+                binding.serviceRecyclerView.setEmptyView(binding.empty);
                 binding.paginationLoader.setVisibility(View.GONE);
                 isLoading = false;
             }
@@ -160,7 +154,7 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
     }
 
     private void initialise() {
-        adapter = new BookingAdapter(this, serviceArrayList, this::pay);
+        adapter = new BookingAdapter(this, serviceArrayList, this);
         binding.serviceRecyclerView.setAdapter(adapter);
     }
 
@@ -173,11 +167,16 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
     }
 
     @Override
-    public void pay(String bookingId) {
-
-
+    public void detail(String bookingId) {
+        Intent intent = new Intent(OnGoingBookingActivity.this, OngoingActivity.class);
+        intent.putExtra("bookingId", serviceArrayList.get(position).getBookingId());
+        startActivity(intent);
     }
 
+    @Override
+    public void cancel(String bookingId) {
+        serviceViewModel.cancelBooking(PrefManager.getInstance().getString(R.string.authToken), serviceArrayList.get(position).getBookingId());
+    }
 
     @Override
     public void onPaymentSuccess(String s) {

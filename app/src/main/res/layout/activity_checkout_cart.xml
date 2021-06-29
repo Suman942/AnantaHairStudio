@@ -229,6 +229,15 @@
                 android:textColor="@color/colorPrimary"
                 android:fontFamily="@font/roboto_medium"
                 android:id="@+id/addressLabel"/>
+            <ImageView
+                android:id="@+id/editLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/ic_pencil"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/addressLabel" />
 
             <TextView
                 android:layout_width="0dp"
@@ -244,15 +253,7 @@
                 />
 
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_pencil"
-                    app:layout_constraintTop_toBottomOf="@id/addressLabel"
-                    app:layout_constraintRight_toRightOf="@id/timeVIew"
-                    android:layout_marginTop="15dp"
-                    android:visibility="invisible"
-                    android:id="@+id/editLocation"/>
+
 
             <View
                 android:layout_width="match_parent"

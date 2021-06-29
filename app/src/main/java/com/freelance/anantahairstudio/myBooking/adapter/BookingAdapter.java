@@ -5,6 +5,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.myBooking.pojo.OnGoingServiceResponse;
 import com.freelance.anantahairstudio.utils.LocalTime;
+import com.google.android.material.card.MaterialCardView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +27,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     ArrayList<OnGoingServiceResponse.Data.Booking> serviceArrayList ;
 
     public interface Callback{
-        void pay(String bookingId) ;
+        void detail(String bookingId) ;
+        void cancel(String bookingId);
     }
     Callback callback;
     public BookingAdapter(Context context, ArrayList<OnGoingServiceResponse.Data.Booking> serviceArrayList,Callback callback) {
@@ -72,24 +75,20 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         String dateString = formatter.format(new Date(slot));
         holder.date.setText("Date: "+dateString);
 
-//        Date date = new Date(slot);
-//        String hr = String.valueOf(date.getHours());
-//        String mm = String.valueOf(date.getMinutes());
-//        if (date.getHours() >= 12) {
-//            holder.time.setText("Time: " + hr + ":" + mm+" PM");
-//        }
-//        else {
-//            holder.time.setText("Time: " + hr + ":" + mm+" AM");
-//        }
 
         holder.time.setText("Time: "+ LocalTime.getLocalTime(slot));
-        holder.pay.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.pay(serviceArrayList.get(position).getBookingId());
+                callback.detail(serviceArrayList.get(position).getBookingId());
             }
         });
-
+        holder.cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.cancel(serviceArrayList.get(position).getBookingId());
+            }
+        });
     }
 
     @Override
@@ -100,6 +99,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     public class BookingViewHolder  extends RecyclerView.ViewHolder {
         View statusBackground;
         TextView statusTxt,time,date,bookingId,pay;
+        MaterialCardView layout;
+        ImageView cancel;
         public BookingViewHolder(@NonNull View itemView) {
             super(itemView);
             statusBackground = itemView.findViewById(R.id.statusBackground);
@@ -108,6 +109,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             date = itemView.findViewById(R.id.dateTxt);
             bookingId = itemView.findViewById(R.id.serviceNameTxt);
             pay = itemView.findViewById(R.id.payTxt);
+            layout = itemView.findViewById(R.id.layout);
+            cancel = itemView.findViewById(R.id.cancel);
 
         }
     }

@@ -31,13 +31,25 @@
             app:layout_constraintLeft_toRightOf="@id/serviceImg"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/delete"
             android:text="Service name"
             android:textColor="#52508B"
             android:fontFamily="@font/roboto"
             android:textSize="18sp"
             android:layout_marginLeft="16dp"
             android:id="@+id/serviceNameTxt"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/delete"
+            android:padding="5dp"
+            android:background="@drawable/ic_cross"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
 
         <TextView
             android:layout_width="wrap_content"

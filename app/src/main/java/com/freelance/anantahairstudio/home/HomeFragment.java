@@ -142,6 +142,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        binding.packageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext() , HomeActivity.class);
+                intent.putExtra("fromHome",true);
+                intent.putExtra("serviceName","116");
+                startActivity(intent);
+            }
+        });
+
         binding.locateStudioView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

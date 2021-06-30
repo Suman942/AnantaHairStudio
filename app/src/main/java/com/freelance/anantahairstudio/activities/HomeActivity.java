@@ -39,20 +39,21 @@ public class HomeActivity extends AppCompatActivity  {
     PagerAdapter pagerAdapter;
     ActivityHomeBinding binding;
     private MenuItem bottomTabMenuItem;
-    boolean fromHome ;
+    boolean fromHome;
     String emailSplit[];
     String topic;
+    int current;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     binding = DataBindingUtil.setContentView(this,R.layout.activity_home);
-    PrefManager.getInstance(this,true);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        PrefManager.getInstance(this, true);
         intialise();
         getIntents();
 
 
-      topic = PrefManager.getInstance().getString(R.string.email).substring(0,PrefManager.getInstance().getString(R.string.email).indexOf("@")).trim();
-            Log.i("token",topic+"\n");
+        topic = PrefManager.getInstance().getString(R.string.email).substring(0, PrefManager.getInstance().getString(R.string.email).indexOf("@")).trim();
+        Log.i("token", topic + "\n");
 
         notifications();
 
@@ -60,7 +61,7 @@ public class HomeActivity extends AppCompatActivity  {
 
     private void notifications() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
             NotificationChannel channel = new NotificationChannel(
                     "AnantaHairStudioNotification",
@@ -85,23 +86,34 @@ public class HomeActivity extends AppCompatActivity  {
     }
 
     private void getIntents() {
+         current = getIntent().getIntExtra("homeScreen", -1);
+        if (current == 0) {
+            binding.viewPager.setCurrentItem(0);
+        }
+        else if (current == 1){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    finishAffinity();
+                }
+            });
+            finishAffinity();
+            finish();
+        }
+
         try {
-            fromHome = getIntent().getBooleanExtra("fromHome",false);
-            if (fromHome){
+            fromHome = getIntent().getBooleanExtra("fromHome", false);
+            if (fromHome) {
                 binding.viewPager.setCurrentItem(1);
             }
-           if(getIntent().getIntExtra("from",-1) == 0){
-               binding.viewPager.setCurrentItem(3);
-           }
-            if(getIntent().getIntExtra("from",-1) == 1){
+            if (getIntent().getIntExtra("from", -1) == 0) {
+                binding.viewPager.setCurrentItem(3);
+            }
+            if (getIntent().getIntExtra("from", -1) == 1) {
                 binding.viewPager.setCurrentItem(1);
             }
-        }
-        catch (Exception e){
-
-        }
+        } catch (Exception e) {}
     }
-
 
 
     private void intialise() {
@@ -109,7 +121,7 @@ public class HomeActivity extends AppCompatActivity  {
         binding.viewPager.setPagingEnabled(false);
         binding.viewPager.setAdapter(pagerAdapter);
 
-       binding.bottomNavigation.setOnNavigationItemSelectedListener(
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -145,7 +157,7 @@ public class HomeActivity extends AppCompatActivity  {
                 }
 
                 binding.bottomNavigation.getMenu().getItem(position).setChecked(true);
-                bottomTabMenuItem =  binding.bottomNavigation.getMenu().getItem(position);
+                bottomTabMenuItem = binding.bottomNavigation.getMenu().getItem(position);
 
 //                switch (position) {
 //                    case 0:
@@ -171,6 +183,7 @@ public class HomeActivity extends AppCompatActivity  {
 
 
 
+
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
         public final int PAGE_COUNT = 4;
@@ -188,14 +201,14 @@ public class HomeActivity extends AppCompatActivity  {
                     return new HomeFragment();
                 case 1:
                     Bundle bundle = new Bundle();
-                    if (getIntent().getStringExtra("serviceName") != null){
-                        bundle.putString("serviceName" , getIntent().getStringExtra("serviceName"));
-                        bundle.putBoolean("fromHome",fromHome);
+                    if (getIntent().getStringExtra("serviceName") != null) {
+                        bundle.putString("serviceName", getIntent().getStringExtra("serviceName"));
+                        bundle.putBoolean("fromHome", fromHome);
                     }
-                    bundle.putInt("search",getIntent().getIntExtra("search",-1));
+                    bundle.putInt("search", getIntent().getIntExtra("search", -1));
                     ServicesFragment servicesFragment = new ServicesFragment();
                     servicesFragment.setArguments(bundle);
-                    return  servicesFragment;
+                    return servicesFragment;
                 case 2:
                     return new CartFragment();
                 case 3:
@@ -232,7 +245,8 @@ public class HomeActivity extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
+        if (current == 1){
+            finishAffinity();
+        }
     }
 }

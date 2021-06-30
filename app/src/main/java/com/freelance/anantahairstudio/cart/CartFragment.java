@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.cart.adapter.CartAdapter;
 import com.freelance.anantahairstudio.cart.pojo.CartListResponse;
 import com.freelance.anantahairstudio.cart.pojo.RemoveCartResponse;
@@ -60,6 +62,16 @@ public class CartFragment extends Fragment implements CartAdapter.Callback{
         initialise();
         clickiew();
         observers();
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra("homeScreen",0);
+                startActivity(intent);
+//                homeScreen.homeScreen();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT ) {

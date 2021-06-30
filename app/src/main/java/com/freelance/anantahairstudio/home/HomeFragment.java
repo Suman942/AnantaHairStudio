@@ -1,9 +1,11 @@
 package com.freelance.anantahairstudio.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -41,6 +43,17 @@ public class HomeFragment extends Fragment {
 
         initialise();
         clickViews();
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra("homeScreen",1);
+                startActivity(intent);
+//                getActivity().finishAffinity();
+//                getActivity().finish();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return binding.getRoot();
     }
@@ -180,4 +193,6 @@ public class HomeFragment extends Fragment {
         ImageAdapter adapterView = new ImageAdapter(getContext());
         binding.viewPager.setAdapter(adapterView);
     }
+
+
 }

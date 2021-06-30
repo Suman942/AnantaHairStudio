@@ -1,8 +1,10 @@
 package com.freelance.anantahairstudio.services;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.FragmentServicesBinding;
 import com.freelance.anantahairstudio.services.adapter.ServiceAdapter;
 import com.freelance.anantahairstudio.services.local.AllServicesDao;
@@ -43,6 +46,8 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
     ServicesDatabase serviceDatabase;
     AllServicesDao servicesDao;
     int position;
+
+
     public ServicesFragment() {
         // Required empty public constructor
     }
@@ -99,13 +104,18 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
                 return false;
             }
         });
-//        binding.serviceRecyclerView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                binding.serviceDetails.setVisibility(View.GONE);
-//                return false;
-//            }
-//        });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra("homeScreen",0);
+                startActivity(intent);
+//                homeScreen.homeScreen();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
         return binding.getRoot();
     }
 
@@ -185,4 +195,6 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
     public void serviceDetails(String id) {
 //        binding.serviceDetails.setVisibility(View.VISIBLE);
     }
+
+
 }

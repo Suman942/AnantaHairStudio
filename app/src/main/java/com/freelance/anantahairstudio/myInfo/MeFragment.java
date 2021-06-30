@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.freelance.anantahairstudio.BuildConfig;
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.contactUs.ContactUsActivity;
 import com.freelance.anantahairstudio.databinding.FragmentMeBinding;
 import com.freelance.anantahairstudio.myInfo.pojo.MyAccountResponse;
@@ -64,6 +66,18 @@ public class MeFragment extends Fragment {
 
         clickViews();
         observers();
+
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra("homeScreen",0);
+                startActivity(intent);
+//                homeScreen.homeScreen();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return binding.getRoot();
     }

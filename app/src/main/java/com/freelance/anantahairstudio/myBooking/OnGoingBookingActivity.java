@@ -114,7 +114,7 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
         serviceViewModel.ongoingServiceLiveData().observe(this, new Observer<OnGoingServiceResponse>() {
             @Override
             public void onChanged(OnGoingServiceResponse onGoingServiceResponse) {
-                if (onGoingServiceResponse.getData().getBookings().size() >0) {
+                if (onGoingServiceResponse.getData().getBookings().size() > 0) {
                     serviceArrayList.addAll(onGoingServiceResponse.getData().getBookings());
                 }
                 if (onGoingServiceResponse.getData().getBookings().size() == 0)
@@ -160,17 +160,19 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         Intent intent = new Intent(OnGoingBookingActivity.this, HomeActivity.class);
-        intent.putExtra("from", 0);
+//        intent.putExtra("from", 0);
         startActivity(intent);
+        finish();
     }
 
     @Override
-    public void detail(String bookingId) {
+    public void detail(String bookingId,int position) {
         Intent intent = new Intent(OnGoingBookingActivity.this, OngoingActivity.class);
         intent.putExtra("bookingId", serviceArrayList.get(position).getBookingId());
         startActivity(intent);
+        finish();
     }
 
     @Override

@@ -46,13 +46,12 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             @Override
             public void onChanged(AddtoCartResponse addtoCartResponse) {
                 try {
-                    binding.addtocartBtn.setBackgroundColor(Color.parseColor("#FF3B70"));
-                    binding.addtocartBtn.setText("ADDED");
-                    Toast.makeText(ServiceDetailsActivity.this, "Successfully added to cart", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(ServiceDetailsActivity.this, HomeActivity.class);
-//                    intent.putExtra("from",1);
-//                    startActivity(intent);
-                    finish();
+
+                        binding.addtocartBtn.setBackgroundColor(Color.parseColor("#FF3B70"));
+                        binding.addtocartBtn.setText("ADDED");
+                        Toast.makeText(ServiceDetailsActivity.this, "Successfully added to cart", Toast.LENGTH_SHORT).show();
+                        finish();
+
                 }
                 catch (Exception e){
 
@@ -144,7 +143,6 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addToCartViewModel.addToCart(PrefManager.getInstance().getString(R.string.authToken),id,String.valueOf(counter));
-                Log.i("referral",""+PrefManager.getInstance().getString(R.string.authToken));
             }
         });
 

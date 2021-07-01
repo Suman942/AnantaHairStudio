@@ -2,6 +2,7 @@ package com.freelance.anantahairstudio.myBooking.adapter;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     ArrayList<OnGoingServiceResponse.Data.Booking> serviceArrayList ;
 
     public interface Callback{
-        void detail(String bookingId) ;
+        void detail(String bookingId,int position) ;
         void cancel(String bookingId);
     }
     Callback callback;
@@ -75,12 +76,12 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         String dateString = formatter.format(new Date(slot));
         holder.date.setText("Date: "+dateString);
 
-
+        Log.i("slot",""+slot);
         holder.time.setText("Time: "+ LocalTime.getLocalTime(slot));
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.detail(serviceArrayList.get(position).getBookingId());
+                callback.detail(serviceArrayList.get(position).getBookingId(),position);
             }
         });
         holder.cancel.setOnClickListener(new View.OnClickListener() {

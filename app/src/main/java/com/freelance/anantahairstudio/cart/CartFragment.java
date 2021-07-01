@@ -62,6 +62,7 @@ public class CartFragment extends Fragment implements CartAdapter.Callback{
         initialise();
         clickiew();
         observers();
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -100,6 +101,14 @@ public class CartFragment extends Fragment implements CartAdapter.Callback{
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        cartList.clear();
+        cartViewModel.getCartList(PrefManager.getInstance().getString(R.string.authToken));
+
+    }
+
     private void observers() {
         cartViewModel.removeCartLiveData().observe(getViewLifecycleOwner(), new Observer<RemoveCartResponse>() {
             @Override
@@ -109,6 +118,28 @@ public class CartFragment extends Fragment implements CartAdapter.Callback{
                     cartList.clear();
                     cartViewModel.getCartList(PrefManager.getInstance().getString(R.string.authToken));
                     binding.loader.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        cartViewModel.getCartListLiveData().observe(getViewLifecycleOwner(), new Observer<CartListResponse>() {
+            @Override
+            public void onChanged(CartListResponse cartListResponse) {
+                if (cartListResponse != null || cartListResponse.getData().size() > 0){
+                    try {
+                        cartList.addAll(cartListResponse.getData());
+                        cartAdapter.notifyDataSetChanged();
+                        binding.loader.setVisibility(View.GONE);
+                    }
+                    catch (Exception e){}
+                    if (cartList.size()==0) {
+                        binding.checkout.setVisibility(View.GONE);
+                        binding.loader.setVisibility(View.GONE);
+
+                    }
+                    else {
+                        binding.checkout.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
@@ -127,28 +158,7 @@ public class CartFragment extends Fragment implements CartAdapter.Callback{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cartViewModel.getCartList(PrefManager.getInstance().getString(R.string.authToken));
-        cartViewModel.getCartListLiveData().observe(getViewLifecycleOwner(), new Observer<CartListResponse>() {
-            @Override
-            public void onChanged(CartListResponse cartListResponse) {
-                if (cartListResponse != null || cartListResponse.getData().size() > 0){
-                    try {
-                        cartList.addAll(cartListResponse.getData());
-                        cartAdapter.notifyDataSetChanged();
-                        binding.loader.setVisibility(View.GONE);
-                    }
-                   catch (Exception e){}
-                    if (cartList.size()==0) {
-                        binding.checkout.setVisibility(View.GONE);
-                        binding.loader.setVisibility(View.GONE);
 
-                    }
-                    else {
-                        binding.checkout.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-        });
     }
 
     private void initialise() {

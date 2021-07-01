@@ -110,7 +110,7 @@ public interface ApiInterface {
             "Content-Type: application/x-www-form-urlencoded",
             "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
     })
-    @GET("cart?fetch=1")
+    @GET("cart?fetch")
     Call<CartListResponse> getCartList(
             @Header("Authorization") String token
     );

@@ -243,10 +243,10 @@ public class HomeActivity extends AppCompatActivity  {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (current == 1){
-            finishAffinity();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (current == 1){
+//            finishAffinity();
+//        }
+//    }
 }

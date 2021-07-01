@@ -209,6 +209,8 @@ public class CheckoutCartActivity extends AppCompatActivity {
                                 binding.setDate.setText(String.valueOf(dayOfMonth));
                                 binding.setMonth.setText(String.valueOf(MONTHS[monthOfYear]));
                                 Log.i("time", " " + String.valueOf(dayOfMonth) + "-" + String.valueOf(MONTHS[monthOfYear]) + "-" + String.valueOf(year));
+                                monthOfYear ++;
+
                                 finalDate = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear) + "-" + String.valueOf(year);
                             }
                         }, year, month, day);

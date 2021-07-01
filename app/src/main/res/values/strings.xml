@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AnantaHairStudio</string>
+    <string name="app_name">AH Studio</string>
     <string name="pref_isFirstTimeLaunch_key">pref_isFirstTimeLaunch_key</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="fullname">fullname</string>

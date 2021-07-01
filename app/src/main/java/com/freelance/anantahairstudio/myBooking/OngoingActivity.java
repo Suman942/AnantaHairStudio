@@ -37,7 +37,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
     OngoingServiceAdapter adapter;
     ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList = new ArrayList<>();
     OngoingServiceViewModel serviceViewModel;
-    String bookingId;
+    String bookingId = null;
     String priceTobePaid = null;
     Integer price;
     Integer points;
@@ -84,6 +84,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
                 Intent intent = new Intent(OngoingActivity.this, OnGoingBookingActivity.class);
                 intent.putExtra("from", 0);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -123,6 +124,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
         Intent intent = new Intent(OngoingActivity.this, OnGoingBookingActivity.class);
 //        intent.putExtra("from", 0);
         startActivity(intent);
+        finish();
     }
 
 

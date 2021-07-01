@@ -76,16 +76,18 @@ public class EditDetailsActivity extends AppCompatActivity {
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-            }
+                Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
+//        intent.putExtra("from",0);
+                startActivity(intent);
+                finish();            }
         });
     }
 
     @Override
     public void onBackPressed() {
-//        Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
+        Intent intent = new Intent(EditDetailsActivity.this, HomeActivity.class);
 //        intent.putExtra("from",0);
-//        startActivity(intent);
+        startActivity(intent);
         finish();
         }
 }

@@ -82,7 +82,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OngoingActivity.this, OnGoingBookingActivity.class);
-                intent.putExtra("from", 0);
+//                intent.putExtra("from", 0);
                 startActivity(intent);
                 finish();
             }
@@ -169,14 +169,14 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                  points = Integer.parseInt(PrefManager.getInstance().getString(R.string.points));
-                                Double pointsToRs = points * 0.1;
+//                                Double pointsToRs = points * 0.1;
 
-                                price  -=  pointsToRs.intValue();
+                                price  -= points;
                                 if (price > 0) {
                                     makePayment();
                                 }
                                 else {
-                                    Toast.makeText(OngoingActivity.this, "Price cannot be \u20B9 0", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(OngoingActivity.this, "Price cannot be \u20B90", Toast.LENGTH_SHORT).show();
                                 }
                                 dialog.dismiss();
                             }
@@ -189,7 +189,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
                                     makePayment();
                                 }
                                 else {
-                                    Toast.makeText(OngoingActivity.this, "Price cannot be \u20B9 0", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(OngoingActivity.this, "Price cannot be \u20B90", Toast.LENGTH_SHORT).show();
                                 }
                                 dialog.dismiss();
 

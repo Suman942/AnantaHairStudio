@@ -147,7 +147,7 @@ public class OnGoingBookingActivity extends AppCompatActivity implements Booking
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OnGoingBookingActivity.this, HomeActivity.class);
-                intent.putExtra("from", 0);
+//                intent.putExtra("from", 0);
                 startActivity(intent);
             }
         });

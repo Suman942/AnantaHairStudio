@@ -159,7 +159,7 @@ public class MeFragment extends Fragment {
             public void onChanged(MyAccountResponse myAccountResponse) {
 
                 try {
-                    binding.phoneTxt.setText(myAccountResponse.getData().getBasic().getPhone().toString());
+                    binding.phoneTxt.setText("+91 "+myAccountResponse.getData().getBasic().getPhone().toString());
                     PrefManager.getInstance().putString(R.string.phone,myAccountResponse.getData().getBasic().getPhone());
                 } catch (Exception e) {
                 }

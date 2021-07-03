@@ -45,13 +45,13 @@ public class ContactUsActivity extends AppCompatActivity {
             public void onChanged(ContactUpdateResponse contactUpdateResponse) {
                 try {
                     if (!contactUpdateResponse.getData().getBusinessInfo().getPhone().isEmpty()) {
-                        binding.callTxt.setText(contactUpdateResponse.getData().getBusinessInfo().getPhone());
+                        binding.callTxt.setText("+91 "+contactUpdateResponse.getData().getBusinessInfo().getPhone());
                     }
                     else {
                         binding.callTxt.setText("N/A");
                     }
                     if (!contactUpdateResponse.getData().getBusinessInfo().getWhatsapp().isEmpty()) {
-                        binding.contactus.setText(contactUpdateResponse.getData().getBusinessInfo().getWhatsapp());
+                        binding.contactus.setText("+91 "+contactUpdateResponse.getData().getBusinessInfo().getWhatsapp());
                     }
                     else {
                         binding.contactus.setText("N/A");

@@ -1,6 +1,7 @@
 package com.freelance.anantahairstudio.gallery;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.telecom.Call;
 import android.text.Layout;
@@ -17,6 +18,8 @@ import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.utils.GlideHelper;
 
 import java.util.ArrayList;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
@@ -47,7 +50,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         holder.galleryImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.setImageToImageView(imageList.get(position).getImage());
+                Intent intent = new Intent(context, PhotoViewActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("position",position);
+                intent.putExtra("image",imageList.get(position).getImage());
+                context.startActivity(intent);
             }
         });
         Log.i("file",""+imageList.get(position).getImage());

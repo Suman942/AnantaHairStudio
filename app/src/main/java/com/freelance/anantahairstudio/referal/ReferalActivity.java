@@ -50,12 +50,13 @@ public class ReferalActivity extends AppCompatActivity {
                     Toast.makeText(ReferalActivity.this, "Congratulations you earned "+referalResponse.getData().getPoints().intValue()+" points", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                     finish();
-                    binding.submitBtn.setEnabled(true);
-                    progressDialog.dismiss();
                 }
               catch (Exception e){
-                  Toast.makeText(ReferalActivity.this, "Technical issue", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(ReferalActivity.this, "Invalid code", Toast.LENGTH_SHORT).show();
               }
+                binding.submitBtn.setEnabled(true);
+                progressDialog.dismiss();
+
 
             }
         });

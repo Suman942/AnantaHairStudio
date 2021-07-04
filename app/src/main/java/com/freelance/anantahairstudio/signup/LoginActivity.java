@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 e.printStackTrace();
 
-//                Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Technical error has occurred", Toast.LENGTH_SHORT).show();
             }
         }
     }

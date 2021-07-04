@@ -36,6 +36,10 @@ public class ReferralCodeRepo {
                     Log.i("referral","successfully authenticated");
                     mutableLiveData.setValue(response.body());
                 }
+                if (response.code() == 400){
+                    Log.i("referral","error");
+                    mutableLiveData.setValue(response.body());
+                }
             }
 
             @Override

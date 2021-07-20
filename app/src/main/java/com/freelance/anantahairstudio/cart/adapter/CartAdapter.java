@@ -57,7 +57,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.delete(cartList.get(position).getId());
+                try {
+                    callback.delete(cartList.get(position).getId());
+                }
+                catch (Exception e){}
             }
 
         });

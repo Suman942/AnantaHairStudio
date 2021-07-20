@@ -87,7 +87,12 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         holder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.cancel(serviceArrayList.get(position).getBookingId());
+                try {
+                    callback.cancel(serviceArrayList.get(position).getBookingId());
+                }
+                catch (Exception e){
+
+                }
             }
         });
     }

@@ -113,6 +113,7 @@ public class CartFragment extends Fragment implements CartAdapter.Callback{
         cartViewModel.removeCartLiveData().observe(getViewLifecycleOwner(), new Observer<RemoveCartResponse>() {
             @Override
             public void onChanged(RemoveCartResponse removeCartResponse) {
+
                 if (removeCartResponse != null){
                     Toast.makeText(getContext(), "Item removed successfully", Toast.LENGTH_SHORT).show();
                     cartList.clear();

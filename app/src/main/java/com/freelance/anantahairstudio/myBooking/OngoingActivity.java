@@ -170,7 +170,7 @@ public class OngoingActivity extends AppCompatActivity implements PaymentResultL
                             public void onClick(DialogInterface dialog, int id) {
                                  points = Integer.parseInt(PrefManager.getInstance().getString(R.string.points));
 //                                Double pointsToRs = points * 0.1;
-
+                                points *=100;
                                 price  -= points;
                                 if (price > 0) {
                                     makePayment();

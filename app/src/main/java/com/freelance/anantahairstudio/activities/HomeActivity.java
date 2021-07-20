@@ -1,6 +1,7 @@
 package com.freelance.anantahairstudio.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -10,7 +11,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,12 +34,17 @@ import com.freelance.anantahairstudio.utils.PrefManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity  {
+public class HomeActivity extends AppCompatActivity {
 
     PagerAdapter pagerAdapter;
     ActivityHomeBinding binding;
@@ -43,6 +53,7 @@ public class HomeActivity extends AppCompatActivity  {
     String emailSplit[];
     String topic;
     int current;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +61,46 @@ public class HomeActivity extends AppCompatActivity  {
         PrefManager.getInstance(this, true);
         intialise();
         getIntents();
-
-
         topic = PrefManager.getInstance().getString(R.string.email).substring(0, PrefManager.getInstance().getString(R.string.email).indexOf("@")).trim();
         Log.i("token", topic + "\n");
-
         notifications();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        UpdateApp();
+    }
+
+    public void UpdateApp() {
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+
+        com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+// Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    // This example applies an immediate update. To apply a flexible update
+                    // instead, pass in AppUpdateType.FLEXIBLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                // Request the update.
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setMessage("Newer version is available ");
+                alertDialogBuilder.setPositiveButton("Update",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+//                                appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, 0);
+                            }
+                        });
+
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
     }
 
     private void notifications() {
@@ -86,11 +130,10 @@ public class HomeActivity extends AppCompatActivity  {
     }
 
     private void getIntents() {
-         current = getIntent().getIntExtra("homeScreen", -1);
+        current = getIntent().getIntExtra("homeScreen", -1);
         if (current == 0) {
             binding.viewPager.setCurrentItem(0);
-        }
-        else if (current == 1){
+        } else if (current == 1) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -112,7 +155,8 @@ public class HomeActivity extends AppCompatActivity  {
             if (getIntent().getIntExtra("from", -1) == 1) {
                 binding.viewPager.setCurrentItem(1);
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
 
@@ -182,8 +226,6 @@ public class HomeActivity extends AppCompatActivity  {
     }
 
 
-
-
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
         public final int PAGE_COUNT = 4;
@@ -243,10 +285,5 @@ public class HomeActivity extends AppCompatActivity  {
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (current == 1){
-//            finishAffinity();
-//        }
-//    }
+
 }

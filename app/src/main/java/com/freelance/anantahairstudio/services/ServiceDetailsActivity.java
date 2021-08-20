@@ -66,7 +66,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         binding.discountAmount.setText("\u20B9 "+discountedPrice+" OFF");
         GlideHelper.setImageView(this,binding.serviceImage,serviceImg,R.drawable.ic_image_placeholder);
         if (description != null){
-            binding.serviceDescription.setText(description);
+            binding.serviceDescription.setText(description.replaceAll("\\\\n", "\n"));
         }
         else {
             binding.serviceDescription.setText("No description available");

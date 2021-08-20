@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintHeight_percent="0.72"
         android:id="@+id/view"
         android:background="@drawable/left_right_corner_radius"/>
 
@@ -87,9 +87,8 @@
        android:text="No description"
        app:layout_constraintTop_toBottomOf="@id/categoryHolder"
        android:textColor="#999999"
-       android:textSize="16sp"
-       android:maxLength="100"
-       android:maxLines="3"
+       android:inputType="textMultiLine"
+       android:textSize="15sp"
        app:layout_constraintBottom_toTopOf="@id/noOfIndividualsTxt"
        android:id="@+id/serviceDescription"/>
 
@@ -172,7 +171,7 @@
         android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/serviceImage"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="15dp"
         android:background="#F4F4F4"
         android:id="@+id/minusView"/>
 

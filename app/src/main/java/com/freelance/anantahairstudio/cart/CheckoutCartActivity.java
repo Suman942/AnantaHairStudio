@@ -134,7 +134,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
                 if (bookingResponse != null) {
                     Toast.makeText(CheckoutCartActivity.this, "Booked Successfully", Toast.LENGTH_SHORT).show();
                     binding.book.setEnabled(true);
-                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/Booking", "Booking Alert", "New Booking request from "+PrefManager.getInstance().getString(R.string.email),R.drawable.main_logo));
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/Booking", "New Booking Request", "From: "+PrefManager.getInstance().getString(R.string.fullname),R.drawable.main_logo));
                     startActivity(new Intent(CheckoutCartActivity.this, HomeActivity.class));
                     finish();
                     progressDialog.dismiss();
@@ -190,6 +190,7 @@ public class CheckoutCartActivity extends AppCompatActivity {
 
 //        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         binding.setTime.setText("00:00");
+        finalDate = String.valueOf(currentDay) + "-" + String.valueOf(MONTHS[currentMonth]) + "-" + String.valueOf(calendar.get(Calendar.YEAR));
     }
 
     private void clickViews() {

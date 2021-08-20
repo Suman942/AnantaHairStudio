@@ -134,6 +134,7 @@ public class ServicesFragment extends Fragment implements ServiceAdapter.Callbac
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ServicesDatabase.getDatabase(getContext()).clearAllTables();
         insertServiceListToLocal();
     }
 

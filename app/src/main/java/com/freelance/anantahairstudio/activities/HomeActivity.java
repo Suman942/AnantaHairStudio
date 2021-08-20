@@ -1,6 +1,7 @@
 package com.freelance.anantahairstudio.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -11,10 +12,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,12 +40,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -53,12 +60,16 @@ public class HomeActivity extends AppCompatActivity {
     String emailSplit[];
     String topic;
     int current;
-
+    AppUpdateManager appUpdateManager;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         PrefManager.getInstance(this, true);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Updating");
+        progressDialog.setCanceledOnTouchOutside(false);
         intialise();
         getIntents();
         topic = PrefManager.getInstance().getString(R.string.email).substring(0, PrefManager.getInstance().getString(R.string.email).indexOf("@")).trim();
@@ -74,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void UpdateApp() {
-        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+         appUpdateManager = AppUpdateManagerFactory.create(this);
 
         com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
@@ -83,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
                     // This example applies an immediate update. To apply a flexible update
                     // instead, pass in AppUpdateType.FLEXIBLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                    && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
                 // Request the update.
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setCancelable(false);
@@ -92,7 +103,12 @@ public class HomeActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
-//                                appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, 0);
+                                try {
+                                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, IMMEDIATE, HomeActivity.this, 0);
+                                    progressDialog.show();
+                                } catch (IntentSender.SendIntentException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
 
@@ -101,6 +117,60 @@ public class HomeActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
+        // Create a listener to track request state updates.
+        InstallStateUpdatedListener listener = state -> {
+            // (Optional) Provide a download progress bar.
+            if (state.installStatus() == InstallStatus.DOWNLOADING) {
+                long bytesDownloaded = state.bytesDownloaded();
+                long totalBytesToDownload = state.totalBytesToDownload();
+                // Implement progress bar.
+            }
+            // Log state or install the update.
+        };
+
+// Before starting an update, register a listener for updates.
+        appUpdateManager.registerListener(listener);
+
+// Start an update.
+
+// When status updates are no longer needed, unregister the listener.
+        appUpdateManager.unregisterListener(listener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        appUpdateManager
+                .getAppUpdateInfo()
+                .addOnSuccessListener(
+                        appUpdateInfo -> {
+                            if (appUpdateInfo.updateAvailability()
+                                    == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                                // If an in-app update is already running, resume the update.
+                                try {
+                                    appUpdateManager.startUpdateFlowForResult(
+                                            appUpdateInfo,
+                                            IMMEDIATE,
+                                            this,
+                                            0);
+                                } catch (IntentSender.SendIntentException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode != RESULT_OK) {
+
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
     }
 
     private void notifications() {
@@ -127,6 +197,8 @@ public class HomeActivity extends AppCompatActivity {
 ////                        Log.d(TAG, msg);
                     }
                 });
+
+        FirebaseMessaging.getInstance().subscribeToTopic("service");
     }
 
     private void getIntents() {

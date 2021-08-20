@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +19,22 @@ import android.view.ViewGroup;
 import com.freelance.anantahairstudio.R;
 import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.databinding.FragmentHomeBinding;
+import com.freelance.anantahairstudio.gallery.FetchGalleryResponse;
 import com.freelance.anantahairstudio.gallery.GalleryActivity;
+import com.freelance.anantahairstudio.gallery.GalleryAdapter;
+import com.freelance.anantahairstudio.gallery.GalleryViewModel;
 import com.freelance.anantahairstudio.home.adapter.ImageAdapter;
+import com.freelance.anantahairstudio.utils.PrefManager;
+import com.smarteist.autoimageslider.SliderView;
+
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
     final String storeLocation = "Ananta Hair Studio,Plot no 270 ,4th B Road Near Suhag Jewellers Sardarpura raj, Jodhpur, Rajasthan 342001";
+    GalleryViewModel galleryViewModel;
+    ArrayList<FetchGalleryResponse.Data.Image> imageList = new ArrayList<>();
 
 
     public HomeFragment() {
@@ -40,6 +52,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container, false);
+        galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
 
         initialise();
         clickViews();
@@ -187,11 +200,29 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), GalleryActivity.class));
             }
         });
+
+        binding.slideView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), GalleryActivity.class));
+            }
+        });
     }
 
     private void initialise() {
-        ImageAdapter adapterView = new ImageAdapter(getContext());
-        binding.viewPager.setAdapter(adapterView);
+        galleryViewModel.fetchGalleryImg(PrefManager.getInstance().getString(R.string.authToken));
+        galleryViewModel.fetchGalleryImgLiveData().observe(getViewLifecycleOwner(), new Observer<FetchGalleryResponse>() {
+            @Override
+            public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
+                imageList.addAll(fetchGalleryResponse.getData().getImages());
+                ImageAdapter adapterView = new ImageAdapter(getContext(),imageList);
+                binding.viewPager.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
+                binding.viewPager.setSliderAdapter(adapterView);
+                binding.viewPager.setScrollTimeInSec(3);
+                binding.viewPager.setAutoCycle(true);
+                binding.viewPager.startAutoCycle();            }
+        });
+
     }
 
 

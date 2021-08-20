@@ -6,11 +6,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.freelance.anantahairstudio.R;
+import com.freelance.anantahairstudio.activities.HomeActivity;
 import com.freelance.anantahairstudio.myBooking.OnGoingBookingActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
@@ -33,19 +35,30 @@ public class FCMService extends FirebaseMessagingService {
 
     @Override
     public void handleIntent(Intent intent) {
-        Log.d( "FCM", "handleIntent ");
-        showNotifications();
+        Log.d( "FCM", "  "+intent.getExtras());
+        try {
+            showNotifications(intent.getExtras().getString("gcm.notification.title"),intent.getExtras().getString("gcm.notification.body"));
+        }
+        catch (Exception e){}
     }
 
-    public  void showNotifications(){
-        Intent intent = new Intent(this, OnGoingBookingActivity.class);
+    public  void showNotifications(String title,String body){
+        Intent intent = null;
+        if (title.equals("Today's Special")){
+            intent = new Intent(this, HomeActivity.class);
+
+        }
+        else {
+            intent = new Intent(this, OnGoingBookingActivity.class);
+
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"AnantaHairStudioNotification")
                 .setSmallIcon(R.drawable.main_logo)
-                .setContentTitle("Hey! Congratulations")
-                .setContentText("Your appointment request is accepted")
+                .setContentTitle(title)
+                .setContentText(body)
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                 .setVibrate(new long[]{0L})
                 .setContentIntent(pendingIntent)

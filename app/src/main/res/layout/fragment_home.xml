@@ -470,7 +470,7 @@
             android:textSize="13sp"
             android:id="@+id/packageTxt2"/>
 
-        <com.freelance.anantahairstudio.utils.CustomViewPager
+        <com.smarteist.autoimageslider.SliderView
             android:id="@+id/viewPager"
             android:layout_width="0dp"
             android:layout_height="150dp"
@@ -478,7 +478,41 @@
             app:layout_constraintLeft_toLeftOf="@id/gL"
             app:layout_constraintRight_toRightOf="@id/gR"
             android:layout_marginTop="50dp"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorEnabled="true"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="1"
             />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/slideView"
+            app:layout_constraintTop_toTopOf="@id/viewPager"
+            app:layout_constraintBottom_toBottomOf="@id/viewPager"
+            app:layout_constraintLeft_toLeftOf="@id/viewPager"
+            app:layout_constraintRight_toRightOf="@id/viewPager"
+            android:background="#7F000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/viewPager"
+            app:layout_constraintBottom_toBottomOf="@id/viewPager"
+            app:layout_constraintLeft_toLeftOf="@id/viewPager"
+            app:layout_constraintRight_toRightOf="@id/viewPager"
+            android:text="G a l l e r y"
+            android:textAllCaps="true"
+            android:textColor="#F5FFFA"
+            android:textSize="22sp"/>
 
         <TextView
             android:layout_width="wrap_content"

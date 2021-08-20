@@ -10,6 +10,8 @@
     <string name="phone">phone</string>
     <string name="points">points</string>
     <string name="default_notification_channel_id">AnantaHairStudioNotification</string>
-
+    <string name="privacy_policy">
+         <u>Know our privacy policy</u>.
+    </string>
 </resources>
 

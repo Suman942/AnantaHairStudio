@@ -44,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
     AuthenticationLoginViewModel loginViewModel;
    ProgressDialog progressDialog;
+    String url = "https://xbytelab.com/docs/privacy-policy.html";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +91,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 progressDialog.show();
                 signIn();
+            }
+        });
+
+        binding.privacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
     }

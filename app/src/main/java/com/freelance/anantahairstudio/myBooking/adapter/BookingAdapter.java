@@ -48,17 +48,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull BookingViewHolder holder, int position) {
-//        if (position == 0){
-//            holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_reject));
-//            holder.statusTxt.setText("Rejected");
-//        }
-//        if (position == 1){
-//            holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_accept));
-//            holder.statusTxt.setText("Confirmed");
-//        }
-//        if (position == 2){
-//
-//        }
+
         holder.bookingId.setText("BookingId: #"+serviceArrayList.get(position).getBookingId());
         if (serviceArrayList.get(position).getStatus().equals("new")){
             holder.statusBackground.setBackground(context.getDrawable(R.drawable.curved_view_pending));
